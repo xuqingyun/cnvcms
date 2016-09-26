@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.cnv.cms.mapper.UserMapper">
+   
+	<!-- 注:不是必须的，可以使用resultType="User"也能返回list -->
+<!-- 	
+    <resultMap type="User" id="UserMap">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="status" property="status" />
+        <result column="createDate" property="createDate" javaType="java.util.Date" jdbcType="DATE"/>
+    </resultMap>
+ -->
+	<!--  增加用户 -->
+    <insert id="addUser" parameterType="User" 
+        useGeneratedKeys="true" keyProperty="id"> 
+        insert into t_user
+        values(null,#{username},#{password},#{nickname},
+        	#{email},#{phone},#{status},#{createDate});  
+    </insert>      
+    <!-- 返回用户 list -->
+    <select id="selectUsers" parameterType="string" resultType="User">
+        select * from t_user where username like #{username}
+    </select>
+    <!-- 根据id查询用户-->
+     <select id="selectUserByID" parameterType="int" resultType="User">
+        select * from t_user where id=#{id}
+	</select>
+    <!-- 根据用户名查询用户-->
+     <select id="selectUserByName" parameterType="string" resultType="User">
+        select * from t_user where username=#{username};
+	</select>
+	<!--更新操作  -->
+	<select id="updateUser" parameterType="User">
+		update t_user set username=#{username},password=#{password}, 
+		nickname=#{nickname},email=#{email},phone=#{phone} where id= #{id}
+	</select>
+	<!--删除操作  -->
+	<select id="deleteUser" parameterType="int">
+		delete from t_user where id= #{id}
+	</select>
+	<!--删除操作大于id的记录  -->
+	<select id="deleteUserLargerByID" parameterType="int">
+		delete from t_user where id > #{id}
+	</select>
+</mapper>

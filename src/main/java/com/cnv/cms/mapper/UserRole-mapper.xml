@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.cnv.cms.mapper.UserRoleMapper">
+
+<!-- 增加单个操作 -->
+    <insert id="add" parameterType="UserRole" 
+        useGeneratedKeys="true" keyProperty="id"> 
+        insert into t_user_role
+        values(null,#{u_id},#{r_id});  
+    </insert>      
+<!--删除操作  -->
+	<select id="delete" parameterType="int">
+		delete from t_user_role where id= #{id}
+	</select>
+	<select id="deleteByUID" parameterType="int">
+		delete from t_user_role where u_id= #{id}
+	</select>
+<!--更新操作  -->
+	<select id="update" parameterType="UserRole">
+		update t_user_role set u_id=#{u_id},r_id=#{r_id} where id= #{id}
+	</select>
+<!-- 根据id查询 -->
+	<select id="selectByID" parameterType="int" resultType="UserRole">
+        select * from t_user_role where id=#{id}
+	</select>
+<!-- 根据user id查询 -->
+	<select id="selectByUID" parameterType="int" resultType="UserRole">
+        select * from t_user_role where id=#{id}
+	</select>
+<!-- 根据role id查询 -->
+	<select id="selectByRID" parameterType="int" resultType="UserRole">
+        select * from t_user_role where id=#{id}
+	</select>
+<!-- 查询全部 -->
+    <select id="selectAll"  resultType="UserRole">
+        select * from t_user_role
+    </select>
+<!--     根据user id 找到用户角色 -->
+    <select id="selectRolesByUserID"  parameterType="int" resultType="Role">
+        select r.id,name,role_type
+        from t_user_role as ur,t_role as r 
+        where ur.u_id=#{id} and ur.r_id = r.id
+    </select>
+    <select id="selectUsersByRoleID"  parameterType="int" resultType="User">
+        select u.id,username,password,nickname,email,phone,status,createDate
+        from t_user_role as ur,t_user as u 
+        where ur.r_id=#{rid} and ur.u_id = u.id
+    </select>
+
+</mapper>

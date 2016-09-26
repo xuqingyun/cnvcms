@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.cnv.cms.mapper.TestUserMapper">
+   
+	<!-- 为了返回list 类型而定义的returnMap -->
+	<!-- 注:不是必须的，可以使用resultType="User"也能返回list -->
+<!--     <resultMap type="User" id="resultListUser">
+        <id column="id" property="id" />
+        <result column="userName" property="userName" />
+        <result column="userAge" property="userAge" />
+        <result column="userAddress" property="userAddress" />
+    </resultMap> -->
+
+    <insert id="addUser" parameterType="User" 
+        useGeneratedKeys="true" keyProperty="id"> 
+        insert into user(username,password)  
+             values(#{username},#{password})  
+    </insert>      
+    <!-- 返回list 的select 语句，注意 resultMap 的值是指向前面定义好的 -->
+    <!-- 注：此处也可以把resultMap换成 resultType="User"-->
+    <select id="selectUsers" parameterType="string" resultType="User">
+        select * from user where username like #{username}
+    </select>
+    
+
+<!--更新操作  -->
+	<select id="updateUser" parameterType="User">
+		update user set username=#{username},password=#{password} where id= #{id}
+	</select>
+<!--删除操作  -->
+	<select id="deleteUser" parameterType="int">
+		delete from user where id= #{id}
+	</select>
+<!--删除操作大于id的记录  -->
+	<select id="deleteUserLargerByID" parameterType="int">
+		delete from user where id > #{id}
+	</select>
+</mapper>

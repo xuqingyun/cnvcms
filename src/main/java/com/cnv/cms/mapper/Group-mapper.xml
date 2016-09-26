@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.cnv.cms.mapper.GroupMapper">
+
+<!-- 增加单个操作 -->
+    <insert id="addGroup" parameterType="Group" 
+        useGeneratedKeys="true" keyProperty="id"> 
+        insert into t_group
+        values(null,#{name},#{descr});  
+    </insert>      
+<!--删除操作  -->
+	<select id="deleteGroup" parameterType="int">
+		delete from t_group where id= #{id}
+	</select>
+<!--更新操作  -->
+	<select id="updateGroup" parameterType="Group">
+		update t_group set name=#{name},descr=#{descr} where id= #{id}
+	</select>
+<!-- 根据id查询 -->
+	<select id="selectGroup" parameterType="int" resultType="Group">
+        select * from t_group where id=#{id}
+	</select>
+<!-- 查询全部 -->
+    <select id="selectAllGroups"  resultType="Group">
+        select * from t_group
+    </select>
+
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.cnv.cms.mapper.RoleMapper">
+
+<!-- 增加单个操作 -->
+    <insert id="addRole" parameterType="Role" 
+        useGeneratedKeys="true" keyProperty="id"> 
+        insert into t_role
+        values(null,#{name},#{role_type});  
+    </insert>      
+<!--删除操作  -->
+	<select id="deleteRole" parameterType="int">
+		delete from t_role where id= #{id}
+	</select>
+<!--更新操作  -->
+	<select id="updateRole" parameterType="Role">
+		update t_role set name=#{name},role_type=#{role_type} where id= #{id}
+	</select>
+<!-- 根据id查询 -->
+	<select id="selectRole" parameterType="int" resultType="Role">
+        select id,name,role_type from t_role where id=#{id}
+	</select>
+<!-- 查询全部 -->
+    <select id="selectAllRoles"  resultType="Role">
+        select id,name,role_type from t_role
+    </select>
+
+
+</mapper>
