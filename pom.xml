@@ -28,7 +28,7 @@
     </dependency>
     
     
-  
+  <!-- spring 配置  -->
      <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
@@ -60,9 +60,19 @@
     	<artifactId>spring-orm</artifactId>
     	<version>${spring.version}</version>
     </dependency>
+  <!-- spring web 配置  -->
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-web</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>${spring.version}</version>
+    </dependency>
 
-
-
+  <!-- mybatis jdbc 配置  -->
       <dependency>
     	<groupId>org.mybatis</groupId>
     	<artifactId>mybatis</artifactId>
@@ -79,7 +89,7 @@
     	<version>5.1.38</version>
     </dependency>
     
- 
+ <!-- 数据验证 -->
     <dependency>
          	<groupId>org.wicketstuff</groupId>
          	<artifactId>jsr303</artifactId>
@@ -91,6 +101,12 @@
     	<version>5.2.4.Final</version>
 	</dependency>
 	
+	
+	<dependency>
+	    <groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
 	
 	   
 

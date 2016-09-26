@@ -1,6 +1,6 @@
 # cnvcms
-cms系统
-springMVC +spring + mybatis +maven
+# cms系统
+# 采用 springMVC +spring + mybatis +maven
 
 
 version 0.0.3
@@ -9,6 +9,8 @@ version 0.0.3
 	Service:
 		UserService
 		UserServiceImpl
+	Exception:
+		CmsException
 		
 version 0.0.2
 	model:
