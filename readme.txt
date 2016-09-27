@@ -1,7 +1,7 @@
 # cnvcms
 # cms系统
 # 采用 springMVC +spring + mybatis +maven
-
+test
 
 version 0.0.3
 	model:
