@@ -1,6 +1,7 @@
 package com.cnv.cms.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,21 +48,26 @@ public class UserServiceImpl implements UserService {
 		}
 		//添加角色
 		for(int rid:rids){
-			//1.检查角色是否存在
-			Role role = roleMapper.selectRole(rid);
-			if(role==null)	throw new CmsException("添加的角色不存在");
-			userRoleMapper.add(new UserRole(user.getId(),rid));
+			//1.检查角色是否存在并插入
+			addRole(user,rid);
 		}
 		//添加组别
 		for(int gid:gids){
 			//检查组别是否存在
-			Group group  = groupMapper.selectGroup(gid);
-			if(group==null) throw new CmsException("添加的组别不存在");
-			userGroupMapper.add(new UserGroup(user.getId(),gid));
+			addGroup(user,gid);
 		}
 		
 	}
-
+	private void addRole(User user, int rid){
+		Role role = roleMapper.selectRole(rid);
+		if(role==null)	throw new CmsException("添加的角色不存在");
+		userRoleMapper.add(new UserRole(user.getId(),rid));		
+	}
+	private void addGroup(User user, int gid){
+		Group group  = groupMapper.selectGroup(gid);
+		if(group==null) throw new CmsException("添加的组别不存在");
+		userGroupMapper.add(new UserGroup(user.getId(),gid));	
+	}
 	public void delete(int id) {
 		//是否有文章
 		userMapper.deleteUser(id);
@@ -70,8 +76,36 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void update(User user, Integer[] rids, Integer[] gids) {
-		// TODO Auto-generated method stub
-
+		userMapper.updateUser(user);
+		List<Integer> oldRids = userRoleMapper.selectRoleIDsByUserID(user.getId());
+		List<Integer> oldGids = userGroupMapper.selectGroupIDsByUserID(user.getId());
+		List<Integer> listRids = Arrays.asList(rids);
+		List<Integer> listGids = Arrays.asList(gids);
+		
+		//如果原有的rid不存在，删除
+		for(int oldRid:oldRids){
+			if(!listRids.contains(oldRid)){
+				userRoleMapper.deleteUserRole(user.getId(), oldRid);
+			};
+		}
+		//如果新的的rid不存在，添加
+		for(int rid:listRids){
+			if(!oldRids.contains(rid)){
+				addRole(user,rid);
+			}
+		}
+		//如果原有的gid不存在，删除
+		for(int oldGid:oldGids){
+			if(!listGids.contains(oldGid)){
+				userGroupMapper.deleteUserGroup(user.getId(), oldGid);
+			};
+		}
+		//如果新的的gid不存在，添加
+		for(int gid:listGids){
+			if(!oldGids.contains(gid)){
+				addGroup(user,gid);
+			}
+		}		
 	}
 
 	public void update(User user) {
@@ -146,10 +180,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User login(String username, String password) {
-		// TODO Auto-generated method stub
 		//
-		List<User> users = userRoleMapper.selectUsersByRoleID(1);
-		return null;
+		User user = userMapper.selectUserByName(username);
+		if(user==null){
+			throw new CmsException("用户不存在");
+		}
+		if(!password.equals(user.getPassword())){
+			throw new CmsException("密码不正确");
+		}
+		return user;
 	}
 
 }

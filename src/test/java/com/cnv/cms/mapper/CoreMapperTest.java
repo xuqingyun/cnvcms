@@ -102,13 +102,13 @@ public class CoreMapperTest {
 
 		u = new UserRole();
 		u.setU_id(3);
-		u.setR_id(1);
+		u.setR_id(3);
 		urm.add(u);
 		List<UserRole> gs = urm.selectAll();
 		for(UserRole g1 : gs){
 			System.out.println(g1);
 		}	
-		urm.delete(u.getId());
+		urm.deleteUserRole(3, 3);
 		System.out.println("------user roles query---------");
 		List<Role> userRoles = urm.selectRolesByUserID(2);
 		for(Role m : userRoles){

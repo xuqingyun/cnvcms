@@ -13,12 +13,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values(null,#{u_id},#{g_id});  
     </insert>      
 <!--删除操作  -->
-	<select id="delete" parameterType="int">
+	<delete id="delete" parameterType="int">
 		delete from t_user_group where id= #{id}
-	</select>
-	<select id="deleteByUID" parameterType="int">
+	</delete>
+	<delete id="deleteByUID" parameterType="int">
 		delete from t_user_group where u_id= #{id}
-	</select>
+	</delete>
+	<delete id="deleteUserGroup" >
+		delete from t_user_group where u_id= #{uid} and g_id=#{gid}
+	</delete>
 <!--更新操作  -->
 	<select id="update" parameterType="UserGroup">
 		update t_user_group set u_id=#{u_id},g_id=#{g_id} where id= #{id}
@@ -49,6 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select u.id,username,password,nickname,email,phone,status,createDate
         from t_user_group as ug,t_user as u 
         where ug.g_id=#{gid} and ug.u_id = u.id
+    </select>
+    <select id="selectGroupIDsByUserID"  parameterType="int" resultType="int">
+        select ug.g_id
+        from t_user_group as ug
+        where ug.u_id=#{id}
     </select>
 
 
