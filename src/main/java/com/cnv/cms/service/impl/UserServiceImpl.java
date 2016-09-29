@@ -134,6 +134,11 @@ public class UserServiceImpl implements UserService {
 
 	public Pager<User> findUser() {
 		// TODO Auto-generated method stub
+		List<User> users = userMapper.selectUsers("%");
+		Pager<User> userPager = new Pager<User>();
+		userPager.setSize(15);
+		userPager.setOffset(0);
+		userPager.setTotal(users.size());
 		return null;
 	}
 
@@ -180,7 +185,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User login(String username, String password) {
-		//
 		User user = userMapper.selectUserByName(username);
 		if(user==null){
 			throw new CmsException("用户不存在");
