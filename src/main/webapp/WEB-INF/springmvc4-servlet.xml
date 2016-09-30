@@ -30,6 +30,6 @@
 	   <!--  最大文件大小，-1为不限制大小 -->
 	    <property name="maxUploadSize" value="-1"/>
 	</bean>
- 	<mvc:resources mapping="/admin/**" location="/front/admin/"/>
+ 	<mvc:resources mapping="/admin/**" location="/WEB-INF/front/admin/"/>
  	
 </beans>
