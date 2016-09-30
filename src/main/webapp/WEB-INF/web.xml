@@ -3,7 +3,10 @@
 
 	<display-name>SpringMVC_01_HelloWorld</display-name>
 	
-
+  <welcome-file-list>  
+    <welcome-file>/index.html</welcome-file>  
+    <welcome-file>/index.jsp</welcome-file>  
+  </welcome-file-list> 
   	
 <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -19,9 +22,10 @@
 	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
 	    <load-on-startup>1</load-on-startup>  
 	</servlet>  
+	
 	<servlet-mapping>  
 	    <servlet-name>springmvc4</servlet-name>  
-	    <url-pattern>/</url-pattern>  
+	    <url-pattern>api/*</url-pattern>  
 	</servlet-mapping> 
 	
 </web-app>

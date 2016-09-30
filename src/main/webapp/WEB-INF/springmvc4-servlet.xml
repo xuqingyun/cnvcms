@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 <!-- Spring MVC配置 -->
- 	<context:component-scan base-package="com.cnv.springmvc.controller"/>
+ 	<context:component-scan base-package="com.cnv.cms.controller"/>
     <!-- if you use annotation you must configure following setting -->
     <mvc:annotation-driven />
  	<bean id="viewResolver"
@@ -30,6 +30,6 @@
 	   <!--  最大文件大小，-1为不限制大小 -->
 	    <property name="maxUploadSize" value="-1"/>
 	</bean>
- 	
+ 	<mvc:resources mapping="/admin/**" location="/front/admin/"/>
  	
 </beans>
