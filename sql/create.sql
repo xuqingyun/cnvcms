@@ -54,6 +54,7 @@ insert into user values(null,'nametest3');
 insert into t_user values(null,'nametest1','f123','abc','abg@t.cn','1355434543',1,'2016-9-11');
 insert into t_user values(null,'nametest2','aa345','abdc','abg@t.cn','123123',1,'2016-9-11');
 insert into t_user values(null,'nametest3','x895','gabc','abg@t.cn','123123',1,'2016-9-11');
+insert into t_user values(null,'shishuocms','shishuocms','gabc','abg@t.cn','123123',1,'2016-9-11');
 
 insert into t_group values(null,"财务处",'负责财务部门');
 insert into t_group values(null,"宣传部",'负责宣传部门');

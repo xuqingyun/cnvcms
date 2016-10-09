@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.GroupMapper;
@@ -21,7 +21,8 @@ import com.cnv.cms.model.UserGroup;
 import com.cnv.cms.model.UserRole;
 import com.cnv.cms.service.UserService;
 
-@Component
+//@Component
+@Service("userServiceImpl")  
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
