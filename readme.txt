@@ -3,6 +3,16 @@
 # 采用 springMVC +spring + mybatis +maven
 test
 
+
+version 0.0.3
+	Controller:
+		AdminController
+		UserController部分
+	前台:
+		admin/
+			login.html login.js
+			index.html index.js部分
+			
 version 0.0.3
 	model:
 		Pager
