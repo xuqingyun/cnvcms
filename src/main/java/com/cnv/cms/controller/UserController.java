@@ -78,5 +78,25 @@ public class UserController {
 		
 		return map;
 	}
-
+	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  update(@RequestBody User  userForm,
+			@PathVariable(value="id") Integer id){
+		
+		System.out.println("----user update------");
+		System.out.println("update userid :"+id);
+		System.out.println("received userform:"+userForm);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			userService.update(userForm);
+			map.put("flag", "success");	
+		}
+		catch(CmsException ce){
+			map.put("flag", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+		}	
+		
+		
+		return map;
+	}
 }

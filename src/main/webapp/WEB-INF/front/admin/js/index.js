@@ -53,10 +53,14 @@ $(document).ready(function () {
  	
 	};
 	
+	function showPanel(panel){
+		$(".center_panel").hide();
+		$(panel).show();
+	};
+	
 	function showUserTable(){
 		//关闭所有面板，显示用户面板
-		$(".center_panel").hide();
-		$("#div_table_and_btn").show();
+		showPanel("#div_table_and_btn");
 		
 		$("#welecome_msg").hide();
 		$("#table_title").text("用户列表");
@@ -74,8 +78,8 @@ $(document).ready(function () {
 			}
 		
 	 	});
-	}
-	
+	};
+
 	//showUserTable();
 	//$("#user_manage").trigger("click");
 	$(".center_panel").hide();
@@ -90,9 +94,8 @@ $(document).ready(function () {
 	//用户添加事件响应
 	$("#user_add").click(function(){
 		//关闭所有面板，显示添加用户面板
-		$(".center_panel").hide();
-		$("#div_user_add").show();
-		
+		showPanel("#div_user_add");
+	
 	});
 	
 
@@ -138,8 +141,8 @@ $(document).ready(function () {
 	//用户编辑事件响应
 	$("#item_edit").live("click",function(){
 		//关闭所有面板，显示添加用户面板
-		$(".center_panel").hide();
-		$("#div_user_edit").show();
+		showPanel("#div_user_edit");
+
 		
 		var itemid = $(this).parent().parent().attr("itemid");
 		
@@ -154,13 +157,56 @@ $(document).ready(function () {
 				$("#edit_phone").attr('value',user["phone"]);
 				$("#edit_status").attr('value',user["status"]);
 				$("#edit_createDate").attr('value',user["createDate"]);
+				if(user["status"] == "1"){
+					$("#edit_select_on").attr('selected',"true");
+				}else{
+					$("#edit_select_off").attr('selected',"true");
+				}
+				$("#edit_form").attr('userid',user["id"]);
 				
-
 			}
 		
 	 	});
 		
 	});	
+
+	//用户编辑提交按钮
+	$("#user_edit_form_submit").click(function(){
+        // 获取表单中的参数
+		var userid = $("#edit_form").attr('userid');
+        var user = { 
+			'id'	:	userid,
+        	'username': $("#edit_username").val(), 
+			'password': $("#edit_password").val(), 
+			'nickname': $("#edit_nickname").val(), 
+			'email': 	$("#edit_email").val(), 
+			'phone': 	$("#edit_phone").val(), 
+			'status': 	$("#edit_form_select").val(), 
+			'createDate': $("#edit_createDate").val()
+		}; 
+       
+        $.ajax({ 
+            type:"POST", 
+            url:"../api/user/update/"+userid, 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:JSON.stringify(user), 
+            success:function(data,status){ 
+    			if(status == "success" && data.flag == "success"){
+                	//alert("用户添加成功！");
+                	$("#user_manage").trigger("click");
+    			}else{
+    				alert("添加失败!\n"+data.flag);
+    			}
+
+            },
+            error:function(msg){
+            	alert("添加失败！\nstatus:"+msg.status);
+            }
+         });
+        
+	});
+	
 	//删除按钮响应
     $("#item_delete").live("click",function(){
     	

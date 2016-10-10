@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--更新操作  -->
 	<select id="updateUser" parameterType="User">
 		update t_user set username=#{username},password=#{password}, 
-		nickname=#{nickname},email=#{email},phone=#{phone} where id= #{id}
+		nickname=#{nickname},email=#{email},phone=#{phone},status=#{status} where id= #{id}
 	</select>
 	<!--删除操作  -->
 	<select id="deleteUser" parameterType="int">
