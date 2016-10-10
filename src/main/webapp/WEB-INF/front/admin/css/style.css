@@ -15,6 +15,10 @@ a.button{-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;font
 .red:hover{ background-color:#d96060;}
 .green:hover{ background-color:#69b736;}
 
+button.button{-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;font-family:arial;font-size:12px;font-weight: bold;padding:8px 12px 8px 12px;text-align: center;cursor:pointer; margin:10px 10px 0 0; float:left;}
+.red{color:#fff;background: #eb8484;text-shadow:1px 1px #cc5959;}
+.green{color:#fff;background: #7dc44e;text-shadow:1px 1px #4c9021;}
+
 #panelwrap{width:1000px; margin:20px auto; background-color:#FFFFFF;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px; border-radius:10px;border:6px #c0cdd2 solid;}
 #loginpanelwrap{width:500px; margin:120px auto auto auto; background-color:#FFFFFF;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px; border-radius:10px;border:6px #c0cdd2 solid;}
 

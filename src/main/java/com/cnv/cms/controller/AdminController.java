@@ -47,4 +47,27 @@ public class AdminController {
 		
 		return map;
 	}
+	@RequestMapping(value="/login.json",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  login(HttpSession httpSession){
+		System.out.println("login get");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+			
+		//httpSession.setAttribute("loginUser", user.getUsername()); 
+		String loginUser = (String) httpSession.getAttribute("loginUser");
+		System.out.println("login user: "+loginUser);
+		if(loginUser == null){
+			map.put("login", "failure");
+		}else{
+			map.put("login", "success");
+		}	
+		
+		return map;
+	}
+	@RequestMapping(value="/login.out",method=RequestMethod.GET)
+	public  String  loginOut(HttpSession httpSession){
+		httpSession.removeAttribute("loginUser");
+		System.out.println("login out");
+		return "redirect:/admin/login.html";
+	}
 }
