@@ -5,9 +5,12 @@ package com.cnv.cms.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -48,7 +51,7 @@ public class User {
 	/*
 	 * 创建时间
 	 */
-	private Date createDate;
+	private Date createDate=new Date();
 	
 	public User(){}
 	public User(int id, String username, String password, String nickname, 
@@ -109,6 +112,7 @@ public class User {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
 	public Date getCreateDate() {
 		return createDate;
 	}

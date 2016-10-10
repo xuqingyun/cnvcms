@@ -16,6 +16,7 @@ $(document).ready(function () {
 			window.location.href="login.html"; 
 		}
  	});
+
 	var user={
 			
 			id:"1",
@@ -28,7 +29,7 @@ $(document).ready(function () {
 	}
 
 	function additem(item){
-		var str = '<tr id="listitem';
+		var str = '<tr itemid="'+item["id"]+'" id="listitem';
 		for(var s in item){
 			if(s=="id"){
 				str += item[s]+'" class="odd"><td><input type="checkbox" name="" /></td>';
@@ -38,28 +39,149 @@ $(document).ready(function () {
 				str += '<td>'+item[s]+'</td>';
 			}				
 		}
-		str += '<td><span id="item_delete" ><a href="#"><img src="images/edit.png" alt="" title="" border="0"/></a></span ></td>';
+		str += '<td><span id="item_edit" ><a href="#"><img src="images/edit.png" alt="" title="" border="0"/></a></span ></td>';
 		str += '<td><span id="item_delete" ><a href="#"><img src="images/trash.gif" alt="" title="" border="0"/></a></span ></td>';
 		return str;
 	}
 	function addTableHead(headlist){
-		var str = "";
+		var str = "<th></th> ";
 		for(var s in headlist){
 			str +="<th>"+headlist[s]+"</th>";
 		}
+		$("#table_head").empty();
 		$("#table_head").append(str);
+ 	
 	};
 	
 	function showUserTable(){
-		addTableHead(['用户名','昵称','邮箱','电话','状态','创建时间','编辑','删除']);
+		//关闭所有面板，显示用户面板
+		$(".center_panel").hide();
+		$("#div_table_and_btn").show();
+		
+		$("#welecome_msg").hide();
+		$("#table_title").text("用户列表");
+		$("#table_msg").text("用户列表信息");
+		addTableHead(['用户名','密码','昵称','邮箱','电话','状态','创建时间','编辑','删除']);
+		var stru = "";
+	 	$.get("../api/user/users",function(data,status){
+	 	
+			if(status == "success"){
+				for(var d in data.users){
+		 			stru +=  additem(data.users[d]);
+		 		}
+				$("#table_list").empty();
+				$("#table_list").append(stru);
+			}
+		
+	 	});
 	}
 	
-	showUserTable();
-	//$("#right_wrap").load("index_right.html");
-    //$("#footer").load("footer.html");
+	//showUserTable();
+	//$("#user_manage").trigger("click");
+	$(".center_panel").hide();
+	$("#div_table_and_btn").show();
+	$("#table_btn").hide();
+	
+	//用户管理事件响应
+	$("#user_manage").click(function(){
+		showUserTable();
+	});
+	
+	//用户添加事件响应
+	$("#user_add").click(function(){
+		//关闭所有面板，显示添加用户面板
+		$(".center_panel").hide();
+		$("#div_user_add").show();
+		
+	});
+	
+
+	//用户添加提交按钮
+	$("#user_add_form_submit").click(function(){
+        // 获取表单中的参数
+		var params = $("#add_form").serialize();  
+		var d = new Date();
+		var date = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+		//alert(date);
+		
+        var user = { 
+			'username': $("#add_username").val(), 
+			'password': $("#add_password").val(), 
+			'nickname': $("#add_nickname").val(), 
+			'email': 	$("#add_email").val(), 
+			'phone': 	$("#add_phone").val(), 
+			'status': 	"1", 
+			'createDate': date
+		}; 
+       
+        $.ajax({ 
+            type:"POST", 
+            url:"../api/user/add", 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:JSON.stringify(user), 
+            success:function(data,status){ 
+    			if(status == "success" && data.flag == "success"){
+                	//alert("用户添加成功！");
+                	$("#user_manage").trigger("click");
+    			}else{
+    				alert("添加失败!\n"+data.flag);
+    			}
+
+            },
+            error:function(msg){
+            	alert("添加失败！\nstatus:"+msg.status);
+            }
+         });
+        
+	});
+	//用户编辑事件响应
+	$("#item_edit").live("click",function(){
+		//关闭所有面板，显示添加用户面板
+		$(".center_panel").hide();
+		$("#div_user_edit").show();
+		
+		var itemid = $(this).parent().parent().attr("itemid");
+		
+	 	$.get("../api/user/detail/"+itemid,function(data,status){
+		 	
+			if(status == "success"){
+				var user = data.user;
+				$("#edit_username").attr('value',user["username"]);
+				$("#edit_password").attr('value',user["password"]);
+				$("#edit_nickname").attr('value',user["nickname"]);
+				$("#edit_email").attr('value',user["email"]);
+				$("#edit_phone").attr('value',user["phone"]);
+				$("#edit_status").attr('value',user["status"]);
+				$("#edit_createDate").attr('value',user["createDate"]);
+				
+
+			}
+		
+	 	});
+		
+	});	
+	//删除按钮响应
+    $("#item_delete").live("click",function(){
+    	
+    	var itemid = $(this).parent().parent().attr("itemid");
+	 	$.get("../api/user/delete/"+itemid,function(data,status){
+		 	
+			if(status == "success" && data.flag == "success"){
+				
+				$("#listitem"+itemid).remove();
+			}else{
+				alert("删除失败");
+			}
+
+	 	});
+    	
+		
+
+	});
+	
     var listid=0;
- 
-    
+  
     $("#testadd").click(function(){
     	//alter("test add");
     	 $("#testbtn").text("Hello world!"); 
@@ -82,10 +204,5 @@ $(document).ready(function () {
 	});
     
     
-    $("#item_delete").live("click",function(){
-	
-	 	//alert("delete");
-		$(this).parent().parent().remove();
 
-	});
 });

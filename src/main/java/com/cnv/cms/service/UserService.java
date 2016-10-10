@@ -22,6 +22,7 @@ public interface UserService {
 	 * @param gids 用户的所有组信息
 	 */
 	public void add(User user,Integer[]rids,Integer[]gids);
+	public void add(User user);
 	/**
 	 * 删除用户，注意需要把用户和角色和组的对应关系删除
 	 * 如果用户存在相应的文章不能删除
@@ -55,6 +56,10 @@ public interface UserService {
 	 * 列表用户
 	 */
 	public Pager<User> findUser();
+	/*
+	 * 用户列表
+	 */
+	public List<User> listUsers();
 	/**
 	 * 获取用户信息
 	 * @param id

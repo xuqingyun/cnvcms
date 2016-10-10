@@ -36,9 +36,10 @@ public class UserServiceImpl implements UserService {
 	private GroupMapper groupMapper;
 
 	public void add(User user, Integer[] rids, Integer[] gids) {
-		//检查用户是否存在
+		add(user);
+/*		//检查用户是否存在
 		User utemp = userMapper.selectUserByName(user.getUsername());
-		if(utemp==null){
+		if(utemp!=null){
 			//此处应该抛出异常
 			throw new CmsException("该用户已经存在");
 		}
@@ -46,8 +47,9 @@ public class UserServiceImpl implements UserService {
 			userMapper.addUser(user);
 		}catch(Exception e){
 			throw new CmsException("用户添加失败");
-		}
+		}*/
 		//添加角色
+		
 		for(int rid:rids){
 			//1.检查角色是否存在并插入
 			addRole(user,rid);
@@ -57,6 +59,21 @@ public class UserServiceImpl implements UserService {
 			//检查组别是否存在
 			addGroup(user,gid);
 		}
+		
+	}
+	public void add(User user) {
+		//检查用户是否存在
+		User utemp = userMapper.selectUserByName(user.getUsername());
+		if(utemp!=null){
+			//此处应该抛出异常
+			throw new CmsException("该用户已经存在");
+		}
+		try {
+			userMapper.addUser(user);
+		}catch(Exception e){
+			throw new CmsException("用户添加失败");
+		}
+
 		
 	}
 	private void addRole(User user, int rid){
@@ -140,9 +157,13 @@ public class UserServiceImpl implements UserService {
 		userPager.setSize(15);
 		userPager.setOffset(0);
 		userPager.setTotal(users.size());
-		return null;
+		return userPager;
 	}
-
+	public List<User> listUsers() {
+		// TODO Auto-generated method stub
+		List<User> users = userMapper.selectUsers("%");
+		return users;
+	}
 	public User load(int id) {
 		return userMapper.selectUserByID(id);
 	}

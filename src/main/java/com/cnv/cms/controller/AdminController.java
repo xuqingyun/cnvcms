@@ -43,6 +43,8 @@ public class AdminController {
 		catch(CmsException ce){
 			map.put("login", "failure");
 			map.put("loginError", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+			
 		}		
 		
 		return map;

@@ -28,7 +28,7 @@
     
     <div class="menu">
     <ul>
-    <li><a href="#" class="selected">Main page</a></li>
+    <li><a href="" class="selected">Main page</a></li>
     <li><a href="#">Settings</a></li>
     <li><a href="#">Add a category</a></li>
     <li><a href="#">Edit categories</a></li>
@@ -53,72 +53,39 @@
     </div>          
   -->                   
     <div class="center_content">  
-   <!--  <iframe SRC="index_right.html" ></iframe> -->
 
     <div id="right_wrap">
     
-    <div id="right_content">             
-    <h2>Tables section</h2> 
-                    
-                    
+    <div id="right_content">       
+ <div id="div_table_and_btn" class="center_panel">  
+ 
+       
+    <h2 id="table_title">欢迎使用 后台管理系统！</h2> 
+    <p id="welecome_msg">欢迎使用 后台管理系统！<br/>本系统由xqy开发<br/>版权所有</p>                   
+               
 <table id="rounded-corner">
 
     <thead>
     	<tr id="table_head">
-        	<th></th>
-<!--         	
-            <th>产品</th>
-            <th>描述</th>
-            <th>价格</th>
-            <th>日期</th>
-            <th>分类</th>
-            <th>用户</th>
-            <th>编辑</th>
-            <th>删除</th>
-    -->         
+        	<!-- 列表头, 由js代码添加 -->     
         </tr>
     </thead>
     
     <tfoot>
     	<tr>
-        	<td colspan="12">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</td>
+        	<td id="table_msg" colspan="12"></td>
         </tr>
     </tfoot>
     
     <tbody id="table_list">
-    
-<!--     
-    	<tr class="odd">
-        	<td><input type="checkbox" name="" /></td>
-            <td>Box Software</td>
-            <td>Lorem ipsum dolor sit amet consectetur</td>
-            <td>45$</td>
-            <td>10/04/2011</td>
-            <td>web design</td>
-            <td>Alex</td>
-            <td><a href="#"><img src="images/edit.png" alt="" title="" border="0" /></a></td>
-            <td><a href="#"><img src="images/trash.gif" alt="" title="" border="0" /></a></td>
-            <td><span id="item_delete" ><a href="#"><img src="images/trash.gif" alt="" title="" border="0"/></a></span ></td>
-        </tr>
-    	<tr class="even">
-        	<td><input type="checkbox" name="" /></td>
-            <td>Trial Software</td>
-            <td>Lorem ipsum dolor sit amet consectetur</td>
-            <td>155$</td>
-            <td>12/04/2011</td>
-            <td>web design</td>
-            <td>Carrina</td>
-            <td><a href="#"><img src="images/edit.png" alt="" title="" border="0" /></a></td>
-           <td><span id="item_delete" ><a href="#"><img src="images/trash.gif" alt="" title="" border="0"/></a></span ></td>
-        </tr>
-     -->
+    	<!-- 列表项, 由js代码添加 -->   
                
     </tbody>
     
     
 </table>
 
-	<div id="abc1"class="form_sub_buttons">
+	<div id="table_btn"class="form_sub_buttons">
 	
 		<a href="#" class="button green">Edit selected</a>
 	    <a href="#" class="button red">Delete selected</a>
@@ -128,7 +95,119 @@
 	    <a href="#" id="testbtn" class="button red">not set</a>
     
     </div>
-    
+ </div> 
+ 
+      
+ <div id="div_user_add" class="center_panel">
+    <div  class="tabcontent">
+        <h3 align="center">添加用户</h3>
+        <div class="form" id="add_form">
+            
+            <div class="form_row">
+            <label>用户名:</label>
+            <input type="text" class="form_input" id="add_username" value="test1"/>
+            </div>
+             
+            <div class="form_row">
+            <label>密码:</label>
+            <input type="password" class="form_input" id="add_password" value="pwdtest1"/>
+            </div>
+            
+            <div class="form_row">
+            <label>昵称</label>
+            <input type="text" class="form_input" id="add_nickname" value="testnick1"/>
+            </div>
+            
+           <div class="form_row">
+            <label>邮箱</label>
+            <input type="text" class="form_input" id="add_email" value="test@t.com"/>
+            </div>
+
+           <div class="form_row">
+            <label>电话</label>
+            <input type="text" class="form_input" id="add_phone" value="13888889999"/>
+            </div>
+                        
+            <div class="form_row">
+            <label>Subject:</label>
+            <select class="form_select" name="">
+            <option>Select one</option>
+            </select>
+            </div>
+            
+             <div class="form_row">
+            <label>Message:</label>
+            <textarea class="form_textarea" name=""></textarea>
+            </div>
+            <div class="form_row">
+            <input type="submit" id="user_add_form_submit" class="form_submit" value="提交" />
+            </div> 
+            <div class="clear"></div>
+        </div>
+    </div>
+    </div>
+
+
+ <div id="div_user_edit" class="center_panel">
+    <div  class="tabcontent">
+        <h3 align="center">用户编辑</h3>
+        <div class="form" id="add_form">
+            
+            <div class="form_row">
+            <label>用户名:</label>
+            <input type="text" class="form_input" id="edit_username" value=""/>
+            </div>
+             
+            <div class="form_row">
+            <label>密码:</label>
+            <input type="password" class="form_input" id="edit_password" value=""/>
+            </div>
+            
+            <div class="form_row">
+            <label>昵称</label>
+            <input type="text" class="form_input" id="edit_nickname" value=""/>
+            </div>
+            
+           <div class="form_row">
+            <label>邮箱</label>
+            <input type="text" class="form_input" id="edit_email" value=""/>
+            </div>
+
+           <div class="form_row">
+            <label>电话</label>
+            <input type="text" class="form_input" id="edit_phone" value=""/>
+            </div>
+                       <div class="form_row">
+            <label>状态</label>
+            <input type="text" class="form_input" id="edit_status" value=""/>
+            </div>
+                       <div class="form_row">
+            <label>创建时间</label>
+            <input type="text" class="form_input" id="edit_createDate" value=""/>
+            </div>
+                        
+            <div class="form_row">
+            <label>Subject:</label>
+            <select class="form_select" name="">
+            <option>Select one</option>
+            </select>
+            </div>
+            
+             <div class="form_row">
+            <label>Message:</label>
+            <textarea class="form_textarea" name=""></textarea>
+            </div>
+            <div class="form_row">
+            <input type="submit" id="user_add_form_submit" class="form_submit" value="提交" />
+            </div> 
+            <div class="clear"></div>
+        </div>
+    </div>
+    </div>
+
+
+     
+ <!--  
     <ul id="tabsmenu" class="tabsmenu">
         <li class="active"><a href="#tab1">Form Design Structure</a></li>
         <li><a href="#tab2">Tab two</a></li>
@@ -171,20 +250,14 @@
         <ul class="lists">
         <li>Consectetur adipisicing elit  error sit voluptatem accusantium doloremqu sed</li>
         <li>Sed do eiusmod tempor incididunt</li>
-        <li>Ut enim ad minim veniam is iste natus error sit</li>
-        <li>Consectetur adipisicing elit sed</li>
-        <li>Sed do eiusmod tempor  error sit voluptatem accus antium dolor emqu incididunt</li>
-        <li>Ut enim ad minim veniam</li>
-        <li>Consectetur adipisi  error sit voluptatem accusantium doloremqu cing elit sed</li>
-        <li>Sed do eiusmod tempor in is iste natus error sit cididunt</li>
-        <li>Ut enim ad minim ve is iste natus error sitniam</li>
+
         </ul>
     </div>
 
     <div id="tab3" class="tabcontent">
         <h3>Tab three title</h3>
         <p>
-    Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. <br /><br />Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+    Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventoreo. <br /><br />Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
         </p>
     </div> 
     
@@ -197,7 +270,7 @@
      
     
 
-    
+
         <div class="toogle_wrap">
             <div class="trigger"><a href="#">Toggle with text</a></div>
 
@@ -207,7 +280,10 @@
 			</p>
             </div>
         </div>
-      
+        
+   -->  
+   
+        
      </div>
      </div>
      <!-- end of right content -->
@@ -216,6 +292,14 @@
                      
                     
     <div class="sidebar" id="sidebar">
+        <h2>用户设置</h2>
+    
+        <ul>
+        	<li><span id="user_manage"><a href="#">管理用户</a></span></li>
+        	<li><span id="user_add"><a href="#">添加用户</a></span></li>
+            <li><a href="#">编辑用户</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>  
     <h2>Browse categories</h2>
     
         <ul>
@@ -236,14 +320,7 @@
             <li><a href="#">Docs and info</a></li>
         </ul> 
         
-    <h2>User Settings</h2>
-    
-        <ul>
-            <li><a href="#">Edit user</a></li>
-            <li><a href="#">Add users</a></li>
-            <li><a href="#">Manage users</a></li>
-            <li><a href="#">Help</a></li>
-        </ul>   
+ 
          
     <h2>Text Section</h2> 
     <div class="sidebar_section_text">
