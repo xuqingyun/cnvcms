@@ -19,8 +19,8 @@
  	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/WEB-INF/jsp/"/>
-		<property name="suffix" value=".jsp"/>
+		<property name="prefix" value="/WEB-INF/front/html/"/>
+		<property name="suffix" value=".html"/>
 	</bean>
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
@@ -48,5 +48,12 @@
 	    <property name="maxUploadSize" value="-1"/>
 	</bean>
  	<mvc:resources mapping="/admin/**" location="/WEB-INF/front/admin/"/>
+<!--
+ 	<mvc:resources mapping="/js/**" location="/WEB-INF/front/js/"/>
+  	<mvc:resources mapping="/css/**" location="/WEB-INF/front/css/"/>
+ 	<mvc:resources mapping="/images/**" location="/WEB-INF/front/images/"/> -->
+ 	<mvc:resources mapping="/**" location="/WEB-INF/front/"/>
+ 	<!-- <mvc:resources mapping="/*" location="/WEB-INF/front/html/*.html"/> -->
+ 	<mvc:resources mapping="/*.*" location="/WEB-INF/front/html/"/>
  	
 </beans>

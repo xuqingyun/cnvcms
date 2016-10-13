@@ -39,8 +39,12 @@ $(document).ready(function () {
 				str += '<td>'+item[s]+'</td>';
 			}				
 		}
-		str += '<td><span id="item_edit" ><a href="#"><img src="images/edit.png" alt="" title="" border="0"/></a></span ></td>';
-		str += '<td><span id="item_delete" ><a href="#"><img src="images/trash.gif" alt="" title="" border="0"/></a></span ></td>';
+		str += '<td><span id="item_edit" > \
+					<a href="#"><img src="images/edit.png" alt="" title="" border="0"/></a> \
+				</span ></td> \
+				<td><span id="item_delete" > \
+					<a href="#"><img src="images/trash.gif" alt="" title="" border="0"/></a> \
+				</span ></td>';
 		return str;
 	}
 	function addTableHead(headlist){
@@ -61,7 +65,8 @@ $(document).ready(function () {
 	function showUserTable(){
 		//关闭所有面板，显示用户面板
 		showPanel("#div_table_and_btn");
-		
+		$("#table_btn").show();
+		$("#table_btn").attr("item_type","user");
 		$("#welecome_msg").hide();
 		$("#table_title").text("用户列表");
 		$("#table_msg").text("用户列表信息");
@@ -79,29 +84,8 @@ $(document).ready(function () {
 		
 	 	});
 	};
-
-	//showUserTable();
-	//$("#user_manage").trigger("click");
-	$(".center_panel").hide();
-	$("#div_table_and_btn").show();
-	$("#table_btn").hide();
-	
-	//用户管理事件响应
-	$("#user_manage").click(function(){
-		showUserTable();
-	});
-	
-	//用户添加事件响应
-	$("#user_add").click(function(){
-		//关闭所有面板，显示添加用户面板
-		showPanel("#div_user_add");
-	
-	});
-	
-
-	//用户添加提交按钮
-	$("#user_add_form_submit").click(function(){
-        // 获取表单中的参数
+	function userAdd(){
+	       // 获取表单中的参数
 		var params = $("#add_form").serialize();  
 		var d = new Date();
 		var date = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
@@ -137,14 +121,14 @@ $(document).ready(function () {
             }
          });
         
-	});
-	//用户编辑事件响应
-	$("#item_edit").live("click",function(){
+	};
+	
+	function showUserEdit(elemt){
 		//关闭所有面板，显示添加用户面板
 		showPanel("#div_user_edit");
 
 		
-		var itemid = $(this).parent().parent().attr("itemid");
+		var itemid = $(elemt).parent().parent().attr("itemid");
 		
 	 	$.get("../api/user/detail/"+itemid,function(data,status){
 		 	
@@ -167,6 +151,33 @@ $(document).ready(function () {
 			}
 		
 	 	});
+	}
+	
+	//showUserTable();
+	//$("#user_manage").trigger("click");
+	$(".center_panel").hide();
+	$("#div_table_and_btn").show();
+	$("#table_btn").hide();
+	
+	//用户管理事件响应
+	$("#user_manage").click(function(){
+		showUserTable();
+	});
+	
+	//用户添加事件响应
+	$("#user_add").click(function(){
+		//关闭所有面板，显示添加用户面板
+		showPanel("#div_user_add");
+	});
+	
+
+	//用户添加提交按钮
+	$("#user_add_form_submit").click(function(){
+		userAdd();
+	});
+	//用户编辑事件响应
+	$("#item_edit").live("click",function(){
+		showUserEdit(this);
 		
 	});	
 
@@ -221,11 +232,24 @@ $(document).ready(function () {
 			}
 
 	 	});
-    	
-		
+	
 
 	});
+  //列表编辑选中项按钮响应
+    $("#table_selected").live("click",function(){	 	 	
+	 	alert("table_selected");
 	
+	});
+  //列表添加按钮响应
+    $("#table_add").live("click",function(){	 	 	
+	 	var item_type = $("#table_btn").attr("item_type");
+	 	if(item_type == "user"){
+	 		//$("#user_add").trigger("click");
+	 		showPanel("#div_user_add");
+	 	}
+	
+	});
+/*    
     var listid=0;
   
     $("#testadd").click(function(){
@@ -247,7 +271,7 @@ $(document).ready(function () {
 	 		var t = $("#listitem"+listid).text();
 	 		$("#listitem"+listid).remove();
 	 	}
-	});
+	});*/
     
     
 

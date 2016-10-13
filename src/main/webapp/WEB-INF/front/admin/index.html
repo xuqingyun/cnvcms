@@ -59,7 +59,16 @@
     <div id="right_content">       
  <div id="div_table_and_btn" class="center_panel">  
  
-       
+     	<div id="table_btn" item_type="user" class="form_sub_buttons">
+	
+		<span id="table_selected" item_type="user"><a href="#" class="button green">Edit selected</a></span>
+		<span id="table_selected" item_type="user"><a href="#" class="button red">Delete selected</a></span>
+		<span id="table_add" item_type="user"><a href="#" class="button red">添加</a></span>
+	<!--     <span id="testadd"><a href="#" class="button green">添加(测试)</a></span>
+	    <span id="testadd"><a href="#" class="button red">删除(测试)</a></span> -->
+    
+    </div>  
+    
     <h2 id="table_title">欢迎使用 后台管理系统！</h2> 
     <p id="welecome_msg">欢迎使用 后台管理系统！<br/>本系统由xqy开发<br/>版权所有</p>                   
                
@@ -85,16 +94,7 @@
     
 </table>
 
-	<div id="table_btn"class="form_sub_buttons">
-	
-		<a href="#" class="button green">Edit selected</a>
-	    <a href="#" class="button red">Delete selected</a>
-	    
-	    <button id="testadd"  class="button green">添加(测试)</button>
-	    <button id="testdel"  class="button green">删除(测试)</button>
-	    <a href="#" id="testbtn" class="button red">not set</a>
-    
-    </div>
+
  </div> 
  
       
@@ -297,8 +297,10 @@
         <h2>用户设置</h2>
     
         <ul>
-        	<li><span id="user_manage"><a href="#">管理用户</a></span></li>
-        	<li><span id="user_add"><a href="#">添加用户</a></span></li>
+        	<li><span id="user_manage"><a href="#">用户管理</a></span></li>
+        	<li><span id="group_manage"><a href="#">组别管理</a></span></li>
+        	<li><span id="role_manage"><a href="#">角色管理</a></span></li>
+        	<!-- <li><span id="user_add"><a href="#">添加用户</a></span></li> -->
             <li><a href="#">Help</a></li>
         </ul>  
     <h2>Browse categories</h2>
