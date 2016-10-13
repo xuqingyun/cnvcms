@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/aaa")
 public class TestController {
 	@RequestMapping(value="/*",method=RequestMethod.GET)
 	public String test1(Model model){
 		System.out.println("mapping.........");
-		return "index";
+		return "redirect:index.html";
 	}
 }

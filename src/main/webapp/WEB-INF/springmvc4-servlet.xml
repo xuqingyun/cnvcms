@@ -47,13 +47,12 @@
 	   <!--  最大文件大小，-1为不限制大小 -->
 	    <property name="maxUploadSize" value="-1"/>
 	</bean>
+	
+	<!-- 配置静态资源拦截 -->
  	<mvc:resources mapping="/admin/**" location="/WEB-INF/front/admin/"/>
-<!--
  	<mvc:resources mapping="/js/**" location="/WEB-INF/front/js/"/>
-  	<mvc:resources mapping="/css/**" location="/WEB-INF/front/css/"/>
- 	<mvc:resources mapping="/images/**" location="/WEB-INF/front/images/"/> -->
- 	<mvc:resources mapping="/**" location="/WEB-INF/front/"/>
- 	<!-- <mvc:resources mapping="/*" location="/WEB-INF/front/html/*.html"/> -->
+ 	<mvc:resources mapping="/css/**" location="/WEB-INF/front/css/"/>
+ 	<mvc:resources mapping="/images/**" location="/WEB-INF/front/images/"/>
  	<mvc:resources mapping="/*.*" location="/WEB-INF/front/html/"/>
  	
 </beans>
