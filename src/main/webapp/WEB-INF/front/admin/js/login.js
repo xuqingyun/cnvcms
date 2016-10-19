@@ -2,6 +2,29 @@
  * login.html页面登录验证
  */
 $(function(){
+	
+
+	//test
+	var user = { 
+			"username": "test1", 
+			"password": "pwdtest1"
+		} 
+	$("#btntest").click(function(){  		
+		
+		$.post("../api/admin/login",user,
+			function(data,status){ 
+	        	if(status == "success" && data.login == "success"){
+	            	var login =  data.login;
+	            	window.location.href="index.html"; 
+        	}
+        },"json");
+		
+
+	});
+	
+	
+	
+	
     // 登录验证  
     $("#submit").click(function(){  
         // 做表单输入校验  
@@ -35,35 +58,39 @@ $(function(){
             // 获取表单中的参数  
             var logindata = { 
 				'username': userId.val(), 
-				'password': password.val(), 
+				'password': password.val()
 			}; 
-            var params = $("#login").serialize();  
             
             $.ajax({ 
                 type:"POST", 
-                url:"../api/admin/login.json", 
+                //timeout : 100000,
+                //async: false,
+                url:"../api/admin/login", 
                 dataType:"json",      
                 contentType:"application/json",               
                 data:JSON.stringify(logindata), 
-                success:function(data){ 
-                	//alert("登录成功！\n"+JSON.stringify(data));
-                	var user =  data.login;
-                	//alert(user);
-                	window.location.href="index.html"; 
-                	
+                success:function(data,status){ 
+                	if(status == "success" && data.login == "success"){
+                    	window.location.href="index.html"; 
+                		//window.location.replace("index.html"); 
+                	}
                 },
                 error:function(msg){
                 	alert("登录错误！\nstatus:"+msg.status);
+                	//window.location.href="login.html";
                 }
              });
+
             
         }  
  
         });  
+    
     // 为document绑定onkeydown事件监听是否按了回车键  
     $(document).keydown(function(event){  
         if (event.keyCode === 13){ // 按了回车键  
             $("#submit").trigger("click");  
         } 
     }); 
+    
 });

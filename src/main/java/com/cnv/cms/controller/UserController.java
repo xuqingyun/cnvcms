@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -96,6 +98,54 @@ public class UserController {
 			System.out.println("cms error:"+ce.getMessage());
 		}	
 		
+		
+		return map;
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  login(@RequestBody User  userForm){
+		
+		System.out.println("user/login--------------received userform:");
+		System.out.println(userForm);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try{
+			User user = userService.login(userForm.getUsername(), userForm.getPassword());
+			//httpSession.setAttribute("loginUser", user.getUsername()); 
+			map.put("login", "success");
+		}
+		catch(CmsException ce){
+			map.put("login", "failure");
+			map.put("loginError", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+			
+		}		
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/testpost",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  post(@RequestBody User  userForm){
+		
+		System.out.println("test post--------------received userform:");
+		System.out.println(userForm);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try{
+			User user = userService.login(userForm.getUsername(), userForm.getPassword());
+			//httpSession.setAttribute("loginUser", user.getUsername()); 
+			map.put("login", "success");
+		}
+		catch(CmsException ce){
+			map.put("login", "failure");
+			map.put("loginError", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+			
+		}	
+
 		
 		return map;
 	}

@@ -19,6 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteByUID" parameterType="int">
 		delete from t_user_group where u_id= #{id}
 	</delete>
+	<delete id="deleteByGID" parameterType="int">
+		delete from t_user_group where g_id= #{id}
+	</delete>
 	<delete id="deleteUserGroup" >
 		delete from t_user_group where u_id= #{uid} and g_id=#{gid}
 	</delete>

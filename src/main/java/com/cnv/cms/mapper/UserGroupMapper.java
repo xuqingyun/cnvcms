@@ -12,6 +12,7 @@ public interface UserGroupMapper {
 	void add(UserGroup userGroup);
 	void delete(int id);
 	void deleteByUID(int id);
+	void deleteByGID(int id);
 	void deleteUserGroup(@Param("uid") int uid,@Param("gid") int gid);
 	void update(UserGroup userGroup);
 	UserGroup selectByID(int id);

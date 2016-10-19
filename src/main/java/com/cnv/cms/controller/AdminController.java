@@ -26,31 +26,29 @@ public class AdminController {
 	private UserService userService;
 	
 	
-	//@RequestParam(value = "username") String username,
-	//@RequestParam(value = "password") String password,
-	@RequestMapping(value="/login.json",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  login(@RequestBody User  userForm,
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, String>  loginIn(@RequestBody User  userForm,
 			HttpSession httpSession){
 		System.out.println("received userform:");
 		System.out.println(userForm);
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, String> map = new HashMap<String, String>();
 		
 		try{
 			User user = userService.login(userForm.getUsername(), userForm.getPassword());
 			httpSession.setAttribute("loginUser", user.getUsername()); 
 			map.put("login", "success");
+			
 		}
 		catch(CmsException ce){
 			map.put("login", "failure");
 			map.put("loginError", ce.getMessage());
 			System.out.println("cms error:"+ce.getMessage());
 			
-		}		
-		
+		}			
 		return map;
 	}
-	@RequestMapping(value="/login.json",method=RequestMethod.GET)
-	public  @ResponseBody Map<String, Object>  login(HttpSession httpSession){
+	@RequestMapping(value="/login.check",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  loginCheck(HttpSession httpSession){
 		System.out.println("login get");
 		Map<String, Object> map = new HashMap<String, Object>();
 		

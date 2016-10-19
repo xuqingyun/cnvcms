@@ -11,22 +11,13 @@ $(function() {
 
 $(document).ready(function () {
 	//验证是否登录,否则跳转到登录页面
- 	$.get("../api/admin/login.json",function(data,status){
+ 	$.get("../api/admin/login.check",function(data,status){
 		if(status != "success" || data.login != "success"){
 			window.location.href="login.html"; 
 		}
  	});
 
-	var user={
-			
-			id:"1",
-			name:"name",
-			nick:"nickname",
-			email:"abc@qq.com",
-			phone:"123484454",
-			status:"1",
-			date:"2016-09-11"
-	}
+
 
 	function additem(item){
 		var str = '<tr itemid="'+item["id"]+'" id="listitem';
@@ -100,6 +91,8 @@ $(document).ready(function () {
 			'status': 	"1", 
 			'createDate': date
 		}; 
+        
+        
        
         $.ajax({ 
             type:"POST", 
@@ -122,7 +115,54 @@ $(document).ready(function () {
          });
         
 	};
+	function userDelete(elemt){
+    	var itemid = $(elemt).parent().parent().attr("itemid");
+	 	$.get("../api/user/delete/"+itemid,function(data,status){
+		 	
+			if(status == "success" && data.flag == "success"){
+				
+				$("#listitem"+itemid).remove();
+			}else{
+				alert("删除失败");
+			}
+
+	 	});
 	
+	};
+	function userEditSubmit(){
+        // 获取表单中的参数
+		var userid = $("#edit_form").attr('userid');
+        var user = { 
+			'id'	:	userid,
+        	'username': $("#edit_username").val(), 
+			'password': $("#edit_password").val(), 
+			'nickname': $("#edit_nickname").val(), 
+			'email': 	$("#edit_email").val(), 
+			'phone': 	$("#edit_phone").val(), 
+			'status': 	$("#edit_form_select").val(), 
+			'createDate': $("#edit_createDate").val()
+		}; 
+       
+        $.ajax({ 
+            type:"POST", 
+            url:"../api/user/update/"+userid, 
+            dataType:"json",      
+            contentType:"application/json",               
+            data:JSON.stringify(user), 
+            success:function(data,status){ 
+    			if(status == "success" && data.flag == "success"){
+                	//alert("用户添加成功！");
+                	$("#user_manage").trigger("click");
+    			}else{
+    				alert("添加失败!\n"+data.flag);
+    			}
+
+            },
+            error:function(msg){
+            	alert("添加失败！\nstatus:"+msg.status);
+            }
+         });
+	}
 	function showUserEdit(elemt){
 		//关闭所有面板，显示添加用户面板
 		showPanel("#div_user_edit");
@@ -175,65 +215,21 @@ $(document).ready(function () {
 	$("#user_add_form_submit").click(function(){
 		userAdd();
 	});
+	
 	//用户编辑事件响应
 	$("#item_edit").live("click",function(){
-		showUserEdit(this);
-		
+		showUserEdit(this);	
 	});	
 
 	//用户编辑提交按钮
 	$("#user_edit_form_submit").click(function(){
-        // 获取表单中的参数
-		var userid = $("#edit_form").attr('userid');
-        var user = { 
-			'id'	:	userid,
-        	'username': $("#edit_username").val(), 
-			'password': $("#edit_password").val(), 
-			'nickname': $("#edit_nickname").val(), 
-			'email': 	$("#edit_email").val(), 
-			'phone': 	$("#edit_phone").val(), 
-			'status': 	$("#edit_form_select").val(), 
-			'createDate': $("#edit_createDate").val()
-		}; 
-       
-        $.ajax({ 
-            type:"POST", 
-            url:"../api/user/update/"+userid, 
-            dataType:"json",      
-            contentType:"application/json",               
-            data:JSON.stringify(user), 
-            success:function(data,status){ 
-    			if(status == "success" && data.flag == "success"){
-                	//alert("用户添加成功！");
-                	$("#user_manage").trigger("click");
-    			}else{
-    				alert("添加失败!\n"+data.flag);
-    			}
-
-            },
-            error:function(msg){
-            	alert("添加失败！\nstatus:"+msg.status);
-            }
-         });
+		userEditSubmit();
         
 	});
 	
 	//删除按钮响应
     $("#item_delete").live("click",function(){
-    	
-    	var itemid = $(this).parent().parent().attr("itemid");
-	 	$.get("../api/user/delete/"+itemid,function(data,status){
-		 	
-			if(status == "success" && data.flag == "success"){
-				
-				$("#listitem"+itemid).remove();
-			}else{
-				alert("删除失败");
-			}
-
-	 	});
-	
-
+    	userDelete(this);
 	});
   //列表编辑选中项按钮响应
     $("#table_selected").live("click",function(){	 	 	
@@ -249,30 +245,7 @@ $(document).ready(function () {
 	 	}
 	
 	});
-/*    
-    var listid=0;
-  
-    $("#testadd").click(function(){
-    	//alter("test add");
-    	 $("#testbtn").text("Hello world!"); 
-    	 var item1 = '<tr id="listitem' + listid+'" class="odd"> <td><input type="checkbox" name="" /></td><td>item' +
-    	  listid +
-    	 '</td> <td>Lorem ipsum dolor sit amet consectetur</td><td>45$</td><td>10/04/2011</td><td>web design</td><td>John</td><td><span id="item_edit" ><a href="#"><img src="images/edit.png" alt="" title="" border="0"/></a></span ></td><td><span id="item_delete" ><a href="#"><img src="images/trash.gif" alt="" title="" border="0"/></a></span ></td></tr>';
-  	 	listid ++;
-    	 
-		var item2 = additem(user);
-		$("#table_list").append(item2);
-    });
-    
-    $("#testdel").live("click",function(){	 	 	
-	 	//alert(t);
-	 	if(listid > 0){
-	 		listid--;
-	 		var t = $("#listitem"+listid).text();
-	 		$("#listitem"+listid).remove();
-	 	}
-	});*/
-    
-    
+
+      
 
 });
