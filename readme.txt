@@ -3,7 +3,7 @@
 # 采用 springMVC +spring + mybatis +maven
 test
 
-version 0.0.4
+version 0.0.5
 	Controller:
 		UserController
 		GroupController
