@@ -14,60 +14,59 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cnv.cms.exception.CmsException;
-import com.cnv.cms.model.Group;
-import com.cnv.cms.model.User;
-import com.cnv.cms.service.GroupService;
+import com.cnv.cms.model.Role;
+import com.cnv.cms.service.RoleService;
 
 @Controller
-@RequestMapping("/api/group")
-public class GroupController {
+@RequestMapping("/api/role")
+public class RoleController {
 	@Autowired
-	 @Qualifier("groupServiceImpl")
-	private GroupService groupService;
+	@Qualifier("roleServiceImpl")
+	private RoleService roleService;
+
 	
-	
-	@RequestMapping(value="/groups",method=RequestMethod.GET)
-	public  @ResponseBody Map<String, Object>  groups(){
-		System.out.println("----groups query---");
+	@RequestMapping(value="/roles",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  roles(){
+		System.out.println("----roles query---");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Group> groups = groupService.selectGroups();
-		map.put("groups", groups);
+		List<Role> roles = roleService.selectRoles();
+		map.put("roles", roles);
 		
 		return map;
 	}
 	
 	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  detail(@PathVariable(value="id") Integer id){
-		System.out.println("----group query by id---");
+		System.out.println("----Role query by id---");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Group group = groupService.selectGroup(id);
-		map.put("group", group);
+		Role Role = roleService.selectRole(id);
+		map.put("Role", Role);
 		return map;
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  deleter(@PathVariable(value="id") Integer id){
-		System.out.println("----group delete---");
+		System.out.println("----Role delete---");
 		System.out.println("delete id:" + id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", "failure");	
-		groupService.deleteGroup(id);
+		roleService.deleteRole(id);
 		map.put("flag", "success");	
 		return map;
 	}
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  add(@RequestBody Group  group){
+	public  @ResponseBody Map<String, Object>  add(@RequestBody Role  role){
 		
-		System.out.println("----group add------");
-		System.out.println("received group:"+group);
+		System.out.println("----Role add------");
+		System.out.println("received Role:"+role);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
-			groupService.add(group);
+			roleService.add(role);
 			map.put("flag", "success");	
 		}
 		catch(CmsException ce){
@@ -79,16 +78,17 @@ public class GroupController {
 		return map;
 	}
 	
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  update(@RequestBody Group  group){
+	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  update(@RequestBody Role  Role,
+			@PathVariable(value="id") Integer id){
 		
-		System.out.println("----group update------");
-		System.out.println("update groupid :"+group.getId());
-		System.out.println("received group:"+group);
+		System.out.println("----Role update------");
+		System.out.println("update Roleid :"+id);
+		System.out.println("received Role:"+Role);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
-			groupService.update(group);
+			roleService.update(Role);
 			map.put("flag", "success");	
 		}
 		catch(CmsException ce){
@@ -97,6 +97,5 @@ public class GroupController {
 		}	
 		return map;
 	}
-	
-	
+
 }

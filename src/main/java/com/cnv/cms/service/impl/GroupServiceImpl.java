@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.GroupMapper;
 import com.cnv.cms.mapper.UserGroupMapper;
 import com.cnv.cms.model.Group;
@@ -20,6 +21,10 @@ public class GroupServiceImpl implements GroupService {
 	private UserGroupMapper userGroupMapper;
 	
 	public void add(Group g) {
+		Group group = groupMapper.selectGroupByName(g.getName());
+		if(group != null){
+			throw new CmsException("该组名已经存在");
+		}
 		groupMapper.addGroup(g);
 	}
 	
@@ -37,6 +42,10 @@ public class GroupServiceImpl implements GroupService {
 	}
 	
 	public void update(Group g) {
+		Group group = groupMapper.selectGroup(g.getId());
+		if(group == null){
+			throw new CmsException("Group不存在！");
+		}
 		groupMapper.updateGroup(g);
 	}
 	

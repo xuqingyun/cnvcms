@@ -2,50 +2,54 @@ package com.cnv.cms.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cnv.cms.mapper.RoleMapper;
+import com.cnv.cms.mapper.UserRoleMapper;
 import com.cnv.cms.model.Role;
 import com.cnv.cms.model.UserRole;
 import com.cnv.cms.service.RoleService;
 
+@Service("roleServiceImpl")
 public class RoleServiceImpl implements RoleService {
 
+	@Autowired
+	private UserRoleMapper userRoleMapper;
+	@Autowired
+	private RoleMapper roleMapper;
+	
 	public void add(Role role) {
-		// TODO Auto-generated method stub
-
+		roleMapper.addRole(role);
 	}
 
 	public void add(UserRole userRole) {
-		// TODO Auto-generated method stub
-
+		userRoleMapper.add(userRole);
 	}
 
 	public void deleteRole(int id) {
-		// TODO Auto-generated method stub
-
+		roleMapper.deleteRole(id);
+		userRoleMapper.deleteByUID(id);
 	}
 
 	public void deleteUserRole(int id) {
-		// TODO Auto-generated method stub
-
+		userRoleMapper.delete(id);
 	}
 
 	public void update(Role role) {
-		// TODO Auto-generated method stub
-
+		roleMapper.updateRole(role);
 	}
 
 	public void update(UserRole userRole) {
-		// TODO Auto-generated method stub
-
+		userRoleMapper.update(userRole);
 	}
 
 	public List<Role> selectRoles() {
-		// TODO Auto-generated method stub
-		return null;
+		return roleMapper.selectAllRoles();
 	}
 
 	public Role selectRole(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleMapper.selectRole(id);
 	}
 
 }

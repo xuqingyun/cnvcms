@@ -9,5 +9,6 @@ public interface GroupMapper {
 	void deleteGroup(int id);
 	void updateGroup(Group g);
 	Group selectGroup(int id);
+	Group selectGroupByName(String name);
 	List<Group> selectAllGroups();
 }

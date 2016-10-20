@@ -12,6 +12,7 @@ public interface UserRoleMapper {
 	void add(UserRole userRole);
 	void delete(int id);
 	void deleteByUID(int id);
+	void deleteByRID(int id);
 	void deleteUserRole(@Param("uid") int uid,@Param("rid") int rid);
 	void update(UserRole userRole);
 	UserRole selectByID(int id);

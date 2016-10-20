@@ -19,6 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteByUID" parameterType="int">
 		delete from t_user_role where u_id= #{id}
 	</delete>
+	<delete id="deleteByRID" parameterType="int">
+		delete from t_user_role where r_id= #{id}
+	</delete>
 	<delete id="deleteUserRole" parameterType="int">
 		delete from t_user_role where u_id= #{uid} and r_id=#{rid}
 	</delete>

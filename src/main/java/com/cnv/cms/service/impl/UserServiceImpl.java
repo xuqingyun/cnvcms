@@ -127,6 +127,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void update(User user) {
+		User u = userMapper.selectUserByID(user.getId());
+		if(u==null){
+			//此处抛出异常
+			throw new CmsException("用户不存在");
+		}
 		userMapper.updateUser(user);
 	}
 
@@ -160,7 +165,6 @@ public class UserServiceImpl implements UserService {
 		return userPager;
 	}
 	public List<User> listUsers() {
-		// TODO Auto-generated method stub
 		List<User> users = userMapper.selectUsers("%");
 		return users;
 	}

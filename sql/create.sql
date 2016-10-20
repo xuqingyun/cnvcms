@@ -12,8 +12,8 @@ create table user(
 #test table
 create table t_user(
 	id int not null auto_increment primary key,
-	username varchar(50),
-	password varchar(50),
+	username varchar(50) not null unique,
+	password varchar(50) not null,
 	nickname varchar(50),
 	email varchar(50),
 	phone varchar(20),
@@ -23,12 +23,12 @@ create table t_user(
 
 create table t_group(
 	id int not null auto_increment primary key,
-	name varchar(50),
+	name varchar(50) not null unique,
 	descr varchar(200)
 );
 create table t_role(
 	id int not null auto_increment primary key,
-	name varchar(50),
+	name varchar(50) not null unique,
 	role_type int
 );
 create table t_user_role(

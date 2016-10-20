@@ -39,6 +39,7 @@ public class UserController {
 		
 		return map;
 	}
+	
 	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  detail(@PathVariable(value="id") Integer id){
 		System.out.println("----users query---");
@@ -50,6 +51,7 @@ public class UserController {
 		
 		return map;
 	}
+	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  deleter(@PathVariable(value="id") Integer id){
 		System.out.println("----users delete---");
@@ -61,6 +63,7 @@ public class UserController {
 		
 		return map;
 	}
+	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  add(@RequestBody User  userForm){
 		
@@ -80,6 +83,7 @@ public class UserController {
 		
 		return map;
 	}
+	
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  update(@RequestBody User  userForm,
 			@PathVariable(value="id") Integer id){
@@ -102,7 +106,26 @@ public class UserController {
 		return map;
 	}
 	
-	
+	@RequestMapping(value="/update/",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  update(@RequestBody User  userForm){
+		
+		System.out.println("----user update------");
+		System.out.println("update userid :"+ userForm.getId());
+		System.out.println("received userform:"+userForm);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			userService.update(userForm);
+			map.put("flag", "success");	
+		}
+		catch(CmsException ce){
+			map.put("flag", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+		}	
+		
+		
+		return map;
+	}
 	
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)

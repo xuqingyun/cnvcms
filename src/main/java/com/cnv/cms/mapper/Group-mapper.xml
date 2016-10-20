@@ -24,6 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectGroup" parameterType="int" resultType="Group">
         select * from t_group where id=#{id}
 	</select>
+	<select id="selectGroupByName" parameterType="string" resultType="Group">
+        select * from t_group where name=#{name}
+	</select>
 <!-- 查询全部 -->
     <select id="selectAllGroups"  resultType="Group">
         select * from t_group

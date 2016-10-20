@@ -1,9 +1,18 @@
 # cnvcms
 # cms系统
 # 采用 springMVC +spring + mybatis +maven
-test12
+test
 
-
+version 0.0.4
+	Controller:
+		UserController
+		GroupController
+		RoleController
+	Service:
+		GroupService
+		GroupServiceImpl
+		RoleService
+		RoleServiceImpl
 version 0.0.4
 	Controller:
 		AdminController
