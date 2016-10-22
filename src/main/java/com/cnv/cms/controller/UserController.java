@@ -46,7 +46,11 @@ public class UserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		User user = userService.load(id);
+		List<Integer> gids = userService.listUserGroupIds(id);
+		List<Integer> rids = userService.listUserRoleIds(id);
 		map.put("user", user);
+		map.put("groupids", gids);
+		map.put("roleids", rids);
 	
 		
 		return map;
@@ -72,7 +76,7 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
-			userService.add(userForm);
+			userService.add(userForm,userForm.getRoleIDs(),userForm.getGroupIDs());
 			map.put("flag", "success");	
 		}
 		catch(CmsException ce){
@@ -87,21 +91,46 @@ public class UserController {
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  update(@RequestBody User  userForm,
 			@PathVariable(value="id") Integer id){
+		List<Integer> gids = userForm.getGroupIDs();
+		List<Integer> rids = userForm.getRoleIDs();
 		
 		System.out.println("----user update------");
 		System.out.println("update userid :"+id);
 		System.out.println("received userform:"+userForm);
+		System.out.println("received gids:"+gids+"\treceived rids:"+rids);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
-			userService.update(userForm);
+			userService.update(userForm,rids,gids);
 			map.put("flag", "success");	
-		}
-		catch(CmsException ce){
+		}catch(CmsException ce){
 			map.put("flag", ce.getMessage());
 			System.out.println("cms error:"+ce.getMessage());
 		}	
 		
+		
+		return map;
+	}
+	
+
+	@RequestMapping(value="/usergroup/update/{id}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  updateUserGroup(@RequestBody Map<String, List<Integer>> mapIDs,
+			@PathVariable(value="id") Integer id){
+		List<Integer> gids = mapIDs.get("gids");
+		List<Integer> rids = mapIDs.get("rids");
+		
+		System.out.println("----user group update------");
+		System.out.println("update userid :"+id);
+		System.out.println("received gids:"+gids+"\treceived gids:"+rids);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			userService.update(id, rids, gids);
+			map.put("flag", "success");	
+		}catch(CmsException ce){
+			map.put("flag", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+		}	
 		
 		return map;
 	}

@@ -6,6 +6,7 @@ package com.cnv.cms.service;
 import java.util.List;
 
 import com.cnv.cms.model.Group;
+import com.cnv.cms.model.User;
 import com.cnv.cms.model.UserGroup;
 
 /**
@@ -46,7 +47,7 @@ public interface GroupService {
 	
 
 	/*
-	 * 用户列表
+	 * Group列表
 	 */
 	public List<Group> selectGroups();
 	/**
@@ -54,6 +55,13 @@ public interface GroupService {
 	 * @param id
 	 */
 	public Group selectGroup(int id);
+	
+	/**
+	 * 获取Group成员信息
+	 * @param group id
+	 */
+	public List<User> selectUsersByGroupID(int id);
+
 
 
 }

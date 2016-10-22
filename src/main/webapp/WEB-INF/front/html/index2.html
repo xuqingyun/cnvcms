@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,11 +6,43 @@
 <link rel="stylesheet" type="text/css" href="css/style1.css" />
 <!-- jQuery file -->
 <script src="js/jquery.min.js"></script>
-<script src="js/index.js"></script>
-
-
+<!-- <script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script> -->
 <script type="text/javascript">
+$(document).ready(function () {
 
+	//UserManage事件响应
+	$("#user_manage").click(function(){
+		$("#right_panel_iframe").attr("src","user_panel.html");
+	});
+	
+	//GroupManage事件响应
+	$("#group_manage").click(function(){
+		$("#right_panel_iframe").attr("src","group_panel.html");
+	});
+	
+	//RoleManage事件响应
+	$("#role_manage").click(function(){
+		showRoleTable();
+	});
+	
+	
+	
+	$("#text_message").text("2222222");
+	//$("#right_panel_iframe").attr("src","user_panel.html");
+	
+	
+	//注意：下面的代码是放在和iframe同一个页面调用
+ 	$("#right_panel_iframe").load(function(){
+ 		iframeHeight();
+	});
+	
+
+});	
+
+function iframeHeight(){
+	var mainheight = $("#right_panel_iframe").contents().find("body").height()+30;
+	$("#right_panel_iframe").height(mainheight);
+}
 </script>
 </head>
 <body>

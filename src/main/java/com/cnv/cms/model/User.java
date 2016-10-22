@@ -4,6 +4,7 @@
 package com.cnv.cms.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -53,6 +54,9 @@ public class User {
 	 */
 	private Date createDate=new Date();
 	
+	private List<Integer> groupIDs;
+	private List<Integer> roleIDs;
+ 	
 	public User(){}
 	public User(int id, String username, String password, String nickname, 
 			String email, String phone, int status,Date createDate) {
@@ -119,11 +123,29 @@ public class User {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	
+	
+	
+	public List<Integer> getGroupIDs() {
+		return groupIDs;
+	}
+	public void setGroupIDs(List<Integer> groupIDs) {
+		this.groupIDs = groupIDs;
+	}
+	public List<Integer> getRoleIDs() {
+		return roleIDs;
+	}
+	public void setRoleIDs(List<Integer> roleIDs) {
+		this.roleIDs = roleIDs;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", nickname=" + nickname
-				+ ", email=" + email + ", phone=" + phone 
-				+ ", status=" + status + ", createDate=" + createDate + "]";
+				+ ", email=" + email + ", phone=" + phone + ", status=" + status + ", createDate=" + createDate
+				+ ", groupIDs=" + groupIDs + ", roleIDs=" + roleIDs + "]";
 	}
+	
+	
 	
 }

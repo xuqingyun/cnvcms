@@ -1,5 +1,6 @@
 package com.cnv.cms.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,8 @@ public class GroupController {
 	private GroupService groupService;
 	
 	
+	
+	
 	@RequestMapping(value="/groups",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  groups(){
 		System.out.println("----groups query---");
@@ -47,8 +50,26 @@ public class GroupController {
 		return map;
 	}
 	
+	@RequestMapping(value="/member/{id}",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  member(@PathVariable(value="id") Integer id){
+		System.out.println("----group member query by id---");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<User> users = groupService.selectUsersByGroupID(id);
+		List<Map<String,Object>> userMaps = new ArrayList<Map<String,Object>>();
+		for(User u : users){
+			Map<String,Object> userMap = new HashMap<String,Object>();
+			userMap.put("id", u.getId());
+			userMap.put("name", u.getUsername());
+			userMaps.add(userMap);
+		}
+		map.put("users", userMaps);
+		return map;
+	}
+	
+	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
-	public  @ResponseBody Map<String, Object>  deleter(@PathVariable(value="id") Integer id){
+	public  @ResponseBody Map<String, Object>  delete(@PathVariable(value="id") Integer id){
 		System.out.println("----group delete---");
 		System.out.println("delete id:" + id);
 		

@@ -41,8 +41,8 @@ public class RoleController {
 		System.out.println("----Role query by id---");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Role Role = roleService.selectRole(id);
-		map.put("Role", Role);
+		Role role = roleService.selectRole(id);
+		map.put("role", role);
 		return map;
 	}
 	
@@ -78,17 +78,16 @@ public class RoleController {
 		return map;
 	}
 	
-	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  update(@RequestBody Role  Role,
-			@PathVariable(value="id") Integer id){
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  update(@RequestBody Role  role){
 		
 		System.out.println("----Role update------");
-		System.out.println("update Roleid :"+id);
-		System.out.println("received Role:"+Role);
+		System.out.println("update Roleid :"+ role.getId());
+		System.out.println("received Role:"+role);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
-			roleService.update(Role);
+			roleService.update(role);
 			map.put("flag", "success");	
 		}
 		catch(CmsException ce){

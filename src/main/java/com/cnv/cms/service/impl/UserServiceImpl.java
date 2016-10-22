@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private GroupMapper groupMapper;
 
-	public void add(User user, Integer[] rids, Integer[] gids) {
+	public void add(User user,List<Integer> rids, List<Integer> gids) {
 		add(user);
 /*		//检查用户是否存在
 		User utemp = userMapper.selectUserByName(user.getUsername());
@@ -93,12 +93,16 @@ public class UserServiceImpl implements UserService {
 		userGroupMapper.deleteByUID(id);
 	}
 
-	public void update(User user, Integer[] rids, Integer[] gids) {
+	public void update(User user, List<Integer> listRids, List<Integer> listGids) {
+		User u = userMapper.selectUserByID(user.getId());
+		if(u==null){
+			//此处抛出异常
+			throw new CmsException("用户不存在");
+		}
 		userMapper.updateUser(user);
 		List<Integer> oldRids = userRoleMapper.selectRoleIDsByUserID(user.getId());
 		List<Integer> oldGids = userGroupMapper.selectGroupIDsByUserID(user.getId());
-		List<Integer> listRids = Arrays.asList(rids);
-		List<Integer> listGids = Arrays.asList(gids);
+
 		
 		//如果原有的rid不存在，删除
 		for(int oldRid:oldRids){
@@ -126,6 +130,43 @@ public class UserServiceImpl implements UserService {
 		}		
 	}
 
+	public void update(int id, List<Integer> rids, List<Integer> gids) {
+		User user = userMapper.selectUserByID(id);
+		if(user==null){
+			//此处抛出异常
+			throw new CmsException("用户不存在");
+		}
+		List<Integer> oldRids = userRoleMapper.selectRoleIDsByUserID(id);
+		List<Integer> oldGids = userGroupMapper.selectGroupIDsByUserID(id);
+		List<Integer> listRids = rids;
+		List<Integer> listGids = gids;
+		
+		//如果原有的rid不存在，删除
+		for(int oldRid:oldRids){
+			if(!listRids.contains(oldRid)){
+				userRoleMapper.deleteUserRole(id, oldRid);
+			};
+		}
+		//如果新的的rid不存在，添加
+		for(int rid:listRids){
+			if(!oldRids.contains(rid)){
+				addRole(user,rid);
+			}
+		}
+		//如果原有的gid不存在，删除
+		for(int oldGid:oldGids){
+			if(!listGids.contains(oldGid)){
+				userGroupMapper.deleteUserGroup(id, oldGid);
+			};
+		}
+		//如果新的的gid不存在，添加
+		for(int gid:listGids){
+			if(!oldGids.contains(gid)){
+				addGroup(user,gid);
+			}
+		}
+	}
+	
 	public void update(User user) {
 		User u = userMapper.selectUserByID(user.getId());
 		if(u==null){
@@ -220,5 +261,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+	public List<User> listUsersByGroupID(int id) {
+		return userGroupMapper.selectUsersByGroupID(id);
+	}
+	
 
 }

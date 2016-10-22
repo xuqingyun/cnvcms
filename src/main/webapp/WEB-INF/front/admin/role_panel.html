@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/center_panel.css" />
+<!-- jQuery file -->
+<script src="js/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<!-- <script src="js/role_panel.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	showRoleTable();
+	//重新调整高度
+	window.parent.iframeHeight(h);
+	
+});
+function showRoleTable(){
+	//关闭所有面板，显示用户面板
+	showPanel("#div_panel_table");
+	$("#table_btn").show();
+	$("#table_btn").attr("item_type","role");
+	$("#welecome_msg").hide();
+	$("#table_title").text("用户角色列表");
+	$("#table_msg").text("Role列表信息");
+	addTableHead(['角色名称','角色类型','编辑','删除']);
+	var stru = "";
+ 	$.get("../api/role/roles",function(data,status){
+ 	
+		if(status == "success"){
+			for(var d in data.roles){
+	 			stru +=  additem(data.roles[d]);
+	 		}
+			$("#table_list").empty();
+			$("#table_list").append(stru);
+			
+			//重新调整高度
+			window.parent.iframeHeight();
+			
+		}
+	
+ 	});
+};
+</script>
+
+</head>
+<body>
+<div id="panel_content"> 
+ <div id="div_panel_table" class="center_panel">  
+ 
+     <div id="table_btn" item_type="user" class="form_sub_buttons">
+		<span id="user_table_selected" item_type="user"><a href="#" class="button green">Edit selected</a></span>
+		<span id="user_table_selected" item_type="user"><a href="#" class="button red">Delete selected</a></span>
+		<span id="btn_table_add" item_type="user"><a href="#" class="button red">添加</a></span>
+    </div>  
+    <h2 id="table_title">用户管理</h2> 
+    <table id="rounded-corner">
+
+	    <thead>
+	    	<tr id="table_head">
+	        	<!-- 列表头, 由js代码添加 -->     
+	       
+			</tr>
+	    </thead>
+	    
+	    <tfoot>
+	    	<tr>
+	        	<td id="table_msg" colspan="12">table foot</td>
+	        </tr>
+	    </tfoot>
+	    
+	    <tbody id="table_list">
+	    	<!-- 列表项, 由js代码添加 -->   
+     
+	    </tbody>
+    </table>
+ </div>  
+
+
+
+ </div>  
+    
+</body>
+</html>

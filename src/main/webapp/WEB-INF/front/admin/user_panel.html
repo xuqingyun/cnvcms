@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/center_panel.css" />
+<!-- jQuery file -->
+<script src="js/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/user_panel.js"></script>
+
+</head>
+<body>
+<div id="panel_content"> 
+ <div id="div_panel_table" class="center_panel">  
+ 
+     <div id="table_btn" item_type="user" class="form_sub_buttons">
+		<span id="user_table_selected" item_type="user"><a href="#" class="button green">Edit selected</a></span>
+		<span id="user_table_selected" item_type="user"><a href="#" class="button red">Delete selected</a></span>
+		<span id="btn_table_add" item_type="user"><a href="#" class="button red">添加</a></span>
+    </div>  
+    <h2 id="table_title">用户管理</h2> 
+    <table id="rounded-corner">
+
+	    <thead>
+	    	<tr id="table_head">
+	        	<!-- 列表头, 由js代码添加 -->     
+	       
+			</tr>
+	    </thead>
+	    
+	    <tfoot>
+	    	<tr>
+	        	<td id="table_msg" colspan="12">table foot</td>
+	        </tr>
+	    </tfoot>
+	    
+	    <tbody id="table_list">
+	    	<!-- 列表项, 由js代码添加 -->   
+     
+	    </tbody>
+    </table>
+ </div>  
+
+
+
+ <div id="div_user_edit" class="center_panel">
+    <div  class="tabcontent">
+        <h3 id="edit_form_title" align="center">用户编辑</h3>
+        <div class="form" id="edit_form">
+              
+            <div class="form_row">
+            	<label>用户名:</label>
+            	<input type="text" class="form_input" id="edit_username" flag="edit_input"/>
+            </div>
+             
+            <div class="form_row">
+            	<label>密码:</label>
+            	<input type="password" class="form_input" id="edit_password" flag="edit_input"/>
+            </div>
+            
+            <div class="form_row">
+            	<label>昵称</label>
+            	<input type="text" class="form_input" id="edit_nickname" flag="edit_input"/>
+            </div>
+            
+           <div class="form_row">
+            	<label>邮箱</label>
+            	<input type="text" class="form_input" id="edit_email" flag="edit_input"/>
+            </div>
+
+           <div class="form_row">
+            	<label>电话</label>
+            	<input type="text" class="form_input" id="edit_phone" flag="edit_input"/>
+            </div>
+       
+        	<div class="form_row" id="edit_user_group">
+            	<label>用户组别:</label>
+            </div>
+            
+            <div class="form_row" id="edit_user_role">
+            	<label>用户角色:</label>
+            </div>
+            
+                        
+            <div class="form_row">
+            <label>用户状态:</label>
+            <select class="form_select" id="edit_form_select" flag="edit_input">
+            	<option id="edit_select_on" value="1">启用</option>
+            	<option id="edit_select_off" value="0">停用</option>
+            </select>
+            </div>
+            
+             <div class="form_row">
+            	<label>创建时间</label>
+            	<input type="text" class="form_input" id="edit_createDate" flag="edit_input" readonly/>
+            </div>
+           
+            
+<!--             
+             <div class="form_row">
+            	<label>Message:</label>
+            	<textarea class="form_textarea" flag="edit_input"></textarea>
+            </div>
+ -->            
+            <div class="form_row">
+            	<input type="submit" id="edit_form_submit" class="form_submit" value="提交" />
+            </div> 
+        </div>
+    </div>
+ </div>
+  <div id="div_user_add" class="center_panel">
+    <div  class="tabcontent">
+        <h3 align="center">添加用户</h3>
+        <div class="form" id="add_form">
+            
+            <div class="form_row">
+            <label>用户名:</label>
+            <input type="text" class="form_input" id="add_username" value="test1"/>
+            </div>
+             
+            <div class="form_row">
+            <label>密码:</label>
+            <input type="password" class="form_input" id="add_password" value="pwdtest1"/>
+            </div>
+            
+            <div class="form_row">
+            <label>昵称</label>
+            <input type="text" class="form_input" id="add_nickname" value="testnick1"/>
+            </div>
+            
+           <div class="form_row">
+            <label>邮箱</label>
+            <input type="text" class="form_input" id="add_email" value="test@t.com"/>
+            </div>
+
+           <div class="form_row">
+            <label>电话</label>
+            <input type="text" class="form_input" id="add_phone" value="13888889999"/>
+            </div>
+                        
+            <div class="form_row" id="add_user_group">
+            	<label>用户组别:</label>
+            </div>
+            
+            <div class="form_row" id="add_user_role">
+            	<label>用户角色:</label>
+            </div>
+<!--             
+             <div class="form_row">
+            <label>Message:</label>
+            <textarea class="form_textarea" name=""></textarea>
+            </div>
+ -->            
+            <div class="form_row">
+            <input type="submit" id="add_form_submit" class="form_submit" value="提交" />
+            </div> 
+            <div class="clear"></div>
+        </div>
+    </div>
+    </div>
+
+ </div>  
+    
+</body>
+</html>

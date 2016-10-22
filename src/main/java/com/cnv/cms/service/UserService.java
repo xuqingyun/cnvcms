@@ -21,7 +21,7 @@ public interface UserService {
 	 * @param rids 用户的所有角色信息
 	 * @param gids 用户的所有组信息
 	 */
-	public void add(User user,Integer[]rids,Integer[]gids);
+	public void add(User user,List<Integer> rids, List<Integer> gids);
 	public void add(User user);
 	/**
 	 * 删除用户，注意需要把用户和角色和组的对应关系删除
@@ -37,7 +37,8 @@ public interface UserService {
 	 * @param rids
 	 * @param gids
 	 */
-	public void update(User user,Integer[] rids,Integer[] gids);
+	public void update(User user,List<Integer> listRids,List<Integer> listGids);
+	public void update(int id,List<Integer> rids,List<Integer> gids);
 	
 	public void update(User user);
 	/**
@@ -85,6 +86,12 @@ public interface UserService {
 	
 	public List<User> listGroupUsers(int gid);
 	public List<User> listRoleUsers(int rid);
+	
+	/**
+	 * 根据Group ID 获取用户信息
+	 * @param id
+	 */
+	public List<User> listUsersByGroupID(int id);
 	
 	public User login(String username,String password);
 }

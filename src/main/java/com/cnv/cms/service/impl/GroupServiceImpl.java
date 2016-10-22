@@ -9,6 +9,7 @@ import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.GroupMapper;
 import com.cnv.cms.mapper.UserGroupMapper;
 import com.cnv.cms.model.Group;
+import com.cnv.cms.model.User;
 import com.cnv.cms.model.UserGroup;
 import com.cnv.cms.service.GroupService;
 
@@ -61,6 +62,11 @@ public class GroupServiceImpl implements GroupService {
 	public Group selectGroup(int id) {
 		return groupMapper.selectGroup(id);
 	}
+
+	public List<User> selectUsersByGroupID(int id) {
+		return userGroupMapper.selectUsersByGroupID(id);
+	}
+
 
 
 

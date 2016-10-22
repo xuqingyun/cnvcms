@@ -26,11 +26,11 @@ public class Role {
 		this.role_type = role_type;
 	}
 
-	public RoleType getRole(){
+/*	public RoleType getRole(){
 		return RoleType.values()[role_type];
 		
 	}
-	
+*/	
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", name=" + name + ", roleType=" + role_type + "]";
