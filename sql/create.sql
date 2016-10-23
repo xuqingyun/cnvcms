@@ -1,3 +1,4 @@
+# test info
 #test table
 create table tt1(
 	id int not null auto_increment primary key,
