@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>后台登录 </title>
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<!-- jQuery file -->
+<script src="js/jquery.min.js"></script>
+<script src="js/login.js"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+
+<body>
+
+<!-- <form id="login" action="../api/admin/login.json" method="post" enctype="application/json"> -->
+<form id="login">
+    <h1>Log In</h1>
+    <fieldset id="inputs">
+        <input id="username" type="text" placeholder="Username" autofocus required>   
+        <input id="password" type="password" placeholder="Password" required>
+    </fieldset>
+    <fieldset id="errormsg">
+       <p id="perror"></p>
+    </fieldset>
+    
+    <fieldset id="actions">
+        <input type="button" id="submit" value="Log in">
+        <a href="#">Forgot your password?</a><a href="#">Register</a>
+        <span id="btntest"><a href="#">test</a></span>
+    </fieldset>
+</form>
+<br><br>
+<div style="text-align:center;clear:both">
+<p id="resp"></p>
+</div>
+
+</body>
+</html>

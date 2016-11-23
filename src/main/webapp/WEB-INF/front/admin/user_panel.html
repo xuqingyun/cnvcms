@@ -1,166 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/center_panel.css" />
-<!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/common.js"></script>
-<script src="js/user_panel.js"></script>
 
-</head>
-<body>
-<div id="panel_content"> 
- <div id="div_panel_table" class="center_panel">  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CMS Admin User Panel</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
  
-     <div id="table_btn" item_type="user" class="form_sub_buttons">
-		<span id="user_table_selected" item_type="user"><a href="#" class="button green">Edit selected</a></span>
-		<span id="user_table_selected" item_type="user"><a href="#" class="button red">Delete selected</a></span>
-		<span id="btn_table_add" item_type="user"><a href="#" class="button red">添加</a></span>
-    </div>  
-    <h2 id="table_title">用户管理</h2> 
-    <table id="rounded-corner">
 
-	    <thead>
-	    	<tr id="table_head">
-	        	<!-- 列表头, 由js代码添加 -->     
-	       
-			</tr>
-	    </thead>
-	    
-	    <tfoot>
-	    	<tr>
-	        	<td id="table_msg" colspan="12">table foot</td>
-	        </tr>
-	    </tfoot>
-	    
-	    <tbody id="table_list">
-	    	<!-- 列表项, 由js代码添加 -->   
-     
-	    </tbody>
-    </table>
- </div>  
-
-
-
- <div id="div_user_edit" class="center_panel">
-    <div  class="tabcontent">
-        <h3 id="edit_form_title" align="center">用户编辑</h3>
-        <div class="form" id="edit_form">
-              
-            <div class="form_row">
-            	<label>用户名:</label>
-            	<input type="text" class="form_input" id="edit_username" flag="edit_input"/>
-            </div>
-             
-            <div class="form_row">
-            	<label>密码:</label>
-            	<input type="password" class="form_input" id="edit_password" flag="edit_input"/>
-            </div>
-            
-            <div class="form_row">
-            	<label>昵称</label>
-            	<input type="text" class="form_input" id="edit_nickname" flag="edit_input"/>
-            </div>
-            
-           <div class="form_row">
-            	<label>邮箱</label>
-            	<input type="text" class="form_input" id="edit_email" flag="edit_input"/>
-            </div>
-
-           <div class="form_row">
-            	<label>电话</label>
-            	<input type="text" class="form_input" id="edit_phone" flag="edit_input"/>
-            </div>
-       
-        	<div class="form_row" id="edit_user_group">
-            	<label>用户组别:</label>
-            </div>
-            
-            <div class="form_row" id="edit_user_role">
-            	<label>用户角色:</label>
-            </div>
-            
-                        
-            <div class="form_row">
-            <label>用户状态:</label>
-            <select class="form_select" id="edit_form_select" flag="edit_input">
-            	<option id="edit_select_on" value="1">启用</option>
-            	<option id="edit_select_off" value="0">停用</option>
-            </select>
-            </div>
-            
-             <div class="form_row">
-            	<label>创建时间</label>
-            	<input type="text" class="form_input" id="edit_createDate" flag="edit_input" readonly/>
-            </div>
-           
-            
-<!--             
-             <div class="form_row">
-            	<label>Message:</label>
-            	<textarea class="form_textarea" flag="edit_input"></textarea>
-            </div>
- -->            
-            <div class="form_row">
-            	<input type="submit" id="edit_form_submit" class="form_submit" value="提交" />
-            </div> 
-        </div>
-    </div>
- </div>
-  <div id="div_user_add" class="center_panel">
-    <div  class="tabcontent">
-        <h3 align="center">添加用户</h3>
-        <div class="form" id="add_form">
-            
-            <div class="form_row">
-            <label>用户名:</label>
-            <input type="text" class="form_input" id="add_username" value="test1"/>
-            </div>
-             
-            <div class="form_row">
-            <label>密码:</label>
-            <input type="password" class="form_input" id="add_password" value="pwdtest1"/>
-            </div>
-            
-            <div class="form_row">
-            <label>昵称</label>
-            <input type="text" class="form_input" id="add_nickname" value="testnick1"/>
-            </div>
-            
-           <div class="form_row">
-            <label>邮箱</label>
-            <input type="text" class="form_input" id="add_email" value="test@t.com"/>
-            </div>
-
-           <div class="form_row">
-            <label>电话</label>
-            <input type="text" class="form_input" id="add_phone" value="13888889999"/>
-            </div>
-                        
-            <div class="form_row" id="add_user_group">
-            	<label>用户组别:</label>
-            </div>
-            
-            <div class="form_row" id="add_user_role">
-            	<label>用户角色:</label>
-            </div>
-<!--             
-             <div class="form_row">
-            <label>Message:</label>
-            <textarea class="form_textarea" name=""></textarea>
-            </div>
- -->            
-            <div class="form_row">
-            <input type="submit" id="add_form_submit" class="form_submit" value="提交" />
-            </div> 
-            <div class="clear"></div>
-        </div>
-    </div>
-    </div>
-
- </div>  
+	<style type="text/css">
+		#page-wrapper {
+			margin: 0 0 0 5px; 
+			padding: 0 10;
+		}
+	</style>
     
+    <script type="text/javascript">
+
+	function updateIFrame(){
+		var h = $(document).height(); 
+		//重新调整高度
+		var ph = window.parent.iframeHeight(h);
+		
+	}  
+	</script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+       	
+ 
+
+      <div id="page-wrapper"> 
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">用户列表</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+              <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            DataTables Advanced Tables
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        		<thead>
+                                    <tr>
+                                    	<th>ID</th>
+                                        <th>用户名</th>
+                                        <th>密码</th>
+                                        <th>昵称</th>
+                                        <th>邮箱</th>
+                                        <th>电话</th>
+                                        <th>状态</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+     
+                            </table>
+                            <!-- /.table-responsive -->
+                            <div class="well">
+                                <h4>DataTables Usage Information</h4>
+                                <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images.</p>
+                                <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+  
+       </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+
+    <!-- DataTables JavaScript -->
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+	 var tdata = [
+        {
+            "name":       "Tiger Nixon",
+            "position":   "System Architect",
+            "salary":     "$3,120",
+            "start_date": "2011/04/25",
+            "office":     "Edinburgh",
+            "extn":       "5421"
+        },
+        {
+            "name":       "Garrett Winters",
+            "position":   "Director",
+            "salary":     "$5,300",
+            "start_date": "2011/07/25",
+            "office":     "Edinburgh",
+            "extn":       "8422"
+        }
+    ];
+    $(document).ready(function() {
+    	
+    	
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            //data : users,
+            ajax : "../api/user/users",
+		 	columns: [
+				{"data": "id"},
+                {"data": "username"},
+                {"data": "password"},
+                {"data": "nickname"},
+                {"data": "email"},
+                {"data": "phone"},
+                {"data": "status"},
+                {"data": "createDate"},
+                {"data": null}
+            ],
+			 "columnDefs": [{  
+				// 定义操作列  
+				"targets": -1,  
+				"data": null,  
+				defaultContent: '<a href="#" class="edit btn btn-default btn-xs"><i class="fa fa-edit"></i> 编辑</a>' +
+								' <a href="#" class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> 删除</a>',
+			 
+			}]
+		});	
+        updateIFrame();
+    });	
+		
+    </script>
+
 </body>
+
 </html>

@@ -53,6 +53,11 @@
  	<mvc:resources mapping="/js/**" location="/WEB-INF/front/js/"/>
  	<mvc:resources mapping="/css/**" location="/WEB-INF/front/css/"/>
  	<mvc:resources mapping="/images/**" location="/WEB-INF/front/images/"/>
+ 	<mvc:resources mapping="/dist/**" location="/WEB-INF/front/dist/"/>
+ 	<mvc:resources mapping="/vendor/**" location="/WEB-INF/front/vendor/"/>
+ 	
  	<mvc:resources mapping="/*.*" location="/WEB-INF/front/html/"/>
  	
+ 	<mvc:resources mapping="/admin_old/**" location="/WEB-INF/front/admin_old/"/>
+ 	<mvc:resources mapping="/test/**" location="/WEB-INF/front/test/"/>
 </beans>

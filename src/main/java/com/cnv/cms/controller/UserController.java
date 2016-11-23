@@ -34,12 +34,24 @@ public class UserController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<User> users = userService.listUsers();
-		map.put("users", users);
+		map.put("data", users);
 	
 		
 		return map;
 	}
+/*	
+	@RequestMapping(value="/users",method=RequestMethod.GET)
+	public  @ResponseBody List<User>  users(){
+		System.out.println("----users query---");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<User> users = userService.listUsers();
+		map.put("users", users);
 	
+		
+		return users;
+	}
+	*/
 	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  detail(@PathVariable(value="id") Integer id){
 		System.out.println("----users query---");
