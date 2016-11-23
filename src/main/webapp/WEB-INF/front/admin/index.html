@@ -33,42 +33,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
- <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-    
-    
-    <script type="text/javascript">
-	
-		function iframeHeight(h){
-			if(h==null){
-				var mainheight = $("#right_panel").contents().find("body").height()+30;
-			}else{
-				mainheight = h;
-			}
-			if(mainheight<400){
-				mainheight = 400;
-			}
-			$("#right_panel").height(mainheight);
-			return mainheight;
-		}
-		function test(){
-				alert("this is a test");
-			}
-	</script>
 	<style type="text/css">
 		#page-wrapper {
 			padding: 0 0;
@@ -325,13 +290,19 @@
                             <a href="#"><i class="fa fa-user fa-fw"></i> 用户管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="../pages/user_panel.html">用户列表</a>
+                                
+                                    <a href="#" onclick="changeRightPanel('user')">用户列表</a>
+                                
                                 </li>
                                 <li>
-                                    <a href="../pages/group_panel.html">组别管理</a>
+                             <!--    <span id="group_manage"> -->
+                                    <a href="#">组别管理</a>
+                                <!-- </span> -->
                                 </li>
                                  <li>
-                                    <a href="../pages/role_panel.html">角色管理</a>
+                                 <!-- <span id="role_manage"> -->
+                                    <a href="#">角色管理</a>
+                              <!--   </span> -->
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -472,7 +443,7 @@
        <div id="page-wrapper">
         
   		
-	  		<iframe id="right_panel" src="user_panel.html"  height="568px" width="100%" MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no></iframe>
+	  		<iframe id="right_panel_iframe" src="user_panel.html"  height="568px" width="100%" MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no></iframe>
      	
             
         </div>
@@ -482,6 +453,28 @@
     <!-- /#wrapper -->
 
    
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="../vendor/raphael/raphael.min.js"></script>
+    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+    
+    <!-- user defined js file -->
+    <script src="js/index.js"></script>
+    
+    
+ 
 
 
 </body>
