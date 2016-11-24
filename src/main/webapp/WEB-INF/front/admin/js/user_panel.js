@@ -19,7 +19,7 @@ function userDelete(id){
 
 function showUserEdit(itemid){
 	//关闭所有面板，显示添加用户面板
-	showPanel("#div_user_edit");
+	showPanel("#edit_panel");
 
 	//重新调整高度
 	updateIFrame();
@@ -78,6 +78,7 @@ $(document).ready(function() {
 	    	}
 		});	
      
+        showPanel("#list_panel");
         updateIFrame();
         
         
@@ -98,7 +99,7 @@ $(document).ready(function() {
             			//$("#listitem"+itemid).remove();
             			table.row(row).remove().draw();
             			//重新调整高度
-            			window.parent.iframeHeight();
+            			updateIFrame();
             		}else{
             			alert("删除失败");
             		}
@@ -108,5 +109,11 @@ $(document).ready(function() {
             }
          
         });
+        
+        $('#dataTables-user tbody').on('click', 'a.edit', function(e) {
+        	showPanel("#edit_panel");
+        	updateIFrame();
+        });
+       
     });	
 
