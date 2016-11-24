@@ -138,10 +138,10 @@ $(document).ready(function () {
 	 	$.get("../api/user/users",function(data,status){
 	 	
 			if(status == "success"){
-				for(var d in data.users){
-					var u = data.users[d];
+				for(var d in data.data){
+					var u = data.data[d];
 					u
-		 			stru +=  additem(data.users[d]);
+		 			stru +=  additem(data.data[d]);
 		 		}
 				$("#table_list").empty();
 				$("#table_list").append(stru);

@@ -7,4 +7,9 @@ function updateIFrame(){
 		 window.parent.iframeHeight(h);
 	}
 	
-}  
+}
+function showPanel(panel){
+	$(".center_panel").hide();
+	$(panel).show();
+	
+};
