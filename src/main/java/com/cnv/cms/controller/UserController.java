@@ -81,6 +81,19 @@ public class UserController {
 		return map;
 	}
 	
+	@RequestMapping(value="/deleteIds",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  deleter(@RequestBody List<Integer> ids){
+		System.out.println("----users delete---");
+		System.out.println("delete id:" + ids);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", "failure");	
+		for(int id : ids){
+			userService.delete(id);
+		}	
+		map.put("flag", "success");	
+		
+		return map;
+	}
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  add(@RequestBody User  userForm){
 		
@@ -129,13 +142,13 @@ public class UserController {
 	
 
 	@RequestMapping(value="/usergroup/update/{id}",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  updateUserGroup(@RequestBody Map<String, Integer[]> mapIDs,
+	public  @ResponseBody Map<String, Object>  updateUserGroup(@RequestBody Map<String, List<Integer>> mapIDs,
 			@PathVariable(value="id") Integer id){
-		//List<Integer> gids = mapIDs.get("gids");
-		//List<Integer> rids = mapIDs.get("rids");
+		List<Integer> gids = mapIDs.get("gids");
+		List<Integer> rids = mapIDs.get("rids");
 	
-		List<Integer> gids = Arrays.asList(mapIDs.get("gids"));
-		List<Integer> rids = Arrays.asList(mapIDs.get("rids"));
+		//List<Integer> gids = Arrays.asList(mapIDs.get("gids"));
+		//List<Integer> rids = Arrays.asList(mapIDs.get("rids"));
 		
 		System.out.println("----user group update------");
 		System.out.println("update userid :"+id);

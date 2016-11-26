@@ -1,13 +1,15 @@
 
+var editTabInit = false;
 
 function showGroupList(){
 	
 	showPanel("#list_panel");
 	
     //初始化表格内容
-    $('#dataTables-user').DataTable({
-        responsive: true,
+    $('#dataTables-list').DataTable({
+        //responsive: true,
         "order": [[ 1, "asc" ]],
+        "scrollX": true,
         //data : users,
         ajax : "../api/group/groups",
 	 	columns: [
@@ -57,34 +59,27 @@ function showGroupEdit(itemid){
  	$.get("../api/group/detail/"+itemid,function(data,status){
 	 	
 		if(status == "success"){
-				
 			var group = data.data;
 			//ID放在username标签的itemid属性里
 			$("#input_name").attr("itemid",itemid);
 			$("#input_name").attr("value",group.name);
-			$("#input_descr").attr("value",group.descr);
-			
-			//$("#input_members").attr("value",user.email);
-
-			
-/*			if(user.status == "1"){
-				$("#status_select_on").attr('selected',"true");
-			}else{
-				$("#status_select_off").attr('selected',"true");
-			}
-	*/		
-			$("#input_createDate").attr("value",user.createDate);
-			
-			showGroupBox('#div_groups_checkbox',data.groupids);
-			showRoleBox('#div_roles_checkbox',data.roleids);
-			
+			$("#input_descr").text(group.descr);
+			//$("#input_descr").attr("value",group.descr);
 		}
 	
  	});
+ 	if(editTabInit){
+ 		
+ 	}else{
+ 		initGroupMemberTable(itemid);
+ 		editTabInit = true;
+ 	}
+ 	
+ 	
 }
 
 function userDelete(ele){
-    var table = $('#dataTables-user').DataTable();
+    var table = $('#dataTables-list').DataTable();
     var row = $(ele).parents('tr');
     var cols = $(row).children();		
     var id = $(cols[0]).text();
@@ -104,43 +99,54 @@ function userDelete(ele){
  	});	
 }
 
-function userEditSubmit(){
+function userDeleteFromGroup(ele){
+    var table = $('#table-group-members').DataTable();
+    var row = table.row($(ele).parents('tr'));	
+    var userid = row.data()["id"];
+    var datasent = {
+    		"userid"  : userid,
+    		"groupid" : $("#input_name").attr("itemid"),
+    };
+	 $.ajax({ 
+	     type:"POST", 
+	     url:"../api/group/removeUser/", 
+	     dataType:"json",      
+	     contentType:"application/json",               
+	     data:JSON.stringify(datasent), 
+	     success:function(data,status){ 
+			if(status == "success" && data.flag == "success"){
+				row.remove().draw(false);
+			}else{
+				alert("更新失败!\n"+data.flag);
+			}
+	
+	     },
+	     error:function(msg){
+	    	 alert("更新失败！\najax错误,status:"+msg.status);
+	     }
+	  });
+}
+
+function groupEditSubmit(){
     // 获取表单中的参数
 
-	 var gids=new Array(),i=0;
-	 $("#group_checkbox:checked").each(function (index, domEle){
-		 gids[i++] = $(domEle).attr("groupid");
-	 });
-	  var rids=new Array();
-	  i=0
-	  $("#role_checkbox:checked").each(function (index, domEle){
-		  rids[i++] = $(domEle).attr("roleid");
-	 });
-	 
-	 var s = $("#input_status").val();
-	 var user = { 
-		'id': $("#input_username").attr("itemid"), 
-		'username': $("#input_username").val(), 
-		'password': $("#input_password").val(), 
-		'nickname': $("#input_nickname").val(), 
-		'email': 	$("#input_email").val(), 
-		'phone': 	$("#input_phone").val(), 
-		'status': 	$("#input_status").val(), 
-		'createDate': $("#input_createDate").val(),
-		'groupIDs':	gids,
-		'roleIDs':	rids
+	 var group = { 
+		'id': $("#input_name").attr("itemid"), 
+		'name': $("#input_name").val(), 
+		'descr': $("#input_descr").val()
 		}; 
 	 
 	 $.ajax({ 
 	     type:"POST", 
-	     url:"../api/user/update/"+$("#input_username").attr("itemid"), 
+	     url:"../api/group/update/", 
 	     dataType:"json",      
 	     contentType:"application/json",               
-	     data:JSON.stringify(user), 
+	     data:JSON.stringify(group), 
 	     success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
-				changeIndexRightPanel('user_panel');
-			 
+				var table = $('#dataTables-list').DataTable();
+				table.ajax.reload( null, false );
+				showPanel("#list_panel");
 			}else{
 				alert("更新失败!\n"+data.flag);
 			}
@@ -152,18 +158,56 @@ function userEditSubmit(){
 	  });
  
 };
+
+function initGroupMemberTable(itemid){
+    $('#table-group-members').DataTable({
+        //responsive: true,
+        //"order": [[ 0, "asc" ]],
+        "ordering": false,
+        "paging": false,
+        "searching": false,
+        "scrollX": true,
+        "autoWidth": false,
+        //data : users,
+        ajax : "../api/group/member/"+itemid,
+	 	columns: [
+			{"data": "id"},
+            {"data": "username"},
+            {"data": "nickname"},
+            {"data": "email"},
+            {"data": "phone"},
+            {"data": null}
+        ],
+		 "columnDefs": [{  
+			"orderable" : false,
+			"targets": -1,  
+			"data": null,  
+			defaultContent: '<a href="#" class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> </a>',
+		}
+		 ],
+    
+        "fnDrawCallback": function (oSettings) {
+        	 updateIFrame();
+    	}
+	});		
+}
+
 $(document).ready(function() {
+	
+	
+	
 	
 	//初始化，默认显示用户列表
 	showGroupList();
     
 	//row 操作-edit 点击事件
-    $('#dataTables-user tbody').on('click', 'a.edit', function(e) {
+    $('#dataTables-list tbody').on('click', 'a.edit', function(e) {
     	e.preventDefault();
     	
-        var row = $(this).parents('tr');
-        var cols = $(row).children();		
-        var id = $(cols[1]).text();
+    	var table = $('#dataTables-list').DataTable();
+        var row = $(this).parents('tr');        
+        var rowdata= table.row(row).data();
+        var id = rowdata.id;
         
         showGroupEdit(id);
 
@@ -172,23 +216,40 @@ $(document).ready(function() {
 	$("#form_submit").on("click", function(event){
 		//取消事件行为
 		event.preventDefault();
-		userEditSubmit();
+		groupEditSubmit();
 	});
     
     //列表上方 添加用户按钮
-    $('#btns_table #user_add').click(function(){
-    	changeIndexRightPanel('user_add');
+    $('#btns_table #group_add').click(function(){
+    	changeIndexRightPanel('group_add');
     });   	
     
  // 初始化刪除按钮
-    $('#dataTables-user tbody').on('click', 'a.delete', function(e) {
+    $('#dataTables-list tbody').on('click', 'a.delete', function(e) {
         e.preventDefault();
-     
         if (confirm("确定要删除该用户？")) {
-          userDelete(this);
+          groupDelete(this);
+        }
+     
+    });
+    $('#table-group-members tbody').on('click', 'a.delete', function(e) {
+        e.preventDefault();
+        if (confirm("确定要将该用户从组中移除？")) {
+          userDeleteFromGroup(this);
         }
      
     });
 
+    // 全选按钮
+    var listCheckboxsStatus = new Boolean('false');
+    $('#dataTables-list thead').on('click', 'a.btn', function(e) {
+        e.preventDefault();
+        var table = $('#dataTables-list').DataTable();
+        var listcheckboxs = $('#dataTables-list tbody #list_checkbox');
+        var checkpre  = listcheckboxs.attr('checked');
+        listCheckboxsStatus = !listCheckboxsStatus;
+        listcheckboxs.attr('checked',listCheckboxsStatus);
+        	
+    });
 });	
 

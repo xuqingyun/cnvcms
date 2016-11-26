@@ -40,7 +40,7 @@ function userAdd(){
 	     data:JSON.stringify(user), 
 	     success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
-				alert("用户添加成功！");
+				//alert("用户添加成功！");
 				changeIndexRightPanel('user_panel');
 			 
 			}else{

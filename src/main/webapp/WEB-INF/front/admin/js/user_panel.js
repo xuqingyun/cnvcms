@@ -6,9 +6,9 @@ function showUserList(){
 	
     //初始化表格内容
     $('#dataTables-user').DataTable({
-        responsive: true,
+        //responsive: true,
+    	"scrollX": true,
         "order": [[ 1, "asc" ]],
-        //data : users,
         ajax : "../api/user/users",
 	 	columns: [
 	 	    {"data": null},
@@ -66,13 +66,7 @@ function showUserEdit(itemid){
 			$("#input_email").attr("value",user.email);
 			$("#input_phone").attr("value",user.phone);
 			$("#input_status").val(user.status);
-			
-/*			if(user.status == "1"){
-				$("#status_select_on").attr('selected',"true");
-			}else{
-				$("#status_select_off").attr('selected',"true");
-			}
-	*/		
+				
 			$("#input_createDate").attr("value",user.createDate);
 			
 			showGroupBox('#div_groups_checkbox',data.groupids);
@@ -86,15 +80,14 @@ function showUserEdit(itemid){
 function userDelete(ele){
     var table = $('#dataTables-user').DataTable();
     var row = $(ele).parents('tr');
-    var cols = $(row).children();		
-    var id = $(cols[0]).text();
+    var rowdata= table.row(row).data();
+    var id = rowdata.id;
+    
     
  	$.get("../api/user/delete/"+id,function(data,status){
 	 	
 		if(status == "success" && data.flag == "success"){
-			
-			//$("#listitem"+itemid).remove();
-			table.row(row).remove().draw();
+			table.row(row).remove().draw( false );;
 			//重新调整高度
 			updateIFrame();
 		}else{
@@ -104,17 +97,50 @@ function userDelete(ele){
  	});	
 }
 
+function userSelectedDelete(){
+	
+	var table = $('#dataTables-user').DataTable();
+	
+	var userids = new Array();
+   	 $("#list_checkbox:checked").each(function (index, domEle){
+		$(domEle).attr("groupid");
+        var row = $(domEle).parents('tr');        
+        var rowdata= table.row(row).data();
+        userids[index] = rowdata.id;
+	 });
+   	
+	 $.ajax({ 
+	     type:"POST", 
+	     url:"../api/user/deleteIds/", 
+	     dataType:"json",      
+	     contentType:"application/json",               
+	     data:JSON.stringify(userids), 
+	     success:function(data,status){ 
+			if(status == "success" && data.flag == "success"){
+				//changeIndexRightPanel('user_panel');
+				table.ajax.reload(null,false);
+			}else{
+				alert("删除失败!\n"+data.flag);
+			}
+	
+	     },
+	     error:function(msg){
+	    	 alert("删除失败！\najax错误,status:"+msg.status);
+	     }
+	  });	
+}
+
 function userEditSubmit(){
     // 获取表单中的参数
-
-	 var gids=new Array(),i=0;
+	var table = $('#dataTables-user').DataTable();
+	
+	 var gids=new Array();
 	 $("#group_checkbox:checked").each(function (index, domEle){
-		 gids[i++] = $(domEle).attr("groupid");
+		 gids[index] = $(domEle).attr("groupid");
 	 });
 	  var rids=new Array();
-	  i=0
 	  $("#role_checkbox:checked").each(function (index, domEle){
-		  rids[i++] = $(domEle).attr("roleid");
+		  rids[index] = $(domEle).attr("roleid");
 	 });
 	 
 	 var s = $("#input_status").val();
@@ -139,8 +165,8 @@ function userEditSubmit(){
 	     data:JSON.stringify(user), 
 	     success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
-				changeIndexRightPanel('user_panel');
-			 
+				 table.ajax.reload( null, false );
+				 showPanel("#list_panel");
 			}else{
 				alert("更新失败!\n"+data.flag);
 			}
@@ -152,7 +178,9 @@ function userEditSubmit(){
 	  });
  
 };
+
 $(document).ready(function() {
+	
 	
 	//初始化，默认显示用户列表
 	showUserList();
@@ -161,9 +189,10 @@ $(document).ready(function() {
     $('#dataTables-user tbody').on('click', 'a.edit', function(e) {
     	e.preventDefault();
     	
-        var row = $(this).parents('tr');
-        var cols = $(row).children();		
-        var id = $(cols[1]).text();
+    	var table = $('#dataTables-user').DataTable();
+        var row = $(this).parents('tr');        
+        var rowdata= table.row(row).data();
+        var id = rowdata.id;
         
         showUserEdit(id);
 
@@ -178,7 +207,12 @@ $(document).ready(function() {
     //列表上方 添加用户按钮
     $('#btns_table #user_add').click(function(){
     	changeIndexRightPanel('user_add');
-    });   	
+    });   
+    
+    //列表上方 删除所选按钮
+    $('#delete_select').click( function () {
+    	userSelectedDelete();	
+    }); 
     
  // 初始化刪除按钮
     $('#dataTables-user tbody').on('click', 'a.delete', function(e) {
@@ -190,5 +224,23 @@ $(document).ready(function() {
      
     });
 
+    //行点击响应
+    $('#dataTables-user tbody').on( 'click', 'tr', function () {
+    	 var table = $('#dataTables-user').DataTable();
+    	 var trs= $(this).find("input");
+    } );
+ 
+    // 全选按钮
+    var listCheckboxsStatus = new Boolean('false');
+    $('#dataTables-user thead').on('click', 'a.btn', function(e) {
+        e.preventDefault();
+        var table = $('#dataTables-user').DataTable();
+        var listcheckboxs = $('tbody #list_checkbox');
+        var checkpre  = listcheckboxs.attr('checked');
+        listCheckboxsStatus = !listCheckboxsStatus;
+        listcheckboxs.attr('checked',listCheckboxsStatus);
+        	
+    });
+    
 });	
 

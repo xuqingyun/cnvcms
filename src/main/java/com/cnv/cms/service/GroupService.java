@@ -35,6 +35,11 @@ public interface GroupService {
 	 */
 	public void deleteUserGroup(int id);
 	/**
+	 * 删除用户和组的对应关系删除
+	 * @param id
+	 */
+	public void deleteUserFromGroup(int gid,int uid);
+	/**
 	 * Group更新
 	 * @param group
 	 */

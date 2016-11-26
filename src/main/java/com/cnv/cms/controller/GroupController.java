@@ -64,6 +64,7 @@ public class GroupController {
 			userMaps.add(userMap);
 		}
 		map.put("users", userMaps);
+		map.put("data", users);
 		return map;
 	}
 	
@@ -79,7 +80,20 @@ public class GroupController {
 		map.put("flag", "success");	
 		return map;
 	}
-	
+
+	@RequestMapping(value="/removeUser",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  remove(@RequestBody Map<String,Integer> mapReq){
+		int uid  = mapReq.get("userid");
+		int gid = mapReq.get("groupid");
+		System.out.println("----remove group member---");
+		System.out.println("delete id:" + uid + ", from group id:"+gid);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", "failure");	
+		groupService.deleteUserFromGroup(gid, uid);
+		map.put("flag", "success");	
+		return map;
+	}
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  add(@RequestBody Group  group){
 		

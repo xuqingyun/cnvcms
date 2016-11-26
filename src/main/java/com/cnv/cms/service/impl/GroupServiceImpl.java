@@ -67,6 +67,10 @@ public class GroupServiceImpl implements GroupService {
 		return userGroupMapper.selectUsersByGroupID(id);
 	}
 
+	public void deleteUserFromGroup(int gid, int uid) {
+		userGroupMapper.deleteUserGroup(uid, gid);
+	}
+
 
 
 
