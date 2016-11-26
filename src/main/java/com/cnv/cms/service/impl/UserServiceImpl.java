@@ -48,17 +48,23 @@ public class UserServiceImpl implements UserService {
 		}catch(Exception e){
 			throw new CmsException("用户添加失败");
 		}*/
-		//添加角色
 		
-		for(int rid:rids){
-			//1.检查角色是否存在并插入
-			addRole(user,rid);
+		//添加角色
+		if(rids.size()>0){
+			for(int rid:rids){
+				//1.检查角色是否存在并插入
+				addRole(user,rid);
+			}
 		}
+
 		//添加组别
-		for(int gid:gids){
-			//检查组别是否存在
-			addGroup(user,gid);
+		if(gids.size()>0){
+			for(int gid:gids){
+				//检查组别是否存在
+				addGroup(user,gid);
+			}
 		}
+		
 		
 	}
 	public void add(User user) {

@@ -1,4 +1,5 @@
 function iframeHeight(h){
+	
 	if(h==null){
 		var mainheight = $("#right_panel_iframe").contents().find("body").height()+30;
 	}else{
@@ -12,13 +13,15 @@ function iframeHeight(h){
 }
 
 function changeRightPanel(panel){
-	if(panel=="user"){
+	var  htmfile = panel + ".html";
+	$("#right_panel_iframe").attr("src",htmfile);
+/*	if(panel=="user"){
 		$("#right_panel_iframe").attr("src","user_panel.html");
 	}else if(panel=="group"){
 		$("#right_panel_iframe").attr("src","group_panel.html");
 	}else if(panel=="role"){
 		$("#right_panel_iframe").attr("src","role_panel.html");
-	}
+	}*/
 }
 $(document).ready(function() {
 	

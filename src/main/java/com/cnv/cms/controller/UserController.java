@@ -1,5 +1,6 @@
 package com.cnv.cms.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +89,9 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try{
+			
 			userService.add(userForm,userForm.getRoleIDs(),userForm.getGroupIDs());
+			//userService.add(userForm);
 			map.put("flag", "success");	
 		}
 		catch(CmsException ce){
@@ -103,8 +106,8 @@ public class UserController {
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  update(@RequestBody User  userForm,
 			@PathVariable(value="id") Integer id){
-		List<Integer> gids = userForm.getGroupIDs();
 		List<Integer> rids = userForm.getRoleIDs();
+		List<Integer> gids = userForm.getGroupIDs();
 		
 		System.out.println("----user update------");
 		System.out.println("update userid :"+id);
@@ -126,19 +129,24 @@ public class UserController {
 	
 
 	@RequestMapping(value="/usergroup/update/{id}",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  updateUserGroup(@RequestBody Map<String, List<Integer>> mapIDs,
+	public  @ResponseBody Map<String, Object>  updateUserGroup(@RequestBody Map<String, Integer[]> mapIDs,
 			@PathVariable(value="id") Integer id){
-		List<Integer> gids = mapIDs.get("gids");
-		List<Integer> rids = mapIDs.get("rids");
+		//List<Integer> gids = mapIDs.get("gids");
+		//List<Integer> rids = mapIDs.get("rids");
+	
+		List<Integer> gids = Arrays.asList(mapIDs.get("gids"));
+		List<Integer> rids = Arrays.asList(mapIDs.get("rids"));
 		
 		System.out.println("----user group update------");
 		System.out.println("update userid :"+id);
 		System.out.println("received gids:"+gids+"\treceived gids:"+rids);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", "success");	
 		try{
 			userService.update(id, rids, gids);
 			map.put("flag", "success");	
+			System.out.println("user group update success");
 		}catch(CmsException ce){
 			map.put("flag", ce.getMessage());
 			System.out.println("cms error:"+ce.getMessage());

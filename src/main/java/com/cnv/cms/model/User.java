@@ -3,6 +3,7 @@
  */
 package com.cnv.cms.model;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -143,7 +144,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", nickname=" + nickname
 				+ ", email=" + email + ", phone=" + phone + ", status=" + status + ", createDate=" + createDate
-				+ ", groupIDs=" + groupIDs + ", roleIDs=" + roleIDs + "]";
+				+ ", groupIDs=" + groupIDs+ ", roleIDs=" + roleIDs + "]";
 	}
 	
 	

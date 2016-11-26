@@ -68,8 +68,8 @@ $(document).ready(function () {
 	 	$.get("../api/group/groups",function(data,status){
 	 	
 			if(status == "success"){
-				for(var d in data.groups){
-		 			stru +=  additem(data.groups[d]);
+				for(var d in data.data){
+		 			stru +=  additem(data.data[d]);
 		 		}
 				$("#table_list").empty();
 				$("#table_list").append(stru);

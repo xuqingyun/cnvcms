@@ -1,6 +1,6 @@
 
 
-function showUserList(){
+function showGroupList(){
 	
 	showPanel("#list_panel");
 	
@@ -9,34 +9,34 @@ function showUserList(){
         responsive: true,
         "order": [[ 1, "asc" ]],
         //data : users,
-        ajax : "../api/user/users",
+        ajax : "../api/role/roles",
 	 	columns: [
-	 	    {"data": null},
+	 	    {"data": null},      
 			{"data": "id"},
-            {"data": "username"},
-            {"data": "password"},
-            {"data": "nickname"},
-            {"data": "email"},
-            {"data": "phone"},
-            {"data": "status"},
-            {"data": "createDate"},
+            {"data": "name"},
+            {"data": "role_type"},
+            {"data": null},
             {"data": null}
         ],
 		 "columnDefs": [{  
 			"orderable" : false,
 			"targets": -1,  
 			"data": null,  
-			defaultContent: '<a href="#" class="edit btn btn-default btn-xs"><i class="fa fa-edit">编辑</i> </a>' +
-						   ' <a href="#" class="delete btn btn-default btn-xs"><i class="fa fa-times">删除</i> </a>',
-		 
+			defaultContent: '<a href="#" class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> </a>',
 		},
 		{  
-			// 定义操作列  
-			"targets": 0, 
 			"orderable" : false,
+			"targets": -2,  
+			"data": null,  
+			defaultContent: '<a href="#" class="edit btn btn-default btn-xs"><i class="fa fa-edit"></i> </a>',
+		},
+		{  
+			"orderable" : false,
+			"targets": 0,  
 			"data": null,  
 			defaultContent: '<input type="checkbox" id="list_checkbox">', 
-		}],
+		}
+		 ],
     
         "fnDrawCallback": function (oSettings) {
 
@@ -155,7 +155,7 @@ function userEditSubmit(){
 $(document).ready(function() {
 	
 	//初始化，默认显示用户列表
-	showUserList();
+	showGroupList();
     
 	//row 操作-edit 点击事件
     $('#dataTables-user tbody').on('click', 'a.edit', function(e) {
@@ -163,7 +163,7 @@ $(document).ready(function() {
     	
         var row = $(this).parents('tr');
         var cols = $(row).children();		
-        var id = $(cols[1]).text();
+        var id = $(cols[0]).text();
         
         showUserEdit(id);
 

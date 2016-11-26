@@ -31,7 +31,7 @@ public class RoleController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Role> roles = roleService.selectRoles();
-		map.put("roles", roles);
+		map.put("data", roles);
 		
 		return map;
 	}

@@ -1,6 +1,6 @@
 
 
-function showUserList(){
+function showGroupList(){
 	
 	showPanel("#list_panel");
 	
@@ -9,34 +9,34 @@ function showUserList(){
         responsive: true,
         "order": [[ 1, "asc" ]],
         //data : users,
-        ajax : "../api/user/users",
+        ajax : "../api/group/groups",
 	 	columns: [
-	 	    {"data": null},
+	 	    {"data": null},      
 			{"data": "id"},
-            {"data": "username"},
-            {"data": "password"},
-            {"data": "nickname"},
-            {"data": "email"},
-            {"data": "phone"},
-            {"data": "status"},
-            {"data": "createDate"},
+            {"data": "name"},
+            {"data": "descr"},
+            {"data": null},
             {"data": null}
         ],
 		 "columnDefs": [{  
 			"orderable" : false,
 			"targets": -1,  
 			"data": null,  
-			defaultContent: '<a href="#" class="edit btn btn-default btn-xs"><i class="fa fa-edit">编辑</i> </a>' +
-						   ' <a href="#" class="delete btn btn-default btn-xs"><i class="fa fa-times">删除</i> </a>',
-		 
+			defaultContent: '<a href="#" class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> </a>',
 		},
 		{  
-			// 定义操作列  
-			"targets": 0, 
 			"orderable" : false,
+			"targets": -2,  
+			"data": null,  
+			defaultContent: '<a href="#" class="edit btn btn-default btn-xs"><i class="fa fa-edit"></i> </a>',
+		},
+		{  
+			"orderable" : false,
+			"targets": 0,  
 			"data": null,  
 			defaultContent: '<input type="checkbox" id="list_checkbox">', 
-		}],
+		}
+		 ],
     
         "fnDrawCallback": function (oSettings) {
 
@@ -46,7 +46,7 @@ function showUserList(){
 	});		
 };
 
-function showUserEdit(itemid){
+function showGroupEdit(itemid){
 	//关闭所有面板，显示添加用户面板
 	showPanel("#edit_panel");
 
@@ -54,18 +54,18 @@ function showUserEdit(itemid){
 	updateIFrame();
 	
 	
- 	$.get("../api/user/detail/"+itemid,function(data,status){
+ 	$.get("../api/group/detail/"+itemid,function(data,status){
 	 	
 		if(status == "success"){
 				
-			var user = data.user;
+			var group = data.data;
 			//ID放在username标签的itemid属性里
-			$("#input_username").attr("itemid",itemid);
-			$("#input_username").attr("value",user.username);
-			$("#input_nickname").attr("value",user.nickname);
-			$("#input_email").attr("value",user.email);
-			$("#input_phone").attr("value",user.phone);
-			$("#input_status").val(user.status);
+			$("#input_name").attr("itemid",itemid);
+			$("#input_name").attr("value",group.name);
+			$("#input_descr").attr("value",group.descr);
+			
+			//$("#input_members").attr("value",user.email);
+
 			
 /*			if(user.status == "1"){
 				$("#status_select_on").attr('selected',"true");
@@ -155,7 +155,7 @@ function userEditSubmit(){
 $(document).ready(function() {
 	
 	//初始化，默认显示用户列表
-	showUserList();
+	showGroupList();
     
 	//row 操作-edit 点击事件
     $('#dataTables-user tbody').on('click', 'a.edit', function(e) {
@@ -165,7 +165,7 @@ $(document).ready(function() {
         var cols = $(row).children();		
         var id = $(cols[1]).text();
         
-        showUserEdit(id);
+        showGroupEdit(id);
 
     });
     

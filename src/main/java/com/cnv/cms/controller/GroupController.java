@@ -35,7 +35,7 @@ public class GroupController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Group> groups = groupService.selectGroups();
-		map.put("groups", groups);
+		map.put("data", groups);
 		
 		return map;
 	}
@@ -46,7 +46,7 @@ public class GroupController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Group group = groupService.selectGroup(id);
-		map.put("group", group);
+		map.put("data", group);
 		return map;
 	}
 	
