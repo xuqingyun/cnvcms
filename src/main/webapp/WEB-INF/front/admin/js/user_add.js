@@ -41,7 +41,7 @@ function userAdd(){
 	     success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
 				//alert("用户添加成功！");
-				changeIndexRightPanel('user_panel');
+				
 			 
 			}else{
 				alert("添加失败!\n"+data.flag);
@@ -56,11 +56,14 @@ function userAdd(){
 };
 
 $(document).ready(function() {
+	loadNavigation();
+	loadNavigation();
+	
 	showUserAdd();
-	updateIFrame();
 	$("#form_submit").on("click", function(event){
 		//取消事件行为，非常重要！否则add中的post请求会被取消
 		event.preventDefault();
+
 		
 		userAdd();
 		//ftest();

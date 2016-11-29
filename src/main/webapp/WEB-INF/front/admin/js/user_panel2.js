@@ -5,7 +5,7 @@ function showUserList(){
 	//showPanel("#list_panel");
 
     //初始化表格内容
-	table = $('#dataTables-user').DataTable({
+    $('#dataTables-user').DataTable({
         //responsive: true,
     	"scrollX": true,
         "order": [[ 1, "asc" ]],
@@ -42,9 +42,39 @@ function showUserList(){
 	});		
 };
 
+function showUserEdit(itemid){
+	//关闭所有面板，显示添加用户面板
+	showPanel("#edit_panel");
+
+	//重新调整高度
+	updateIFrame();
+	
+	
+ 	$.get("../api/user/detail/"+itemid,function(data,status){
+	 	
+		if(status == "success"){
+				
+			var user = data.user;
+			//ID放在username标签的itemid属性里
+			$("#input_username").attr("itemid",itemid);
+			$("#input_username").attr("value",user.username);
+			$("#input_nickname").attr("value",user.nickname);
+			$("#input_email").attr("value",user.email);
+			$("#input_phone").attr("value",user.phone);
+			$("#input_status").val(user.status);
+				
+			$("#input_createDate").attr("value",user.createDate);
+			
+			showGroupBox('#div_groups_checkbox',data.groupids);
+			showRoleBox('#div_roles_checkbox',data.roleids);
+			
+		}
+	
+ 	});
+}
 
 function userDelete(ele){
-//    var table = $('#dataTables-user').DataTable();
+    var table = $('#dataTables-user').DataTable();
     var row = $(ele).parents('tr');
     var rowdata= table.row(row).data();
     var id = rowdata.id;
@@ -65,7 +95,7 @@ function userDelete(ele){
 
 function userSelectedDelete(){
 	
-	//var table = $('#dataTables-user').DataTable();
+	var table = $('#dataTables-user').DataTable();
 	
 	var userids = new Array();
    	 $("#list_checkbox:checked").each(function (index, domEle){
@@ -74,9 +104,7 @@ function userSelectedDelete(){
         var rowdata= table.row(row).data();
         userids[index] = rowdata.id;
 	 });
-   	 if(userids.length ==0){
-   		 return;
-   	 }
+   	
 	 $.ajax({ 
 	     type:"POST", 
 	     url:"../api/user/deleteIds/", 
@@ -98,37 +126,83 @@ function userSelectedDelete(){
 	  });	
 }
 
-var table;
+function userEditSubmit(){
+    // 获取表单中的参数
+	var table = $('#dataTables-user').DataTable();
+	
+	 var gids=new Array();
+	 $("#group_checkbox:checked").each(function (index, domEle){
+		 gids[index] = $(domEle).attr("groupid");
+	 });
+	  var rids=new Array();
+	  $("#role_checkbox:checked").each(function (index, domEle){
+		  rids[index] = $(domEle).attr("roleid");
+	 });
+	 
+	 var s = $("#input_status").val();
+	 var user = { 
+		'id': $("#input_username").attr("itemid"), 
+		'username': $("#input_username").val(), 
+		'password': $("#input_password").val(), 
+		'nickname': $("#input_nickname").val(), 
+		'email': 	$("#input_email").val(), 
+		'phone': 	$("#input_phone").val(), 
+		'status': 	$("#input_status").val(), 
+		'createDate': $("#input_createDate").val(),
+		'groupIDs':	gids,
+		'roleIDs':	rids
+		}; 
+	 
+	 $.ajax({ 
+	     type:"POST", 
+	     url:"../api/user/update/"+$("#input_username").attr("itemid"), 
+	     dataType:"json",      
+	     contentType:"application/json",               
+	     data:JSON.stringify(user), 
+	     success:function(data,status){ 
+			if(status == "success" && data.flag == "success"){
+				 table.ajax.reload( null, false );
+				 showPanel("#list_panel");
+			}else{
+				alert("更新失败!\n"+data.flag);
+			}
+	
+	     },
+	     error:function(msg){
+	    	 alert("更新失败！\najax错误,status:"+msg.status);
+	     }
+	  });
+ 
+};
+
 $(document).ready(function() {
 	
-	//loadNav();
-	//loadNav();
-	loadNavigation();
-	loadNavigation();
 	
 	//初始化，默认显示用户列表
 	showUserList();
     
-	//table = $('#dataTables-user').DataTable();
-	
 	//row 操作-edit 点击事件
     $('#dataTables-user tbody').on('click', 'a.edit', function(e) {
     	e.preventDefault();
     	
-    	//var table = $('#dataTables-user').DataTable();
+    	var table = $('#dataTables-user').DataTable();
         var row = $(this).parents('tr');        
         var rowdata= table.row(row).data();
         var id = rowdata.id;
         
-        //showUserEdit(id);
-        window.location.href='user_panel_edit.html?id='+id;
+        showUserEdit(id);
 
     });
     
+	$("#form_submit").on("click", function(event){
+		//取消事件行为
+		event.preventDefault();
+		userEditSubmit();
+	});
     
     //列表上方 添加用户按钮
     $('#btns_table #user_add').click(function(){
-    	window.location.href='user_panel_add.html';
+    	changeIndexRightPanel('user_add');
     });   
     
     //列表上方 删除所选按钮
@@ -148,27 +222,19 @@ $(document).ready(function() {
 
     //行点击响应
     $('#dataTables-user tbody').on( 'click', 'tr', function () {
-    	 //var table = $('#dataTables-user').DataTable();
+    	 var table = $('#dataTables-user').DataTable();
     	 var trs= $(this).find("input");
-    	 var checkpre  = $(trs).attr('checked');
-    	 if(checkpre == "checked"){
-    		 $(trs).attr('checked',false);
-    	 }else{
-    		 $(trs).attr('checked',true);
-    	 }
-    	 
     } );
  
     // 全选按钮
-    var listCheckboxsStatus = new Boolean('true');
-    $('#select_all').click( function (e) {
+    var listCheckboxsStatus = new Boolean('false');
+    $('#dataTables-user thead').on('click', 'a.btn', function(e) {
         e.preventDefault();
-        //var table = $('#dataTables-user').DataTable();
+        var table = $('#dataTables-user').DataTable();
         var listcheckboxs = $('tbody #list_checkbox');
-        
-        
-        listcheckboxs.attr('checked',listCheckboxsStatus);
+        var checkpre  = listcheckboxs.attr('checked');
         listCheckboxsStatus = !listCheckboxsStatus;
+        listcheckboxs.attr('checked',listCheckboxsStatus);
         	
     });
     

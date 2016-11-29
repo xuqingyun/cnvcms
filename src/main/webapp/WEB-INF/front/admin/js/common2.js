@@ -3,7 +3,7 @@
 function loadNavigation(){
 	$.get("navigation.html",function(data,status){
 		 var head = $("#navigation-div");
-		 head.empty();
+		 //head.empty();
 		 head.html(data);
 	}); 	
 }
@@ -21,7 +21,30 @@ function loadNav(){
 		});		
 }
 
+function updateIFrame(){
+	var h = $(document.body).height();
+	//var h = document.body.scrollHeight;
+	//$(document).height(); 
+	//重新调整高度
+	var piframe = window.parent.document.getElementById('right_panel_iframe');
+	if(piframe != null){
+		 window.parent.iframeHeight(h);
+	}
+	
+};
+function showPanel(panel){
+	$(".center_panel").hide();
+	$(panel).show();
+	
+};
+function changeIndexRightPanel(panel){
 
+	var piframe = window.parent.document.getElementById('right_panel_iframe');
+	if(piframe != null){
+		 window.parent.changeRightPanel(panel);
+	}
+	
+}
 
 function showGroupBox(boxid,gids){
  	$.get("../api/group/groups",function(data,status){
