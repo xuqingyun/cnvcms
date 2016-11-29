@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	public void add(User user) {
+		
 		//检查用户是否存在
 		User utemp = userMapper.selectUserByName(user.getUsername());
 		if(utemp!=null){

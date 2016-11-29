@@ -22,6 +22,9 @@ public class GroupServiceImpl implements GroupService {
 	private UserGroupMapper userGroupMapper;
 	
 	public void add(Group g) {
+		if(g.getName() == null | g.getName() == ""){
+			throw new CmsException("用户名不能为空!");
+		}		
 		Group group = groupMapper.selectGroupByName(g.getName());
 		if(group != null){
 			throw new CmsException("该组名已经存在");

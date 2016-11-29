@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,7 +83,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/deleteIds",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  deleter(@RequestBody List<Integer> ids){
+	public  @ResponseBody Map<String, Object>  deleteIds(@RequestBody List<Integer> ids){
 		System.out.println("----users delete---");
 		System.out.println("delete id:" + ids);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -95,7 +96,7 @@ public class UserController {
 		return map;
 	}
 	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  add(@RequestBody User  userForm){
+	public  @ResponseBody Map<String, Object>  add(@Validated @RequestBody User  userForm){
 		
 		System.out.println("----user add------");
 		System.out.println("received userform:"+userForm);
@@ -117,7 +118,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/update/{id}",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  update(@RequestBody User  userForm,
+	public  @ResponseBody Map<String, Object>  update(@Validated @RequestBody User  userForm,
 			@PathVariable(value="id") Integer id){
 		List<Integer> rids = userForm.getRoleIDs();
 		List<Integer> gids = userForm.getGroupIDs();

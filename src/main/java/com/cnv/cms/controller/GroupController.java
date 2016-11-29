@@ -81,6 +81,20 @@ public class GroupController {
 		return map;
 	}
 
+	@RequestMapping(value="/deleteIds",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  deleteIds(@RequestBody List<Integer> ids){
+		System.out.println("----groups multi delete---");
+		System.out.println("delete id:" + ids);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", "failure");	
+		for(int id : ids){
+			groupService.deleteGroup(id);
+		}	
+		map.put("flag", "success");	
+		
+		return map;
+	}
+	
 	@RequestMapping(value="/removeUser",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  remove(@RequestBody Map<String,Integer> mapReq){
 		int uid  = mapReq.get("userid");

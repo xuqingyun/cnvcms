@@ -1,7 +1,10 @@
 package com.cnv.cms.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Group {
 	private int id;
+	@NotNull
 	private String name;
 	private String descr;
 	public int getId() {

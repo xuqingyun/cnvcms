@@ -41,7 +41,7 @@ function userAdd(){
 	     success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
 				//alert("用户添加成功！");
-				
+				 window.location.href='user_panel.html';
 			 
 			}else{
 				alert("添加失败!\n"+data.flag);
@@ -60,6 +60,7 @@ $(document).ready(function() {
 	loadNavigation();
 	
 	showUserAdd();
+	
 	$("#form_submit").on("click", function(event){
 		//取消事件行为，非常重要！否则add中的post请求会被取消
 		event.preventDefault();
