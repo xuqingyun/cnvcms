@@ -1,6 +1,6 @@
 
 
-function showGroupList(){
+function showRoleList(){
 	
 	
     //初始化表格内容
@@ -10,12 +10,12 @@ function showGroupList(){
         "scrollX": true,
         "stateSave" : true,
         //data : users,
-        ajax : "../api/group/groups",
+        ajax : "../api/role/roles",
 	 	columns: [
 	 	    {"data": null},      
 			{"data": "id"},
             {"data": "name"},
-            {"data": "descr"},
+            {"data": "role_type"},
             {"data": null},
             {"data": null}
         ],
@@ -48,18 +48,18 @@ function showGroupList(){
 };
 
 
-function groupDelete(ele){
+function roleDelete(ele){
     //var table = $('#dataTables-list').DataTable();
     var row = $(ele).parents('tr');
     var rowdata= table.row(row).data();
     var id = rowdata.id;
     
- 	$.get("../api/group/delete/"+id,function(data,status){
+ 	$.get("../api/role/delete/"+id,function(data,status){
 	 	
 		if(status == "success" && data.flag == "success"){
 			
 			//table.row(row).remove().draw();
-			window.location.href = "group_panel.html";
+			window.location.href = "role_panel.html";
 		}else{
 			alert("删除失败");
 		}
@@ -111,7 +111,7 @@ $(document).ready(function() {
 	loadNavigation();	
 	
 	//初始化，默认显示用户列表
-	showGroupList();
+	showRoleList();
     
 	//row 操作-edit 点击事件
     $('#dataTables-list tbody').on('click', 'a.edit', function(e) {
@@ -122,27 +122,29 @@ $(document).ready(function() {
         var rowdata= table.row(row).data();
         var id = rowdata.id;
         
-        window.location.href = "group_panel_edit.html?id="+id;
+        window.location.href = "role_panel_edit.html?id="+id;
 
     });
     
 
     
     //列表上方 添加用户按钮
-    $('#btns_table #group_add').click(function(){
-    	window.location.href = "group_panel_add.html";
+    $('#btns_table #role_add').click(function(){
+    	alert("功能开发中...");
+    	//window.location.href = "role_panel_add.html";
     });  
     
     //列表上方 删除所选按钮
     $('#delete_select').click( function () {
-    	groupSelectedDelete();	
+    	alert("功能开发中...");
+    	roleSelectedDelete();	
     });
     
  // 初始化刪除按钮
     $('#dataTables-list tbody').on('click', 'a.delete', function(e) {
         e.preventDefault();
-        if (confirm("确定要删除该用户组？")) {
-          groupDelete(this);
+        if (confirm("确定要删除该用户角色？")) {
+          roleDelete(this);
         }
      
     });
