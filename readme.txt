@@ -3,11 +3,26 @@
 # 采用 springMVC +spring + mybatis +maven
 test in my pc
 
+version 0.0.7
+	Service:
+		ChannelService
+		ChannelServiceImpl
+	Mapper:
+		ChannelMapper
+	model:
+		Channel	
+
+version 0.0.6
+	前台:
+		admin框架
+		admin/ user,group,role
+					
 version 0.0.5
 	Controller:
 		UserController
 		GroupController
 		RoleController
+		AdmidController
 	Service:
 		GroupService
 		GroupServiceImpl
