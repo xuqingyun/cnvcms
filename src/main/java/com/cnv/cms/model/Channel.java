@@ -16,7 +16,7 @@ public class Channel {
 	/*
 	 * 是否自定义链接，0表示否，1表示是
 	 */
-	private int customLink;
+	private int customLink = 0;
 	/*
 	 * 自定义链接地址
 	 */
@@ -24,11 +24,15 @@ public class Channel {
 	/*
 	 * 是否是首页栏目，0表示否，1表示是
 	 */
-	private int isIndex;
+	private int isIndex = 1;
+	/*
+	 * 父栏目id,只在isIndex为0时有效，否则默认为-1
+	 */
+	private int parentId = -1;
 	/*
 	 * 是否是首页顶部导航栏目，0表示否，1表示是
 	 */
-	private int isTopNav;
+	private int isTopNav = 1;
 	/*
 	 * 是否是推荐栏目,0表示否，1表示是
 	 */
@@ -36,7 +40,7 @@ public class Channel {
 	/*
 	 * 栏目状态,0表示停用，1表示启用
 	 */
-	private int status;
+	private int status = 1;
 	/*
 	 * 栏目序号
 	 */
@@ -79,6 +83,13 @@ public class Channel {
 	public void setIsIndex(int isIndex) {
 		this.isIndex = isIndex;
 	}
+	
+	public int getParentId() {
+		return parentId;
+	}
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
 	public int getIsTopNav() {
 		return isTopNav;
 	}
@@ -102,6 +113,12 @@ public class Channel {
 	}
 	public void setOrders(int orders) {
 		this.orders = orders;
+	}
+	@Override
+	public String toString() {
+		return "Channel [id=" + id + ", name=" + name + ", channelType=" + channelType + ", customLink=" + customLink
+				+ ", customLinkUrl=" + customLinkUrl + ", isIndex=" + isIndex + ", parentId=" + parentId + ", isTopNav="
+				+ isTopNav + ", isRecommend=" + isRecommend + ", status=" + status + ", orders=" + orders + "]";
 	}
 	
 	

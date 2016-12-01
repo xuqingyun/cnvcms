@@ -10,27 +10,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="add" parameterType="Channel" 
         useGeneratedKeys="true" keyProperty="id"> 
         insert into t_channel
-        values(#{id},#{name},#{descr}) -----------
+        values(#{id},#{name},#{channelType},#{customLink},#{customLinkUrl},
+        		#{isIndex},#{parentId},#{isTopNav},#{isRecommend},#{status},#{orders})
     </insert>      
 <!--删除操作  -->
-	<select id="deleteGroup" parameterType="int">
-		delete from t_group where id= #{id}
+	<select id="delete" parameterType="int">
+		delete from t_channel where id= #{id}
+	</select>
+	<select id="deleteByParentId" parameterType="int">
+		delete from t_channel where parentId = #{id}
 	</select>
 <!--更新操作  -->
-	<select id="updateGroup" parameterType="Group">
-		update t_group set name=#{name},descr=#{descr} where id= #{id}
+	<select id="update" parameterType="Channel">
+		update t_channel set name=#{name},channelType=#{channelType},
+							customLink=#{customLink},customLinkUrl=#{customLinkUrl},
+        					isIndex=#{isIndex},parentId=#{parentId},isTopNav=#{isTopNav},
+        					isRecommend=#{isRecommend},status=#{status},orders=#{orders}
+        		where id= #{id}
 	</select>
 <!-- 根据id查询 -->
-	<select id="selectGroup" parameterType="int" resultType="Group">
-        select * from t_group where id=#{id}
+	<select id="selectById" parameterType="int" resultType="Channel">
+        select * from t_channel where id=#{id}
 	</select>
-	<select id="selectGroupByName" parameterType="string" resultType="Group">
-        select * from t_group where name=#{name}
+	<select id="selectByName" parameterType="string" resultType="Channel">
+        select * from t_channel where name=#{name}
 	</select>
+	<select id="selectByParentId" parameterType="int" resultType="Channel">
+        select * from t_channel where parentId=#{id}
+	</select>	
 <!-- 查询全部 -->
-    <select id="selectAllGroups"  resultType="Group">
-        select * from t_group
+    <select id="selectAll"  resultType="Channel">
+        select * from t_channel
     </select>
-
-
+	<select id="maxId"  resultType="int">
+        select max(id) from t_channel
+    </select>
+	<select id="maxOrder"  resultType="int">
+        select max(orders) from t_channel where parentId = -1
+    </select>
+	<select id="subChannelMaxOrder"  resultType="int">
+        select max(orders) from t_channel where parentId = #{id}
+    </select>
 </mapper>

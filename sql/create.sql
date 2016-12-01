@@ -44,6 +44,19 @@ create table t_user_group(
 );
 
 
+create table t_channel(
+	id int not null auto_increment primary key,
+	name varchar(50) not null unique,
+	channelType int not null,
+	customLink int,
+	customLinkUrl varchar(200),
+	isIndex int,
+	parentId int,
+	isTopNav int,
+	isRecommend int,
+	status int,
+	orders int
+);
 
 #################################################################
 
@@ -75,3 +88,9 @@ insert into t_user_group values(null,3,1);
 insert into t_user_group values(null,3,2);
 insert into t_user_group values(null,3,3);
 insert into t_user_group values(null,1,2);
+
+insert into t_channel values(null,'体育',0,0,null,1,-1,1,1,1,1);
+insert into t_channel valuse(null,'足球',1,0,null,1,1,1,1,1,1);
+insert into t_channel valuse(null,'篮球',1,0,null,1,1,1,1,1,2);
+insert into t_channel valuse(null,'娱乐',0,0,null,1,-1,1,1,1,2);
+insert into t_channel valuse(null,'财经',0,0,null,1,-1,1,1,1,3);

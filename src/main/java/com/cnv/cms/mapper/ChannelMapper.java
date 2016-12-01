@@ -8,10 +8,15 @@ import com.cnv.cms.model.User;
 public interface ChannelMapper {
 	
 	void add(Channel channel);
+	Channel selectById(int id);
 	Channel selectByName(String name);
-	User selectByID(int id);
+	List<Channel> selectByParentId(int id);
+	List<Channel> selectAll();
 	void update(Channel channel);
 	void delete(int id);
-	int maxId();
+	void deleteByParentId(int id);
+	Integer maxId();
+	Integer maxOrder();
+	Integer subChannelMaxOrder(int id);
 	
 }
