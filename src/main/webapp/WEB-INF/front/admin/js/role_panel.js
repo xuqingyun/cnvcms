@@ -67,40 +67,6 @@ function roleDelete(ele){
  	});	
 }
 
-function groupSelectedDelete(){
-	
-	//var table = $('#dataTables-list').DataTable();
-	
-	var userids = new Array();
-   	 $("#list_checkbox:checked").each(function (index, domEle){
-        var row = $(domEle).parents('tr');        
-        var rowdata= table.row(row).data();
-        userids[index] = rowdata.id;
-	 });
-   	 if(userids.length ==0){
-   		 return;
-   	 }
-	 $.ajax({ 
-	     type:"POST", 
-	     url:"../api/group/deleteIds/", 
-	     dataType:"json",      
-	     contentType:"application/json",               
-	     data:JSON.stringify(userids), 
-	     success:function(data,status){ 
-			if(status == "success" && data.flag == "success"){
-				//changeIndexRightPanel('user_panel');
-				table.ajax.reload(null,false);
-			}else{
-				alert("删除失败!\n"+data.flag);
-			}
-	
-	     },
-	     error:function(msg){
-	    	 alert("删除失败！\najax错误,status:"+msg.status);
-	     }
-	  });	
-};
-
 
 
 var table;
@@ -121,8 +87,8 @@ $(document).ready(function() {
         var row = $(this).parents('tr');        
         var rowdata= table.row(row).data();
         var id = rowdata.id;
-        
-        window.location.href = "role_panel_edit.html?id="+id;
+        alert("功能开发中...");
+       // window.location.href = "role_panel_edit.html?id="+id;
 
     });
     
@@ -143,8 +109,10 @@ $(document).ready(function() {
  // 初始化刪除按钮
     $('#dataTables-list tbody').on('click', 'a.delete', function(e) {
         e.preventDefault();
+        alert("功能开发中...");
         if (confirm("确定要删除该用户角色？")) {
-          roleDelete(this);
+        	
+        	//roleDelete(this);
         }
      
     });

@@ -21,10 +21,13 @@ public class ChannelServiceImpl implements ChannelService {
 		if(c != null){
 			throw new CmsException("栏目名称已经存在");
 		}
-		c = channelMapper.selectById(channel.getParentId());
-		if(c != null){
-			throw new CmsException("父栏目不存在");
-		}		
+		if(channel.getParentId() != -1){
+			c = channelMapper.selectById(channel.getParentId());
+			if(c == null){
+				throw new CmsException("父栏目不存在");
+			}
+		}
+				
 		
 		Integer maxId = channelMapper.maxId();
 		int id = (maxId == null) ? 1 : maxId+1;
@@ -50,6 +53,9 @@ public class ChannelServiceImpl implements ChannelService {
 	public void deleteById(int id) {
 		// TODO 查询栏目内是否存在文章，否则不能删除
 		
+		if(channelMapper.selectByParentId(id).size() > 0){
+			throw new CmsException("存在子栏目,无法删除!\n");
+		}
 		try{
 			channelMapper.delete(id);
 		}catch(Exception e){

@@ -14,15 +14,26 @@ function statusStr(flag){
 
 function channelTreeOnClick(event, treeId, treeNode) {
     //alert(treeNode.tId + ", " + treeNode.name);
-	showChannelList(treeNode.id);
+	if(treeNode.id == "-1"){
+		showChannelList(-1,"根目录");
+	}else	if(treeNode.parentId=="-1"){
+		showChannelList(treeNode.id, treeNode.name);
+		currentPid = treeNode.id;
+	}else{
+		showChannelList(treeNode.parentId, treeNode.name);
+		treeNode.id = treeNode.parentId;
+	}
+	
 };
 
 function showChannelTree(){
  	$.get("../api/channel/channels/",function(data,status){
 	 	
 		if(status == "success"){
-			
-			treeObj = $.fn.zTree.init($("#channel-tree"), setting, data.data);
+			var ctree =  data.data;
+			ctree.unshift({id:-1,name:"文章栏目系统",parentId:-2,open:true});
+			treeObj = $.fn.zTree.init($("#channel-tree"), setting,ctree);
+			treeObj.expandAll(true);
 		}else{
 			alert("栏目加载失败");
 		}
@@ -30,9 +41,19 @@ function showChannelTree(){
  	});		
 }
 
-function showChannelList(id){
+function loadChannelTypes(){
+ 	$.get("../api/channel/channelTypes/",function(data,status){
+	 	
+		if(status == "success"){
+			channelTypes = data.data;
+			showChannelList(-1,"根目录");
+		}
+ 	});	
+}
+
+function showChannelList(id,name){
 	
-	
+	 $('#table-head').html("当前位置: "+name);
     //初始化表格内容
 	if(table==null){
 	    table = $('#dataTables-list').DataTable({
@@ -73,7 +94,8 @@ function showChannelList(id){
 			}
 			 ],
 			  "rowCallback": function( row, data, index ) {
-				    
+				  //将数字转换为字符串显示
+				  	  $('td:eq(3)', row).html(channelTypes[data.channelType]);
 				      $('td:eq(4)', row).html(yesnoStr(data.customLink));
 				      $('td:eq(5)', row).html(yesnoStr(data.isIndex));
 				      $('td:eq(6)', row).html(yesnoStr(data.isTopNav));
@@ -90,18 +112,16 @@ function showChannelList(id){
 };
 
 
-function groupDelete(ele){
+function channelDelete(ele){
     //var table = $('#dataTables-list').DataTable();
     var row = $(ele).parents('tr');
     var rowdata= table.row(row).data();
     var id = rowdata.id;
     
- 	$.get("../api/group/delete/"+id,function(data,status){
+ 	$.get("../api/channel/delete/"+id,function(data,status){
 	 	
 		if(status == "success" && data.flag == "success"){
-			
-			//table.row(row).remove().draw();
-			window.location.href = "group_panel.html";
+			window.location.href = "channel_panel.html";
 		}else{
 			alert("删除失败");
 		}
@@ -152,7 +172,7 @@ var setting = {
 				enable: true,
 				idKey: "id",
 				pIdKey: "parentId",
-				rootPId: -1
+				rootPId: 0,
 			}
 		},
 		callback: {
@@ -160,17 +180,19 @@ var setting = {
 		}
 	};
 var treeObj;
+var channelTypes;
+var currentPid  = -1;
 
 $(document).ready(function() {
 	
 	
 	//loadNavigation();
 	//loadNavigation();	
-
+	
+	loadChannelTypes();
 	//初始化，栏目树
-//	$.fn.zTree.init($("#channel-tree"), setting, zNodes);
 	showChannelTree();
-	showChannelList(-1);
+	
 	
 	
 	//初始化，默认显示用户列表
@@ -185,27 +207,27 @@ $(document).ready(function() {
         var rowdata= table.row(row).data();
         var id = rowdata.id;
         
-        window.location.href = "group_panel_edit.html?id="+id;
+        window.location.href = "channel_panel_edit.html?id="+id;
 
     });
     
 
     
     //列表上方 添加用户按钮
-    $('#btns_table #group_add').click(function(){
-    	window.location.href = "group_panel_add.html";
+    $('.panel-heading #channel_add').click(function(){
+    	window.location.href = "channel_panel_add.html?id="+currentPid;
     });  
     
     //列表上方 删除所选按钮
     $('#delete_select').click( function () {
-    	groupSelectedDelete();	
+    	//groupSelectedDelete();	
     });
     
  // 初始化刪除按钮
     $('#dataTables-list tbody').on('click', 'a.delete', function(e) {
         e.preventDefault();
-        if (confirm("确定要删除该用户组？")) {
-          groupDelete(this);
+        if (confirm("确定要删除该栏目？")) {
+          channelDelete(this);
         }
      
     });

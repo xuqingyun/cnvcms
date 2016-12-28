@@ -27,7 +27,7 @@ function showGroupEdit(itemid){
  	
 };
 
-function groupDeleteFromGroup(ele){
+function userDeleteFromGroup(ele){
     //var table = $('#table-group-members').DataTable();
     var row = table.row($(ele).parents('tr'));	
     var userid = row.data()["id"];
@@ -133,7 +133,7 @@ $(document).ready(function() {
     $('#table-group-members tbody').on('click', 'a.delete', function(e) {
         e.preventDefault();
         if (confirm("确定要将该用户从组中移除？")) {
-          groupDeleteFromGroup(this);
+          userDeleteFromGroup(this);
         }
      
     });
