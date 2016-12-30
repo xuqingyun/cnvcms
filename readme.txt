@@ -1,8 +1,22 @@
 # cnvcms
 # cms系统
 # 采用 springMVC +spring + mybatis +maven
-test in my pc
 
+version 0.0.8
+
+	增加权限管理:
+	  	packge:authorith
+			AuthClass - 类权限注解
+			AuthMethod - 方法权限注解
+			AuthUtil - 权限初始化
+		packge:web
+			InitServlet - 启动时加载的Servlet, 用来初始化权限
+			AuthInterceptor - REST接口拦截器，拦截api/**，权限管理
+			AdminInterceptor - 静态资源拦截器，拦截admin/**
+
+version 0.0.7.1
+	前台:
+		Channel: 展示，增加，编辑
 version 0.0.7
 	Service:
 		ChannelService
