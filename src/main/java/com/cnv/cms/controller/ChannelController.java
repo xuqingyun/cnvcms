@@ -48,6 +48,42 @@ public class ChannelController {
 		return map;
 	}
 	
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  update(@RequestBody Channel  channel){
+		if(CmsConfig.isDebug){
+			System.out.println("----channel update------");
+			System.out.println("   received channel:"+channel);
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		try{
+			channelService.update(channel);
+			map.put("flag", "success");	
+		}
+		catch(CmsException ce){
+			map.put("flag", ce.getMessage());
+			System.out.println("cms error:"+ce.getMessage());
+		}	
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  detail(@PathVariable("id") int id){
+		if(CmsConfig.isDebug){
+			System.out.println("----channel query---");
+			System.out.println("    id:"+id);
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Channel channel = channelService.selectById(id);
+		map.put("data", channel);
+	
+		
+		return map;
+	}
+	
 	@RequestMapping(value="/channels",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  channels(){
 		if(CmsConfig.isDebug){
@@ -82,7 +118,7 @@ public class ChannelController {
 	public  @ResponseBody Map<String, Object>  subChannels(@PathVariable("id") int id){
 		if(CmsConfig.isDebug){
 			System.out.println("---- sub channels query---");
-			System.out.println("-- parent id: "+id);
+			System.out.println("     parent id: "+id);
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -117,7 +153,7 @@ public class ChannelController {
 	public  @ResponseBody Map<String, Object>  delete(@PathVariable("id") int id){
 		if(CmsConfig.isDebug){
 			System.out.println("---- channel delete---");
-			System.out.println("delete id:" + id);
+			System.out.println("   delete id:" + id);
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();

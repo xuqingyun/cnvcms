@@ -56,8 +56,6 @@ function userAdd(){
 };
 
 $(document).ready(function() {
-	loadNavigation();
-	loadNavigation();
 	
 	showUserAdd();
 	

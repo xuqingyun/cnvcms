@@ -75,8 +75,7 @@ function userEditSubmit(){
  
 };
 $(document).ready(function () {
-	loadNavigation();
-	loadNavigation();
+
 
     showUserEdit(getUrlParam("id"));
     

@@ -31,4 +31,10 @@
 	    <url-pattern>/</url-pattern>  
 	</servlet-mapping> 
 	
+	<servlet>
+		<servlet-name>initServlet</servlet-name>
+		<servlet-class>com.cnv.cms.web.InitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
 </web-app>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.User;
 import com.cnv.cms.service.UserService;
@@ -190,6 +191,8 @@ public class UserController {
 		return map;
 	}
 	
+	
+
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  login(@RequestBody User  userForm){

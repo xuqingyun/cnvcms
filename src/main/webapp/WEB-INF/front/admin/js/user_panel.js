@@ -105,10 +105,6 @@ function userSelectedDelete(){
 var table;
 $(document).ready(function() {
 	
-	//loadNav();
-	//loadNav();
-	loadNavigation();
-	loadNavigation();
 	
 	//初始化，默认显示用户列表
 	showUserList();

@@ -73,4 +73,9 @@ function showRoleBox(boxid,gids){
 				
 			}
 	 	});
-}	
+}
+
+$(document).ready(function () {
+	loadNavigation();
+	//loadNavigation();
+});	

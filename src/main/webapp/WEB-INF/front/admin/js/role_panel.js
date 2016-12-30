@@ -73,9 +73,6 @@ var table;
 $(document).ready(function() {
 	
 	
-	loadNavigation();
-	loadNavigation();	
-	
 	//初始化，默认显示用户列表
 	showRoleList();
     

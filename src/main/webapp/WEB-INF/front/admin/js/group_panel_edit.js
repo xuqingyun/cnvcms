@@ -124,9 +124,7 @@ var editTabInit = false;
 var table;
 $(document).ready(function() {
 	
-	
-	loadNavigation();
-	loadNavigation();	
+
 	
 	showGroupEdit(getUrlParam("id"));
 	

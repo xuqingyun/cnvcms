@@ -271,6 +271,13 @@ public class UserServiceImpl implements UserService {
 	public List<User> listUsersByGroupID(int id) {
 		return userGroupMapper.selectUsersByGroupID(id);
 	}
+	public User load(String username) {
+		User user = userMapper.selectUserByName(username);
+		if(user==null){
+			throw new CmsException("用户不存在");
+		}
+		return user;
+	}
 	
 
 }

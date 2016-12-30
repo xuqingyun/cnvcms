@@ -3,6 +3,29 @@
  */
 $(function(){
 	
+
+	//test
+	var user = { 
+			"username": "test1", 
+			"password": "pwdtest1"
+		} 
+	$("#btntest").click(function(){  		
+		
+		$.post("api/admin/login",user,
+			function(data,status){ 
+	        	if(status == "success" && data.login == "success"){
+	            	var login =  data.login;
+	            	if(data.url == null){
+	            		window.location.href="user/home.html"; 
+	            	}else{
+	            		window.location.href= data.url; 
+	            	}
+	            	
+        	}
+        },"json");
+		
+
+	});
 	
 	
 	
@@ -47,20 +70,20 @@ $(function(){
                 type:"POST", 
                 //timeout : 100000,
                 //async: false,
-                url:"../api/admin/login", 
+                url:"api/admin/login", 
                 dataType:"json",      
                 contentType:"application/json",               
                 data:JSON.stringify(logindata), 
                 success:function(data,status){ 
                 	if(status == "success" && data.login == "success"){
                 		if(data.url == null){
-    	            		window.location.href="user/home.html"; 
+    	            		window.location.href="index.html"; 
     	            	}else{
     	            		window.location.href= data.url; 
     	            	}
                 		//window.location.replace("index.html"); 
                 	}else{
-                		alert("登录错误！\nstatus:"+data.errors);
+                		alert("登录错误！\nstatus:"+data.error);
         			}
                 },
                 error:function(msg){

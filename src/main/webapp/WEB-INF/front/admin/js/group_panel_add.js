@@ -33,9 +33,6 @@ function groupAddSubmit(){
 $(document).ready(function() {
 	
 	
-	loadNavigation();
-	loadNavigation();	
-	
 	$("#form_submit").on("click", function(event){
 		//取消事件行为，非常重要！否则add中的post请求会被取消
 		event.preventDefault();

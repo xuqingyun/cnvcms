@@ -67,6 +67,7 @@ public interface UserService {
 	 * @return
 	 */
 	public User load(int id);
+	public User load(String username);
 	/**
 	 * 获取用户的所有角色信息
 	 * @param id

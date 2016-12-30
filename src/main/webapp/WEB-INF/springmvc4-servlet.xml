@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
 <!-- Spring MVC配置 -->
  	<context:component-scan base-package="com.cnv.cms.controller"/>
     <!-- if you use annotation you must configure following setting -->
@@ -56,8 +57,22 @@
  	<mvc:resources mapping="/dist/**" location="/WEB-INF/front/dist/"/>
  	<mvc:resources mapping="/vendor/**" location="/WEB-INF/front/vendor/"/>
  	
+ 	<mvc:resources mapping="/user/**" location="/WEB-INF/front/user/"/>
+ 	
  	<mvc:resources mapping="/*.*" location="/WEB-INF/front/html/"/>
  	
  	<mvc:resources mapping="/admin_old/**" location="/WEB-INF/front/admin_old/"/>
  	<mvc:resources mapping="/test/**" location="/WEB-INF/front/test/"/>
+ 	
+ 	<!-- 配置拦截器-->
+ 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/api/**"/>
+			<bean class="com.cnv.cms.web.AuthInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<bean class="com.cnv.cms.web.AdminInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
