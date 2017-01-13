@@ -124,8 +124,9 @@
 .classifyDIV a.nosel{color:#1F6599; font-size:18px; font-weight:bold; border:none; background:none;}
 
 .classifyDIV a:hover.type-css.selected {color: #FFF}
+
 input.search-input {
-	height: 21px;
+	height: 31px;
 	line-height: 21px;
 	padding: 4px 6px;
 	border: 1px #E8E8E8 solid;
@@ -135,6 +136,7 @@ input.search-input {
 	margin-bottom: 0;
 	font-family: '微软雅黑';
 }
+
 a.search-btn-css {
 	display: block;
 	width: 40px;

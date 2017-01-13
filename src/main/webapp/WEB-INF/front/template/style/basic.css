@@ -203,7 +203,9 @@ form {margin: 0 0 20px;}
 label, input, button, select, textarea {font-size: 14px;font-weight: normal;line-height: 20px;}
 input, button, select, textarea {font-family: "寰蒋闆呴粦", Helvetica, Arial, sans-serif;}
 label {display: block;margin-bottom: 5px;}
-select, textarea, input[type="text"], input[type="password"] {
+
+
+select, textarea, input.text, input.password {
 	display: inline-block;
 	height: 20px;
 	padding: 4px 6px;
@@ -213,6 +215,17 @@ select, textarea, input[type="text"], input[type="password"] {
 	color: #555;
 	vertical-align: middle;
 }
+
+/* select, textarea, input[type="text"], input[type="password"] {
+	display: inline-block;
+	height: 20px;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #555;
+	vertical-align: middle;
+} */
 input, textarea {width: 206px;}
 textarea {height: auto;}
 textarea, input[type="text"], input[type="password"] {
