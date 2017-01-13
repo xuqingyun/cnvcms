@@ -32,7 +32,7 @@ function loadChannel(){
 	            return value.parentId == pchannel.id;
 	        });
 	        substr = "";
-	        if(subChannels != null){
+	        if(subChannels != null && subChannels.length>0){
 	        	substr += '<ul class="dropdown-menu">';
 	        	for(j in subChannels){
 		        	substr += '<li><a href="#">'+subChannels[j].name+'</a></li>';
@@ -40,7 +40,7 @@ function loadChannel(){
 	        	substr += '</ul>';
 	        }
 	        
-			str += '<li class="dropdown" columnid="1"><a href="+"><b>'
+			str += '<li class="dropdown" columnid="1"><a href="article_list.html?cid='+pchannel.id+'"><b>'
 				+pchannel.name+'</b></a>'+substr+'</li>';
 		}
 		 var navmenu = $("#top-navbar");
@@ -57,5 +57,6 @@ function testnav(){
 }
 $(document).ready(function () {
 	loadNavigation();
+	loadChannel();
 	//loadNavigation();
 });	

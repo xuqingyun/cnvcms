@@ -20,9 +20,6 @@
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -33,12 +30,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
-	<style type="text/css">
-		#page-wrapper {
-			padding: 0 0;
-		}
-	</style>
 </head>
 
 <body>
@@ -47,7 +38,6 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -55,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../pages/index.html">CMS 后台管理系统</a>
+                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -120,7 +110,7 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>任务 1</strong>
+                                        <strong>Task 1</strong>
                                         <span class="pull-right text-muted">40% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
@@ -136,7 +126,7 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>任务 2</strong>
+                                        <strong>Task 2</strong>
                                         <span class="pull-right text-muted">20% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
@@ -152,7 +142,7 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>任务 3</strong>
+                                        <strong>Task 3</strong>
                                         <span class="pull-right text-muted">60% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
@@ -168,7 +158,7 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>任务 4</strong>
+                                        <strong>Task 4</strong>
                                         <span class="pull-right text-muted">80% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
@@ -242,7 +232,7 @@
                         <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
-                                <strong>所有通知</strong>
+                                <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -255,12 +245,12 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户中心</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="../pages/login.html"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -272,87 +262,104 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                    
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <!-- /.side-menu item -->
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主面板</a>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                      <!-- /.side-menu item -->
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i>用户管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                
-                                    <a href="#" onclick="changeRightPanel('user_panel')">用户列表</a>
-                                
+                                    <a href="flot.html">Flot Charts</a>
                                 </li>
                                 <li>
-                                    <a href="#"  onclick="changeRightPanel('group_panel')">组别管理</a>
-                                </li>
-                                 <li>
-                                    <a href="#"  onclick="changeRightPanel('role_panel')">角色管理</a>
+                                    <a href="morris.html">Morris.js Charts</a>
                                 </li>
                             </ul>
-                          
+                            <!-- /.nav-second-level -->
                         </li>
-                        <!-- /.side-menu item -->
                         <li>
-                            <a href="#"><i class="fa fa-columns fa-fw"></i> 栏目管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../pages/user_panel.html">栏目列表</a>
-                                </li>
-                                <li>
-                                    <a href="../pages/group_panel.html">添加栏目</a>
-                                </li>                          
-                            </ul>
-                           
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
-                       <!-- /.side-menu item -->
-                        <li> 
-                            <a href="#"><i class="fa fa-list-alt fa-fw"></i> 文章管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../pages/user_panel.html">文章列表</a>
-                                </li>
-                                                        
-                            </ul>
-                         
-                        </li>
-                        
-                        <!-- /.side-menu item -->
                         <li>
-                            <a href="#"><i class="fa fa-lock fa-fw"></i> 权限管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="../pages/user_panel.html">权限列表</a>
-                                </li>
-                                                        
-                            </ul>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
-                        <!-- /.side-menu item -->
-                        
                         <li>
-                            <a href="#"><i class="fa fa-columns fa-fw"></i> 帮助<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="../pages/user_panel.html">帮助</a>
+                                    <a href="panels-wells.html">Panels and Wells</a>
                                 </li>
-                                                        
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
-             
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a class="active" href="blank.html">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">Login Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -360,42 +367,35 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-       <div id="page-wrapper">
-        
-  		
-	  		<iframe id="right_panel_iframe" src="user_panel.html"  height="568px" width="100%" MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no></iframe>
-     	
-            
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Blank</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
 
-   
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
-    
+
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-<!--     <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script> -->
-
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-    
-    <!-- user defined js file -->
-    <script src="js/index.js"></script>
-    
-    
- 
-
 
 </body>
 

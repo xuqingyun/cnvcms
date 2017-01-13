@@ -8,6 +8,9 @@
 <meta name="Keywords" content="CNV CMS,关键字"/>
 <meta name="Description" content="CNV CMS,网站简介。"/>
 
+<!-- !!!!!!!!!!添加bootstrap样式,十分重要 -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Le styles -->
 <link rel="stylesheet" type="text/css" href="template/style/basic.css"/>
@@ -20,7 +23,7 @@
 <script type="text/javascript" src="template/js/function.js"></script>
 
 <!--[if IE 6]>
-<script type="text/javascript" src="js/DD_belatedPNG.js"></script>
+<script type="text/javascript" src="template/js/DD_belatedPNG.js"></script>
 <script type="text/javascript">
 DD_belatedPNG.fix('img,.ie6png');
 </script>
@@ -30,16 +33,17 @@ DD_belatedPNG.fix('img,.ie6png');
 <script type="text/javascript" src="template/js/biobox.js"></script>
  
  
-<!-- !!!!!!!!!!添加bootstrap样式,十分重要 -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
-<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
+<script type="text/javascript" src="template/js/borsertocss.js"> </script>	
 
 <!-- 自定义js --> 
 <script type="text/javascript" src="js/common.js"></script>
 
 </head>
 <body>
-<script type="text/javascript" src="template/js/borsertocss.js"> </script><!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->		
+
 
 
  <!--头部代码开始-->
@@ -153,7 +157,7 @@ DD_belatedPNG.fix('img,.ie6png');
 
     
 	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
-	<div class="container pb-15">
+	<div class="container pb-15" style="padding: 0;">>
 	<!-- Example row of columns -->
 	<div class="row home-index">
 		<div class="span13">
@@ -1181,7 +1185,7 @@ $(function(){
                 <!--<p class="fc999 pull-left footer-info">Copyright © 2013 生物探索网站<span class="l-20">苏ICP备11025281号</span></p>-->
 				
                 <ul class="about-ul">
-					<li>客服电话 400-100-8884 - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></li>
+					<li>客服电话 400-100-8884 - More Templates <a href="javascript:;" target="_blank" title="模板之家">模板之家</a></li>
 					<li><span>|</span></li>
 					<li><a title="广告投放" href="javascript:;" class="fc666" target="_blank">广告投放</a></li>
 					<li><span>|</span></li>
@@ -1243,7 +1247,7 @@ backToTop('body');
 
 
 
-
+<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">  -->
 
 </body>
 </html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<title>CNV CMS</title>
+<meta name="Keywords" content="CNV CMS,关键字"/>
+<meta name="Description" content="CNV CMS,网站简介。"/>
+
+
+<!-- Le styles -->
+<link rel="stylesheet" type="text/css" href="template/style/basic.css"/>
+<link rel="stylesheet" type="text/css" href="template/style/index.css"/>
+<link rel="stylesheet" type="text/css" href="template/style/comment.css"/>
+
+<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="template/js/bioV4.min.js"></script>
+<script type="text/javascript" src="template/js/jquery.lazyload.mini.js"></script>
+<script type="text/javascript" src="template/js/function.js"></script>
+
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('img,.ie6png');
+</script>
+<![endif]--> 
+
+<link type="text/css" rel="stylesheet" href="template/style/biobox2.css" />
+<script type="text/javascript" src="template/js/biobox.js"></script>
+ 
+<!-- !!!!!!!!!!添加bootstrap样式,十分重要 -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- 自定义js --> 
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+ 
+</head>
+<body>
+ 
+<script type="text/javascript" src="template/js/borsertocss.js"> </script><!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
+ 
+ 
+ <!--头部代码开始-->
+
+<div class="navbar navbar-fixed-top" style="_position: relative;_z-index: 10000;">
+		<!-- Navigation -->
+  <div id="navigation-div"></div>  
+	</div>
+	
+<!--头部代码结束-->
+ 
+  	    
+	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span16">
+			<div class="label-public-title t-30">
+				<ul class="clearfix">
+					<li class="pull-left selected border-all r-20"><a href="javascript:;" title="登录" style="_padding: 0;">登录</a></li>
+					<li class="pull-left border-all"><a href="javascript:;" title="注册">注册</a></li>
+				 
+				</ul>
+			</div>
+			<div class="label-div t-15 border-all" style="padding: 0;">
+				<div class="label-main">
+					<div class="clearfix label-public">
+						<div class="pull-left third-party l-30 pt-25">
+							<div class="fc333">社会化账号直接登录</div>
+							<div class="clearfix t-25">
+								<div class="pull-left sina-div r-10 b-10" style="_width: 110px;">
+									<a class="ie6png" href="/oauth/sina.html?url=aHR0cDovL3d3dy5iaW9kaXNjb3Zlci5jb20vZG9jdW1lbnQuaHRtbA%3D%3D">新浪微博</a>
+								</div>
+								<div class="pull-left tencent-div r-10 b-10" style="_width: 110px;">
+									<a class="ie6png" href="/oauth/qq.html?url=aHR0cDovL3d3dy5iaW9kaXNjb3Zlci5jb20vZG9jdW1lbnQuaHRtbA%3D%3D">腾讯微博</a>
+								</div>
+								<div class="pull-left renren-div r-10 b-10" style="_width: 110px;">
+									<a class="ie6png" href="/oauth/renren.html?url=aHR0cDovL3d3dy5iaW9kaXNjb3Zlci5jb20vZG9jdW1lbnQuaHRtbA%3D%3D">人人网</a>
+								</div>
+								<div class="pull-left linkin-div b-10" style="_width: 110px;">
+									<a class="ie6png" href="/oauth/linkin.html?url=aHR0cDovL3d3dy5iaW9kaXNjb3Zlci5jb20vbG9naW4uaHRtbD91cmw9YUhSMGNEb3ZMM2QzZHk1aWFXOWthWE5qYjNabGNpNWpiMjB2Wkc5amRXMWxiblF1YUhSdGJBJTNEJTNE">LinkedIn</a>
+								</div>
+							</div>
+							<p class="fc999" style="max-width: 470px;">欢迎加入我们，这里有最新的资讯、贴心的服务，还有你正在寻找的圈子和朋友。</p>
+						</div>
+						<form id="login_form1" action="?" method="post">	
+						<div class="pull-left border-l public-login span7" style="min-height: 385px;">
+							<div class="t-25 pl-30 fc333">没有社会化账号，使用邮箱账号登录</div>
+							<div class="clearfix pt-25">
+								<div class="title pull-left fc999" style="width: 60px;">用户名</div>
+								<div class="pull-left l-20" style="_margin-left: 0;width: 100px;"><input type="text" id="username" name="Login[username]" value="" class="span4"/></div>
+								<span class="pull-left l-20 fcCF261F info username_msg"></span>
+							</div>
+							<div class="clearfix pt-25">
+								<div class="title pull-left fc999" style="width: 60px;">密&nbsp;&nbsp;&nbsp;码</div>
+								<div class="pull-left l-20" style="_margin-left: 0;width: 100px;"><input type="password" id="password" name="Login[password]" value="" class="span4"/></div>
+								<span class="pull-left l-20 fcCF261F info password_msg"></span>
+							</div>
+							<div class="clearfix pt-25" style="padding-top: 1px">
+							<div class="title pull-left" style="margin-left: 6px;_margin-left: 3px;">&nbsp;</div>
+							<span class="pull-left l-20 fcCF261F info error_msg"></span>
+							</div>
+							
+							<div class="clearfix pt-25" style="padding-top: 1px">
+							
+								<div class="title pull-left" style="margin-left: 6px;_margin-left: 3px;">&nbsp;</div>
+								
+								<a href="javascript:void(0);" title="登录" id="login_submit"  class="pull-left login-register-btn">登&nbsp;录</a>
+								<div class="pull-left l-20 t-8" style="_width: auto;_margin-left: 15px;"><input type="checkbox" checked="checked" style="_width: 20px;_margin: 0;"/></div>
+								<span class="pull-left l-5 info fc999" style="_width: auto;_margin: 0;">下次自动登录<!-- <span class="l-10 fcccc">|</span><a class="fc999 l-10" href="" title="忘记密码">忘记密码</a> --></span>
+							</div>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<!-- /container -->
+ <div class="container">
+ 
+ 	<div class="hr"></div>
+    
+    </div>
+  
+<!-- /container -->
+
+
+	</div>
+     
+ 
+<div class="footer">
+		 
+			<!--<p class="fc999 b-5 footer-info">致力于前沿生物科技和成功商业模式的传播</p>-->
+			<div class="clearfix" style="background:#EDEDED;">
+				
+				
+                <ul class="about-ul">
+					<li>客服电话 888-88888</li>
+					<li><span>|</span></li>
+					<li><a title="广告投放" href="javascript:;" class="fc666" target="_blank">广告投放</a></li>
+					<li><span>|</span></li>
+					<li><a title="企业服务" href="javascript:;" class="fc666" target="_blank">企业服务</a></li>
+					<li><span>|</span></li>
+					<li><a title="公司博客" href="javascript:;" class="fc666" target="_blank" >公司博客</a></li>
+					<li><span>|</span></li>
+					<li><a title="加入我们" href="javascript:;" class="fc666" target="_blank">加入我们</a></li>
+					<li><span>|</span></li>
+					<li><a title="服务协议" href="javascript:;" class="fc666" target="_blank">服务协议</a></li>
+					<li><span>|</span></li>
+                     <li id="zk_btn" class="ie6png down-class">
+                   	 <a title="友情链接" href="#" class="fc666">友情链接</a>
+                    </li>
+				    <div class="clear"></div>
+				</ul>
+			</div>
+    
+  			<div class="friend-link border-all t-20 b-20">
+		<ul class="clearfix">
+		
+	</ul>
+</div>
+  <script type="text/javascript">
+	$(document).ready(function(){
+/* 		var flag = 0;
+		$(".friend-link").hide();
+		//Down
+		$("#zk_btn").click(function(){
+			if(flag == 0){
+				$(".friend-link").slideDown(400); 
+				$(this).removeClass('down-class');
+				$(this).addClass('up-class');
+				$("html,body").animate({scrollTop:($(".friend-link").offset().top+2000)},600);
+				flag = 1;
+			}else{
+				$(".friend-link").slideUp(400);  
+				$(this).removeClass('up-class');
+				$(this).addClass('down-class'); 
+				flag = 0;
+			}
+		}); */
+	});
+</script>
+<p>Copyright ©2017　　备8888888888号</p>
+    
+		</div> 
+
+ 
+<script type="text/javascript">
+//回到顶部
+backToTop('body');
+</script>
+
+ 
+</body>
+</html>
