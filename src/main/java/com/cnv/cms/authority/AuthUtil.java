@@ -22,8 +22,10 @@ public class AuthUtil {
 				String pc = pname+"."+p.substring(0,p.lastIndexOf(".class"));
 				//得到了类的class对象
 				Class clz = Class.forName(pc);
+				//如果没有AuthClass注解，默认只有超级管理员可以访问
 				if(!clz.isAnnotationPresent(AuthClass.class)) continue;
 //				System.out.println(pc);
+				
 				//获取每个类中的方法，以此确定哪些角色可以访问哪些方法
 				Method[] ms = clz.getDeclaredMethods();
 				/*

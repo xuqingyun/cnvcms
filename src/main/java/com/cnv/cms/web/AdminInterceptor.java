@@ -12,6 +12,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.User;
 
+/*
+ *Adminl目录静态资源拦截
+ */
 public class AdminInterceptor extends HandlerInterceptorAdapter {
 	@SuppressWarnings("unchecked")
 	@Override
@@ -22,7 +25,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		String url = request.getRequestURI();
 		System.out.println("Admin Interceptor: "+url);
 
-		//TODO 只有login方法未登录可以访问
+		
 		
 		/*
 		 * 如果使用uploadify进行文件的上传，由于flash的bug问题，会产生一个新的session，此时验证失败
@@ -34,7 +37,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 			//当sid有值，就表示是通过uploadify上传文件，此时就应该获取原有的session
 			session = CmsSessionContext.getSession(sid);
 		}*/
-		
+		//TODO 只有login方法未登录可以访问
 		if(url.equals(request.getContextPath()+"/admin/login.html") ){
 			return super.preHandle(request, response, handler);
 		}
@@ -50,7 +53,6 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 			if(!isAdmin) {
 				System.out.println("没有权限访问该功能");
 				response.sendRedirect(request.getContextPath()+"user/home.html");
-				//throw new CmsException("没有权限访问该功能");
 				return false;
 			}
 		}

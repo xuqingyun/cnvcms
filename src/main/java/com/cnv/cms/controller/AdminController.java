@@ -32,7 +32,7 @@ public class AdminController {
 	 @Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	
+	@AuthMethod(role="customer")
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, String>  loginIn(@RequestBody User  userForm,
 			HttpSession httpSession, HttpServletRequest req){

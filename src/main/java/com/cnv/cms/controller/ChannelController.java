@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cnv.cms.authority.AuthClass;
+import com.cnv.cms.authority.AuthMethod;
 import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.Channel;
 import com.cnv.cms.model.ChannelType;
 import com.cnv.cms.model.Group;
+import com.cnv.cms.model.RoleType;
 import com.cnv.cms.service.ChannelService;
 
+@AuthClass
 @Controller
 @RequestMapping("/api/channel")
 public class ChannelController {
@@ -28,6 +32,7 @@ public class ChannelController {
 	@Qualifier("channelServiceImpl")
 	private ChannelService channelService;
 	
+
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  add(@RequestBody Channel  channel){
 		if(CmsConfig.isDebug){
@@ -48,6 +53,7 @@ public class ChannelController {
 		return map;
 	}
 	
+
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  update(@RequestBody Channel  channel){
 		if(CmsConfig.isDebug){
@@ -84,6 +90,7 @@ public class ChannelController {
 		return map;
 	}
 	
+	@AuthMethod(role="customer")
 	@RequestMapping(value="/channels",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  channels(){
 		if(CmsConfig.isDebug){
@@ -99,6 +106,7 @@ public class ChannelController {
 		return map;
 	}
 	
+	@AuthMethod(role="customer")
 	@RequestMapping(value="/topChannels",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  topChannels(){
 		if(CmsConfig.isDebug){
@@ -114,6 +122,7 @@ public class ChannelController {
 		return map;
 	}	
 	
+	@AuthMethod(role="customer")
 	@RequestMapping(value="/subChannels/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  subChannels(@PathVariable("id") int id){
 		if(CmsConfig.isDebug){
@@ -130,6 +139,7 @@ public class ChannelController {
 		return map;
 	}	
 	
+	@AuthMethod(role="customer")
 	@RequestMapping(value="/channelTypes",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  channelTypes(){
 		if(CmsConfig.isDebug){
@@ -148,6 +158,7 @@ public class ChannelController {
 		
 		return map;
 	}
+	
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  delete(@PathVariable("id") int id){

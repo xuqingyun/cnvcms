@@ -50,26 +50,36 @@
 	</bean>
 	
 	<!-- 配置静态资源拦截 -->
+	    <!--管理员路径  -->
  	<mvc:resources mapping="/admin/**" location="/WEB-INF/front/admin/"/>
+ 		<!--自定义js -->
  	<mvc:resources mapping="/js/**" location="/WEB-INF/front/js/"/>
+ 		<!--自定义css -->
  	<mvc:resources mapping="/css/**" location="/WEB-INF/front/css/"/>
+ 		<!--自定义图片 -->
  	<mvc:resources mapping="/images/**" location="/WEB-INF/front/images/"/>
+ 		<!--admin需要的js和css -->
  	<mvc:resources mapping="/dist/**" location="/WEB-INF/front/dist/"/>
+ 		<!--各种插件和库 -->
  	<mvc:resources mapping="/vendor/**" location="/WEB-INF/front/vendor/"/>
- 	
+ 		<!--前台模板资源文件 -->
+ 	<mvc:resources mapping="/template/**" location="/WEB-INF/front/template/"/>
+ 		<!--用户文件  -->
  	<mvc:resources mapping="/user/**" location="/WEB-INF/front/user/"/>
  	
  	<mvc:resources mapping="/*.*" location="/WEB-INF/front/html/"/>
- 	
+ 	<!--测试用  -->
  	<mvc:resources mapping="/admin_old/**" location="/WEB-INF/front/admin_old/"/>
  	<mvc:resources mapping="/test/**" location="/WEB-INF/front/test/"/>
  	
  	<!-- 配置拦截器-->
  	<mvc:interceptors>
+ 		<!-- RESTful 接口拦截-->
 		<mvc:interceptor>
 			<mvc:mapping path="/api/**"/>
 			<bean class="com.cnv.cms.web.AuthInterceptor"/>
 		</mvc:interceptor>
+		<!-- 管理员路径拦截-->
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**"/>
 			<bean class="com.cnv.cms.web.AdminInterceptor"/>

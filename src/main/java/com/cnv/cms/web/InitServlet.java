@@ -26,7 +26,7 @@ public class InitServlet extends HttpServlet {
 		Map<String,Set<String>> auths = AuthUtil.initAuth("com.cnv.cms.controller");
 		this.getServletContext().setAttribute("allAuths", auths);
 		//this.getServletContext().setAttribute("baseInfo", BaseInfoUtil.getInstacne().read());
-		System.out.println("------------------------系统初始化成功:"+auths+"-----------------------------");
+		System.out.println("------------------------系统初始化成功:-----------------------------\n"+auths);
 	}
 	
 	public static WebApplicationContext getWc() {
