@@ -3,7 +3,6 @@ package com.cnv.cms.mapper;
 import java.util.List;
 
 import com.cnv.cms.model.Channel;
-import com.cnv.cms.model.User;
 
 public interface ChannelMapper {
 	

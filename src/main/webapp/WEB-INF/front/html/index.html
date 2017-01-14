@@ -10,7 +10,6 @@
 
 <!-- !!!!!!!!!!添加bootstrap样式,十分重要 -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
-<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Le styles -->
 <link rel="stylesheet" type="text/css" href="template/style/basic.css"/>
@@ -18,6 +17,8 @@
 <link rel="stylesheet" type="text/css" href="template/style/comment.css"/>
 
 <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="template/js/bioV4.min.js"></script>
 <script type="text/javascript" src="template/js/jquery.lazyload.mini.js"></script>
 <script type="text/javascript" src="template/js/function.js"></script>
@@ -88,67 +89,7 @@ DD_belatedPNG.fix('img,.ie6png');
          
 	</div>
 </div>
-<!-- 顶部广告 切换-->
-<script type="text/javascript">
-	$(function(){
-		var Interval_control = '';
-		var current_index = 0;
-		show_pic_ad = function(index){
-			$(".top-ad .pull-left").each(function(i){
-				$(this).hide();
-				if(i == index){
 
-					$(this).show(); 
-				}
-			});
-		};
-		show_point_ad = function(index){
-			$(".top-ad .slides-ad-point a").each(function(i){
-				if($(this).hasClass("icon-css-on")){
-					$(this).removeClass("icon-css-on");
-					$(this).addClass("icon-css");
-				}
-				if(i == index){
-					if($(this).hasClass("icon-css")){
-						$(this).removeClass("icon-css");
-					}
-					$(this).addClass("icon-css-on");
-				}
-			});
-		};
-		slides = function(){
-			$(".slides-ad-point a").each(function(index){
-				$(this).click(function(){
-					current_index = index;
-					show_point_ad(index);
-					show_pic_ad(current_index);
-				});
-			});
-		};
-		slides();
-		Interval_control = setInterval(function(){
-			show_point_ad(current_index);
-			show_pic_ad(current_index);
-			if (current_index == ($(".slides-icon-ad a").length - 1)){
-				current_index = -1;
-			}
-			current_index ++;
-		},5000);//设置自动切换函数
-		//当触发mouseenter事件时，取消正在执行的自动切换方法，触发mouseouter事件时重新设置自动切换
-		$(".top-ad .pull-left").mouseenter(function() {
-			clearInterval(Interval_control);//停止自动切换
-		}).mouseleave(function(){
-			Interval_control = setInterval(function(){
-				show_point_ad(current_index);
-				show_pic_ad(current_index);
-				if (current_index == ($(".top-ad .pull-left").length - 1)){
-					current_index = -1;
-				}
-				current_index ++;
-			},5000);//设置自动切换函数
-		});
-	});
-</script>
 
 
 <!--头部代码结束-->
