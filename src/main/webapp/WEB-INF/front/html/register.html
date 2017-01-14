@@ -11,36 +11,34 @@
 
 <!-- Le styles -->
 <link rel="stylesheet" type="text/css" href="template/style/basic.css"/>
-<link rel="stylesheet" type="text/css" href="template/style/index.css"/>
-<link rel="stylesheet" type="text/css" href="template/style/comment.css"/>
+<link rel="stylesheet" type="text/css" href="template/style/login.css"/>
+
+ <!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
+ <script type="text/javascript" src="template/js/borsertocss.js"> </script>
 
 <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="template/js/bioV4.min.js"></script>
-<script type="text/javascript" src="template/js/jquery.lazyload.mini.js"></script>
 <script type="text/javascript" src="template/js/function.js"></script>
 
 <!--[if IE 6]>
-<script type="text/javascript" src="js/DD_belatedPNG.js"></script>
+<script type="text/javascript" src="template/js/DD_belatedPNG.js"></script>
 <script type="text/javascript">
 DD_belatedPNG.fix('img,.ie6png');
 </script>
 <![endif]--> 
 
-<link type="text/css" rel="stylesheet" href="template/style/biobox2.css" />
-<script type="text/javascript" src="template/js/biobox.js"></script>
- 
  
 <!-- !!!!!!!!!!添加bootstrap样式,十分重要 -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
 <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
  
 
+ 
  <!-- 自定义js --> 
 <script type="text/javascript" src="js/common.js"></script>
 </head>
 
 <body>
-<script type="text/javascript" src="js/borsertocss.js"> </script><!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
+
    
 
  <!--头部代码开始-->
@@ -120,7 +118,7 @@ DD_belatedPNG.fix('img,.ie6png');
 								</div>
 							</div>
 							<div class="pull-left t-50 l-20">
-								<div class="label-div border-all" style="padding: 10px;width: 150px;"><img class="lazyloadimg show_fave" src="images/user_180.gif" style="width: 150px;height: 150px; display: block;" /></div>
+								<div class="label-div border-all" style="padding: 10px;width: 150px;"><img class="lazyloadimg show_fave" src="template/images/user_180.gif" style="width: 150px;height: 150px; display: block;" /></div>
 								<div class="center t-10"><input id="file" type='file' name="file" onChange="ajaxFileUpload()" /><input id="new_face" type='hidden' name="new_face" value="" /></div>
 							</div>
 							</form>						

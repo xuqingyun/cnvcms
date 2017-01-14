@@ -8,7 +8,7 @@ function getUrlParam(name) {
 
 //读取导航栏
 function loadNavigation(){
-	$.get("navigation.html",function(data,status){
+	$.get(getContextPath()+"/navigation.html",function(data,status){
 		 var head = $("#navigation-div");
 		 head.empty();
 		 head.html(data);
@@ -17,7 +17,7 @@ function loadNavigation(){
 
 //加载栏目
 function loadChannel(){
-	$.get("api/channel/channels",function(data,status){
+	$.get(getContextPath()+"/api/channel/channels",function(data,status){
 		var channels = data.data;
 		//筛选出顶层栏目
         var topChannels = $.grep(channels,function(value){
@@ -55,6 +55,18 @@ function testnav(){
 	 //col.empty();
 	 col.append('<ul class="dropdown-menu"> <li><a href="#">子菜单1</a></li></ul>');
 }
+
+function getContextPath(){
+	if(contextPath == null){
+		var localObj = window.location;
+		var contextPath = localObj.pathname.split("/")[1];
+		var basePath = localObj.protocol+"//"+localObj.host+"/"+contextPath;
+		contextPath = basePath;
+	}
+	return contextPath;
+	
+}
+var contextPath = null;
 $(document).ready(function () {
 	loadNavigation();
 	loadChannel();
