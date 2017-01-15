@@ -96,9 +96,9 @@ function showUserCenter(){
 		  <a class="dropdown-toggle clearfix" href="'+getContextPath()+'/user/home.html" style="padding: 7px 5px;">\
 		    <img class="logo-before pull-left" src="'+getContextPath()+'/template/images/avatar-icon.png" />\
 		  </a>\
-	      <ul class="dropdown-menu">\
+	      <ul class="dropdown-menu right-menu">\
                 <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户中心</a>\
-                </li>\
+             	</li>\
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>\
                 </li>\
                 <li class="divider"></li>\
@@ -109,6 +109,19 @@ function showUserCenter(){
 	obj = $("#top-usercenter");
 	obj.html(str);
 }
+function changeNav(){
+	if(navshow==false){
+		$("#my-navbar-collapse").attr("style","height:auto;")
+		navshow=true;
+	}else{
+		$("#my-navbar-collapse").attr("style","height:0px;")
+		navshow=false;
+	}
+}
+/*
+ * 获取网站根路径
+ * 如http://111.111.111.111/abc
+ */
 function getContextPath(){
 	if(contextPath == null){
 		var localObj = window.location;
@@ -120,9 +133,13 @@ function getContextPath(){
 	
 }
 var contextPath = null;
+var navshow = false;
 $(document).ready(function () {
 	loadNavigation();
 	loadChannel();
-	
-	//loadNavigation();
+/*	$("#nav-trigger").on("click", function(event){
+		//取消事件行为，非常重要！否则add中的post请求会被取消
+		event.preventDefault();
+		changeNav();
+	});	*/
 });	

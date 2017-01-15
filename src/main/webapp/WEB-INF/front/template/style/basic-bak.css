@@ -61,7 +61,7 @@ textarea {overflow: auto;vertical-align: top;}
 }
 body {
 	margin: 0;
-	font-family: "微软雅黑", Arial, sans-serif;
+	font-family: "寰蒋闆呴粦", Arial, sans-serif;
 	font-size: 14px;
 	line-height: 22px;
 	color: #333;
@@ -132,7 +132,7 @@ a:hover { color: #3399CC;}
 .name-css {max-width: 100px;}
 #comment-box .weiboComments .com-textarea2 {width: 79%;}
 .group-list.span6 .offset1.intro .title.clearfix {height: 26px;}
-/******图片预览*******/
+/******鍥剧墖棰勮*******/
 .image-view .view_middle .pic_main {width: 520px;}
 .image-view .view_middle .pic_main .pic_main_div { width: 520px; }
 .image-view .view_middle .pic_main .pic_img{width: 520px;}
@@ -201,9 +201,11 @@ dd {margin-left: 10px;}
 table {max-width: 100%;background-color: transparent;border-collapse: collapse;border-spacing: 0;}
 form {margin: 0 0 20px;}
 label, input, button, select, textarea {font-size: 14px;font-weight: normal;line-height: 20px;}
-input, button, select, textarea {font-family: "微软雅黑", Helvetica, Arial, sans-serif;}
+input, button, select, textarea {font-family: "寰蒋闆呴粦", Helvetica, Arial, sans-serif;}
 label {display: block;margin-bottom: 5px;}
-select, textarea, input[type="text"], input[type="password"] {
+
+
+select, textarea, input.text, input.password {
 	display: inline-block;
 	height: 20px;
 	padding: 4px 6px;
@@ -213,6 +215,17 @@ select, textarea, input[type="text"], input[type="password"] {
 	color: #555;
 	vertical-align: middle;
 }
+
+/* select, textarea, input[type="text"], input[type="password"] {
+	display: inline-block;
+	height: 20px;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #555;
+	vertical-align: middle;
+} */
 input, textarea {width: 206px;}
 textarea {height: auto;}
 textarea, input[type="text"], input[type="password"] {
@@ -244,7 +257,7 @@ select {
 	width: 220px;
 	border: 1px solid #CCC;
 	background-color: #FFF;
-	font-family: '微软雅黑';
+	font-family: '寰蒋闆呴粦';
 }
 select[multiple], select[size] {height: auto;}
 select:focus, input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
@@ -395,22 +408,14 @@ legend + .control-group {margin-top: 20px;-webkit-margin-top-collapse: separate;
 	-webkit-transition:all 0.1s ease;
 	transition:all 0.1s ease;
 	
-	font-size:10px;
+	font-size:14px;
 	color:#6b6b6b;
 	text-transform:uppercase;
 	line-height:1em;
 }
 .nav ul > li > a:hover {text-decoration:none;}
 .nav ul > li:hover > a {padding-left:14px; background-color:#ffffff; color:#f24024;}
-/* .nav > li:hover > ul {display:block;} */
-
-
-
-
-
-
-
-
+.nav > li:hover > ul {display:block;}
 
 
 
@@ -502,7 +507,7 @@ legend + .control-group {margin-top: 20px;-webkit-margin-top-collapse: separate;
 	margin: 0 10px 0 0;
 }
 .navbar .nav.pull-right {float: right;margin-right: 0; font-weight:bold;}
-.navbar .nav > li {float: left;font-family:"宋体"; }
+.navbar .nav > li {float: left;font-family:"瀹嬩綋"; }
 .navbar .nav > li > a {float: none; padding: 10px 20px 10px; *padding: 10px 20px 10px;color: #FFF;text-decoration: none; }
 .navbar .myul > li > a {float: none; padding: 10px 10px 10px; *padding: 10px 10px 10px;color: #FFF;text-decoration: none; }
 .navbar .nav > li > a:focus, .navbar .nav > li > a:hover {background-color: #2885C8;color: #FFF;text-decoration: none;}
@@ -611,7 +616,7 @@ legend + .control-group {margin-top: 20px;-webkit-margin-top-collapse: separate;
 
 .pagination ul > li > a:hover, .pagination ul > .active > a, .pagination ul > .active > span {background-color: #f5f5f5;color: #DE2B1F;}
 .pagination ul > .active > a, .pagination ul > .active > span {color: #999;cursor: default;}
-/*********兼容 Yii**********/
+/*********鍏煎 Yii**********/
 .pagination ul > .selected > a, .pagination ul > .selected > span {background-color: #f5f5f5;}
 .pagination ul > .selected > a, .pagination ul > .selected > span {color: #DE2B1F;cursor: default;}
 .pagination ul > .disabled > span, .pagination ul > .disabled > a, .pagination ul > .disabled > a:hover {
@@ -776,7 +781,7 @@ button.close {
 	transition: height 0.35s ease;
 }
 .collapse.in {height: auto;}
-/**************生物探索**************/
+/**************鐢熺墿鎺㈢储**************/
 .label-div {
 	background: #FFF;
 	padding: 10px 15px 15px 0;
@@ -829,7 +834,7 @@ a.backToTop:hover {background-color: #333;}
 .ucenter-view .intro {margin-left: 200px;}
 .docu-div .docu-img i {right: 5px;}
 .home-other a {margin-right: 3px;}
-/***************布局响应式************/
+/***************甯冨眬鍝嶅簲寮�************/
 .hidden {display: none;visibility: hidden;}
 .visible-phone {display: none !important;}
 .visible-tablet {display: none !important;}
@@ -1060,7 +1065,7 @@ a.backToTop:hover {background-color: #333;}
 	.group-div.news-view.pl-25, .group-div.pl-20 {padding-left: 0;}
 	.home-index .topic-list .span1, .home-index .group-list .span1 {float: left;width: 60px;}
 	.home-index .topic-list .offset1.intro, .home-index .group-list .offset1.intro {margin-left: 80px;}
-	/******图片预览*******/
+	/******鍥剧墖棰勮*******/
 	.image-view .view_middle {padding-right: 25px;}
 	.image-view .view_middle .pic_main {width: 100%;}
 	.image-view .view_middle .pic_main .pic_main_div { width: 100%; }
@@ -1081,9 +1086,7 @@ a.backToTop:hover {background-color: #333;}
   .visible-tablet {display: inherit !important;}
   .hidden-tablet {display: none !important;}
 }
-
 @media (min-width: 768px) and (max-width: 960px) {
-
 	.row { margin-left: -20px;*zoom: 1;}
 	.row:before, .row:after {display: table;content: "";line-height: 0;}
 	.row:after {clear: both;}
@@ -1171,7 +1174,7 @@ a.backToTop:hover {background-color: #333;}
 	.pic-1 a img {height: 154px;}
 	.pic-2 a img, .pic-3 a img {height: 73px;}
 	#comment-box .weiboComments .com-textarea2 {width: 72%;}
-	/******图片预览*******/
+	/******鍥剧墖棰勮*******/
 	.image-view .view_middle .pic_main {width: 510px;}
 	.image-view .view_middle .pic_main .pic_main_div { width: 510px; }
 	.image-view .view_middle .pic_main .pic_img{width: 510px;}
@@ -1231,8 +1234,7 @@ a.backToTop:hover {background-color: #333;}
 		top: auto;
 		left: auto;
 		float: none;
-		/* 原来是none */
-		display: block;
+		display: none;
 		max-width: none;
 		margin: 0 15px;
 		padding: 0;
@@ -1255,7 +1257,6 @@ a.backToTop:hover {background-color: #333;}
 	}
 	.navbar-inverse .nav-collapse .navbar-search {border-top-color: #111;border-bottom-color: #111;}
 	.navbar .nav-collapse .nav.pull-right {float: none;margin-left: 0;}
-	.nav-collapse.collapse.in {height: auto;}
 	.nav-collapse, .nav-collapse.collapse {overflow: hidden;height: 0;}
 	.navbar .btn-navbar {display: block;}
 	.navbar-static .navbar-inner {padding-left: 10px;padding-right: 10px;}
@@ -1326,7 +1327,7 @@ a.backToTop:hover {background-color: #333;}
 	.pic-1 a img {height: 214px;}
 	.pic-2 a img, .pic-3 a img {height: 102px;}
 	.name-css {max-width: 130px;}
-	/******图片预览*******/
+	/******鍥剧墖棰勮*******/
 	.image-view .view_middle .pic_main {width: 580px;}
 	.image-view .view_middle .pic_main .pic_main_div { width: 580px; }
 	.image-view .view_middle .pic_main .pic_img{width: 580px;}
@@ -1381,7 +1382,7 @@ a.backToTop:hover {background-color: #333;}
 	.offset6 {margin-left: 500px;}
 	.offset5 {margin-left: 420px;}
 	.offset4 {margin-left: 340px;}
-	.offset3 {margin-left: 225px;}
+	.offset3 {margin-left: 235px;}/*原来是225*/
 	.offsetindex3{margin-left:240px;}
 	.offset2 {margin-left: 180px;}
 	.offset1 {margin-left: 100px;}
@@ -1432,7 +1433,7 @@ a.backToTop:hover {background-color: #333;}
 	.collections-div .offset2.intro {margin-left: 140px;}
 	.pic-1 a img {height: 270px;}
 	.pic-2 a img, .pic-3 a img {height: 130px;}
-	/******图片预览*******/
+	/******鍥剧墖棰勮*******/
 	.image-view .view_middle .pic_main {width: 710px;}
 	.image-view .view_middle .pic_main .pic_main_div { width: 710px; }
 	.image-view .view_middle .pic_main .pic_img {width: 710px;}
@@ -1454,12 +1455,5 @@ a.backToTop:hover {background-color: #333;}
 	.group-list.span6 .offset1.intro .title.clearfix {height: 26px;}
 	.collections-video-div  .offset2.intro h1 {width: 733px;}
 }
-@media (min-width: 960px)  {
-/* .nav > li:hover > ul {display:block;} */
-}
-@media (max-width: 960px)  {
-.nav > li> ul {display:block;}
-.dropdown-menu.right-menu{display:none;}
-.nav ul > li {background-color:#fdfdfd;}
-}
+
 .span12w100{width:100%;} 
