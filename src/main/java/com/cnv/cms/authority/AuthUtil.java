@@ -19,6 +19,8 @@ public class AuthUtil {
 			Map<String,Set<String>> auths = new HashMap<String, Set<String>>();
 			String[] ps = getClassByPackage(pname);
 			for(String p:ps) {
+				
+				//得到类名
 				String pc = pname+"."+p.substring(0,p.lastIndexOf(".class"));
 				//得到了类的class对象
 				Class clz = Class.forName(pc);

@@ -266,6 +266,7 @@ public class UserServiceImpl implements UserService {
 		if(!password.equals(user.getPassword())){
 			throw new CmsException("密码不正确");
 		}
+		user.setRoleIDs(this.listUserRoleIds(user.getId()));
 		return user;
 	}
 	public List<User> listUsersByGroupID(int id) {

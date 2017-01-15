@@ -8,39 +8,27 @@
 <meta name="Keywords" content="CNV CMS,关键字"/>
 <meta name="Description" content="CNV CMS,网站简介。"/>
 
-<script>
-var contextPath = null;
-function getContextPath(){
-	if(contextPath == null){
-		var localObj = window.location;
-		var contextPath = localObj.pathname.split("/")[1];
-		var basePath = localObj.protocol+"//"+localObj.host+"/"+contextPath;
-		contextPath = basePath;
-	}
-	return contextPath;
-	
-}
 
-/* JQuery */
-document.write('<script type="text/javascript" src="'+getContextPath()+'/vendor/jquery/jquery.min.js"></'+'script>');
+<!-- JQuery -->
+<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 
-//bootstrap
-document.write('<link href="'+getContextPath()+'/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">');
-document.write('<script src="'+getContextPath()+'/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></'+'script>');
+<!-- bootstrap css添加在basic.css前面-->
+<link  rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"> 
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-//模板css js文件
-<!--basic.css 要放在 bootstrap.min.css后面-->
-document.write('<link href="'+getContextPath()+'/template/style/basic.css" rel="stylesheet">');
-document.write('<link href="'+getContextPath()+'/template/style/index.css" rel="stylesheet">');
-<!-- 模板js文件 --> 
-document.write('<script type="text/javascript" src="'+getContextPath()+'/template/js/function.js"></'+'script>');
-<!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
-document.write('<script src="'+getContextPath()+'/template/js/borsertocss.js" type="text/javascript"></'+'script>');
+<!-- 模板样式文件 -->
+<link rel="stylesheet" type="text/css" href="template/style/basic.css"/>
+<link rel="stylesheet" type="text/css" href="template/style/index.css"/>
 
+
+ <!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
+ <script type="text/javascript" src="template/js/borsertocss.js"> </script>
+ 
 
 <!-- 自定义js --> 
-document.write('<script src="'+getContextPath()+'/js/common.js" type="text/javascript"></'+'script>');
-</script>
+<script type="text/javascript" src="js/common.js"></script>
+
+
 </head>
 <body>
 

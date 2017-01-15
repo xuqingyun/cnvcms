@@ -1,8 +1,10 @@
 package com.cnv.cms.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cnv.cms.authority.AuthClass;
 import com.cnv.cms.authority.AuthMethod;
+import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.Role;
 import com.cnv.cms.model.RoleType;
@@ -36,17 +39,38 @@ public class AdminController {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, String>  loginIn(@RequestBody User  userForm,
 			HttpSession httpSession, HttpServletRequest req){
-		System.out.println("received userform:");
-		System.out.println(userForm);
+		if(CmsConfig.isDebug){
+			System.out.println("received userform:");
+			System.out.println(userForm);
+		}
+		
 		Map<String, String> map = new HashMap<String, String>();
 		
 		try{
 			User user = userService.login(userForm.getUsername(), userForm.getPassword());
 			httpSession.setAttribute("loginUser", user); 
 			List<Role> roles =  userService.listUserRoles(user.getId());
+			//是否是管理员
 			boolean isAdmin = isRole(roles,RoleType.ROLE_ADMIN);
-		
 			httpSession.setAttribute("isAdmin", isAdmin);
+			//该用户所有可以访问的方法
+			Set<String> allActions = new HashSet<String>();
+			Map<String,Set<String>> auths = (Map<String, Set<String>>) httpSession.getServletContext().getAttribute("allAuths");
+			//contomer方法和base方法都可以访问
+			Set<String> customAuths = auths.get("customer");
+			allActions.addAll(customAuths);
+			Set<String> baseAuths = auths.get("base");
+			allActions.addAll(baseAuths);
+			//查询每个角色对应的权限
+			for(int rid : user.getRoleIDs()){
+				//数据库中role id 从1开始
+				String rname =RoleType.values()[rid-1].toString();
+				Set<String> roleAuths = auths.get(rname);
+				if(roleAuths != null){
+					allActions.addAll(roleAuths);	
+				}
+			}
+			httpSession.setAttribute("allActions", allActions);
 			map.put("login", "success");
 			if(isAdmin){
 				map.put("url", req.getContextPath()+"/admin/index.html");
@@ -54,6 +78,10 @@ public class AdminController {
 				map.put("url", req.getContextPath()+"/user/home.html");
 			}
 			
+			if(CmsConfig.isDebug){
+				System.out.println(user.getUsername()+" 's authority:");
+				System.out.println(allActions);
+			}
 		}catch(CmsException ce){
 			map.put("login", "failure");
 			map.put("error", ce.getMessage());
@@ -86,7 +114,12 @@ public class AdminController {
 	@RequestMapping(value="/login.out",method=RequestMethod.GET)
 	public  String  loginOut(HttpSession httpSession){
 		httpSession.removeAttribute("loginUser");
-		System.out.println("login out");
+		httpSession.removeAttribute("isAdmin");
+		httpSession.removeAttribute("allActions");
+		if(CmsConfig.isDebug){
+			System.out.println("login out");
+		}
+		
 		return "redirect:/login.html";
 	}
 	

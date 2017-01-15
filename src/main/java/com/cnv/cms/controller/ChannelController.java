@@ -159,7 +159,7 @@ public class ChannelController {
 		return map;
 	}
 	
-	
+	@AuthMethod(role="ROLE_ADMIN")
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  delete(@PathVariable("id") int id){
 		if(CmsConfig.isDebug){

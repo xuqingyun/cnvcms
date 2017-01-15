@@ -8,13 +8,9 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
-import com.cnv.cms.inject.TestInject;
 import com.cnv.cms.model.Channel;
-import com.cnv.cms.model.User;
 
 
 //@Component
