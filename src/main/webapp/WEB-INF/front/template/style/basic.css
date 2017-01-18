@@ -395,7 +395,7 @@ legend + .control-group {margin-top: 20px;-webkit-margin-top-collapse: separate;
 	-webkit-transition:all 0.1s ease;
 	transition:all 0.1s ease;
 	
-	font-size:10px;
+	font-size:14px;
 	color:#6b6b6b;
 	text-transform:uppercase;
 	line-height:1em;
@@ -1213,7 +1213,7 @@ a.backToTop:hover {background-color: #333;}
 	.nav-collapse .nav li a, .nav-collapse .dropdown-menu a {
 		padding: 9px 15px;
 		font-weight: bold;
-		color: #777;
+		color: #eee;
 		border-radius: 3px;
 	}
 	.nav-collapse .btn {
@@ -1222,7 +1222,9 @@ a.backToTop:hover {background-color: #333;}
 		border-radius: 4px;
 	}
 	.nav-collapse .dropdown-menu li + li a {margin-bottom: 2px;}
-	.nav-collapse .nav li a:hover, .nav-collapse .dropdown-menu a:hover {background-color: #c0c0c0;}
+/* 	.nav-collapse .nav li a:hover, .nav-collapse .dropdown-menu a:hover {background-color: #c0c0c0;} */
+	.nav-collapse .nav > ul > a:hover {background-color: #0080c0;}
+	.nav ul > li:first-child {border-top:1px;}
 	.navbar-inverse .nav-collapse .nav li a, .navbar-inverse .nav-collapse .dropdown-menu a {color: #999;}
 	.navbar-inverse .nav-collapse .nav li a:hover, .navbar-inverse .nav-collapse .dropdown-menu a:hover {background-color: #111;}
 	.nav-collapse.in .btn-group {margin-top: 5px;padding: 0;}
@@ -1234,7 +1236,7 @@ a.backToTop:hover {background-color: #333;}
 		/* 原来是none */
 		display: block;
 		max-width: none;
-		margin: 0 15px;
+		margin: 0 30px;
 		padding: 0;
 		background-color: transparent;
 		border: none;
@@ -1302,7 +1304,7 @@ a.backToTop:hover {background-color: #333;}
 	.offset6 {margin-left: 410px;}
 	.offset5 {margin-left: 345px;}
 	.offset4 {margin-left: 280px;}
-	.offset3 {margin-left: 180px;}
+	.offset3 {margin-left: 190px;}
 	.offsetindex3{margin-left:195px;}
 	.offset2 {margin-left: 150px;}
 	.offset1 {margin-left: 85px;}
@@ -1364,7 +1366,7 @@ a.backToTop:hover {background-color: #333;}
 	.span6 {width: 460px;}
 	.span5 {width: 380px;}
 	.span4 {width: 300px;}
-	.span3 {width: 220px;}
+	.span3 {width: 230px;}
 	.spanm3{width: 200px; }
 	.span2 {width: 140px;}
 	.span1 {width: 60px;}
@@ -1381,7 +1383,7 @@ a.backToTop:hover {background-color: #333;}
 	.offset6 {margin-left: 500px;}
 	.offset5 {margin-left: 420px;}
 	.offset4 {margin-left: 340px;}
-	.offset3 {margin-left: 225px;}
+	.offset3 {margin-left: 240px;}
 	.offsetindex3{margin-left:240px;}
 	.offset2 {margin-left: 180px;}
 	.offset1 {margin-left: 100px;}
@@ -1460,7 +1462,8 @@ a.backToTop:hover {background-color: #333;}
 @media (max-width: 960px)  {
 .nav > li> ul {display:block;}
 .dropdown-menu.right-menu{display:none;}
-.nav-collapse>.nav>li>a{color: #FFF;}
-.nav-collapse>.nav>li>ul>li>a{color: #777;}
+.nav > li >a{color: #FFF;}
+.nav ul > li > a{color: #808080;}
+.nav ul > li{background-color:#428bca; border-left:1px; border-right:1px; border-top:1px; border-bottom:1px;}
 }
 .span12w100{width:100%;} 
