@@ -1,0 +1,63 @@
+.list-header {
+	padding-bottom: 15px;
+}
+.list-header  a {
+    padding: 6px 10px 8px;   
+	margin: 5px 5px;
+}
+.list-header  a.header {
+	font-size: 22px;
+}
+.list-header  a.tags {
+	color: #333;
+	background: #fff;
+	border: 1px #E6E6E6 solid;
+	background: #FFF;
+}
+.list-item {
+	padding-left: 5;
+	padding-right: 10;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+	border: 1px solid #E8E8E8;
+}
+.list-item .item-head {
+	margin-left: 1px;
+    margin-top: 3px;
+	padding-left: 20;
+	padding-bottom: 2px;
+	width: 100%;
+	float:left;
+}
+.list-item .item-head a{
+	padding: 0px 15px;
+	/* width: 70%; */
+	/* float:left; */
+}
+.list-item .item-head a.tags-box{
+    background: #F8F8F8;
+    padding: 0px 10px 3px;
+	color: #777;
+	/* float:right; */
+}
+.list-item .item-head a.tags-box:hover {
+    color: #1E6495;
+}
+.list-item .item-body{
+	padding: 0px 3px;
+}
+
+.list-item .item-body a:hover{
+	color: #2a6496;
+}
+.list-item .item-body  .head>a{
+	color: #333;
+	font-weight: bold;
+}
+.list-item .item-body  i.info{
+    font-weight: bold;
+    color: #979797;
+	margin: 0 5px;
+    font-style: normal;	
+}
