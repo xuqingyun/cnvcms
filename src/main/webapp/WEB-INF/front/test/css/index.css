@@ -2,12 +2,12 @@
 
 /* 列表头，不带图片 */
 .list .list-title{margin-top:5px;margin-bottom:10px;list-style:none; }
-.list .list-title h2{font-weight: bold;font-size:14px;width:100%;text-align:center; margin-top: 0px; margin-bottom:10px;}
-.list .list-title h2 a{display:inline;color:#666;float:none;}
-.list .list-title h2 a:hover{text-decoration:underline;color:#de3237;}
-.list .list-title p{font-size:12px;color:#696969;padding:0 10px;text-align:justify;text-justify:inter-ideograph;margin:0px 5px;text-indent:2em;}
-.list .list-title p a{display:inline;color:#de3437;float:none;}
-.list .list-title p a:hover{text-decoration:underline;}
+.list  h2{font-weight: bold;font-size:14px;text-align:center; margin-top: 0px; margin-bottom:10px;}
+.list  h2 a{display:inline;color:#666;float:none;}
+.list  h2 a:hover{text-decoration:underline;color:#de3237;}
+.list  p{font-size:12px;color:#696969;padding:0 10px;text-align:justify;text-justify:inter-ideograph;margin:0px 5px;text-indent:2em;}
+.list  p a{display:inline;color:#de3437;float:none;}
+.list  p a:hover{text-decoration:underline;}
 
 
 
@@ -19,19 +19,21 @@
 	display:block; 
 	min-height:113px;
 	}
-.list .list-title-pic .info {
-	/* display:inline-block; */
-	vertical-align:top;
-	/* height:113px; */
-	}
+	
+.list .list-title-pic .img {float:left;display:inline-block;margin-right:10px;max-width:45%;}
+@media (max-width: 768px) {
+	.list .list-title-pic .img  img{width:100px;height:auto;}		
+	.list .list-title-pic .info{margin-top:20px;}
+	.list  h2{font-weight: bold;font-size:16px;}
+	/* 小屏幕时描述隐藏 */
+	.list .list-title-pic p{display:none;}
+}	
 
+@media (min-width: 768px) {	
+	.list .list-title-pic .img  img{max-width:140px;height:auto;}	
+}
+.list .list-title-pic .img a{display:inline-block; width:100%;}
+.list .list-title-pic p{padding:0px 0px;}
 
-.list .list-title-pic .img{display:inline-block;width:140px;height:113px;float:left;margin-right:10px;}
-.list .list-title-pic h2{font-weight: bold;font-size:14px;text-align:center; margin-top: 0px; margin-bottom:10px;}
-.list .list-title-pic h2 a{display:inline;color:#666;float:none;}
-.list .list-title-pic h2 a:hover{text-decoration:underline;color:#de3237;}
-.list .list-title-pic p{font-size:12px;color:#696969;padding:0px 0px;text-align:justify;text-justify:inter-ideograph;margin:0px 0px;text-indent:2em;}
-.list .list-title-pic p a{display:inline;color:#de3437;float:none;}
-.list .list-title-pic p a:hover{text-decoration:underline;}
 
 
