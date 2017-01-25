@@ -1,136 +1,146 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Panelo - Free Admin Template</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
-<!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/user_panel.js"></script>
-<script src="js/group_panel.js"></script>
-<script src="js/index3.js"></script>
-
-<!-- <script src="js/index.js" type="text/javascript" charset="utf-8"></script> -->
+<meta http-equiv="Content-Language" content="zh-CN" />
+<script type="text/javascript" src="js/jquery1.4.js"></script>
+<title>医疗器械创新网</title>
+<meta name="Keywords" content="医疗器械创新网,医疗"/>
+<meta name="Description" content="医疗器械创新网,网站简介。"/>
 
 
-<script type="text/javascript">
+<!-- JQuery -->
+<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 
-</script>
+<!-- bootstrap css添加在basic.css前面-->
+<link  rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"> 
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
+<!-- 模板样式文件 -->
+<link rel="stylesheet" type="text/css" href="template/style/basic.css"/>
+<link rel="stylesheet" type="text/css" href="template/style/index.css"/>
+
+
+ <!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->	
+ <script type="text/javascript" src="template/js/borsertocss.js"> </script>
+ 
+
+<!-- 自定义js --> 
+<!-- <script type="text/javascript" src="js/common.js"></script> -->
+
+<!-- <link type="text/css" rel="stylesheet" href="template/style/biobox2.css" />
+<script type="text/javascript" src="template/js/biobox.js"></script>
+<script type="text/javascript" src="template/js/bioV4.min.js"></script>
+<script type="text/javascript" src="template/js/jquery.lazyload.mini.js"></script>
+<link rel="stylesheet" type="text/css" href="template/style/comment.css"/> -->
+
+
+
+
+
+ 
 </head>
 <body>
-<div id="panelwrap">
-  	
-	<div class="header">
-    <div class="title"><a href="#">Panelo Admin</a></div>
-    
-    <div class="header_right">Welcome Admin, 
-      <a href="#" class="settings"><img src="images/settings.png"/>设置</a> 
-      <a href="../api/admin/login.out" class="logout"><img src="images/logout.png"/>退出登录</a> 
-    </div>
-    
-    <div class="menu">
-    <ul>
-    <li><a href="" class="selected">Main page</a></li>
-    <li><a href="#">Settings</a></li>
-    <li><a href="#">Add a category</a></li>
-    <li><a href="#">Edit categories</a></li>
-    <li><a href="#">Categories</a></li>
-    <li><a href="#">Options</a></li>
-    <li><a href="#">Admin settings</a></li>
-    <li><a href="#">Help</a></li>
-    </ul>
-    </div>
-   <!--  <div><ul><li>fff</li></ul></div> -->
-    </div>
-    
-<!--     
-    <div class="submenu">
-    <ul>
-    <li><a href="#" class="selected">settings</a></li>
-    <li><a href="#">users</a></li>
-    <li><a href="#">categories</a></li>
-    <li><a href="#">edit section</a></li>
-    <li><a href="#">templates</a></li>
-    </ul>
-    </div>          
-  -->                   
-    <div class="center_content">  
 
-    <div id="right_wrap">
-    
-    <div id="right_content">       
-	  <div id="div_table_and_btn" class="center_panel">  
-		 
-		    <h2 id="table_title">欢迎使用 后台管理系统！</h2> 
-		    <p id="welecome_msg">欢迎使用 后台管理系统！<br/>本系统由xqy开发<br/>版权所有</p>                   
-		
-	  </div> 
- 
-      
+
+ <!--头部代码开始-->
+
+<div class="navbar navbar-fixed-top" style="_position: relative;_z-index: 10000;">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<div class="nav-collapse" id="example-navbar-collapse">
+					<ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html"><b>首页</b></a></li>
+						<li class=""><a href="cxzx_list.html"><b>创新咨讯</b></a></li>
+						<li class=""><a href="cxfw_list.html"><b>创新服务</b></a></li>
+						<li class=""><a href="xmdata.html"><b>项目数据库</b></a></li>
+						<li class=""><a href="tzjg_list.html"><b>投资机构</b></a></li>
+						<li class=""><a href="xm_write.html"><b>项目发布</b></a></li>					
+						<li class="dropdown">
+							<!-- <a href="index.html" class="dropdown-toggle" data-toggle="dropdown"> -->
+								<!-- Java <b class="caret"></b> -->
+							<!-- </a> -->
+							<a href="#"><b>菜单</b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">jmeter</a></li>
+								<li><a href="#">EJB</a></li>
+
+							</ul>
+						</li>
+					</ul>
+				</div>
+
+				<!--/.nav-collapse -->
+				<ul class="nav pull-right login-none nav-tips">
+					<li class="ie6png divider-vertical" style="_width: 30px;_height: 40px;_background: url(images/icons.png) no-repeat 10px -106px;"><a class="dropdown-toggle clearfix" href="javascript:;" style="padding: 7px 5px;"><img class="logo-before pull-left" src="images/avatar-icon.png" /></a></li>
+				</ul>
+				<div class="popup-div tips-div" style="position: absolute;z-index: 10000001;display: none;"></div>
    
-        
-     </div>
-     </div>
-     <!-- end of right content -->
 
 
-                     
-                    
-    <div class="sidebar" id="sidebar">
-        <h2>用户设置</h2>
-    
-        <ul>
-        	<li><span id="user_manage"><a href="#">用户管理</a></span></li>
-        	<li><span id="group_manage"><a href="#">组别管理</a></span></li>
-        	<li><span id="role_manage"><a href="#">角色管理</a></span></li>
-        	<!-- <li><span id="user_add"><a href="#">添加用户</a></span></li> -->
-            <li><a href="#">Help</a></li>
-        </ul>  
-    <h2>Browse categories</h2>
-    
-        <ul>
-            <li><a href="#" class="selected">Main page</a></li>
-            <li><a href="#">Template settings</a></li>
-            <li><a href="#">Add page</a></li>
-            <li><a href="#">Edit section</a></li>
-            <li><a href="#">Templates</a></li>
-            <li><a href="#">Clients</a></li>
-        </ul>
-        
-    <h2>Page Section</h2>
-    
-        <ul>
-            <li><a href="#">Edit section</a></li>
-            <li><a href="#">Templates</a></li>
-            <li><a href="#">Clients</a></li>
-            <li><a href="#">Docs and info</a></li>
-        </ul> 
-        
- 
+				<ul class="nav pull-right pl-20 myul">
+					<li class=""><a href="register.html">注册</a></li>
+					<li class="l10"><a href="login.html">登录</a></li>
+				</ul>
+				
+	     </div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<div class="top-div">
+	<div class="container clearfix">
+		
+       <div class="span3 logo-div logo-img" style="margin-left:0px;">
+        <a href="/" title="医疗器械创新网"><img src="images/logo.jpg" class="ie6png" style="display: block;"/></a>
+       </div>
+		
+          <div class="span11 pull-right top-ad" style="position: relative;_float: right;_height: 80px;_overflow: hidden;">
          
-    <h2>Text Section</h2> 
-    <div class="sidebar_section_text">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>         
-    
-    </div>             
-    
-    
-    <div class="clear"></div>
-    
-    
-    </div>
-<!--end of center_content-->
-    
-    <div class="footer">
-	Panelo - Free Admin Collect
+         <a href="javascript:;" class="pull-left" target="_blank" rel="nofollow">
+        <img alt="" src="images/img1.jpg" style="width: 100%; display: block;"/></a>
+        
+         <a href="javascript:;" class="pull-left" style="display:none;" target="_blank">
+        <img alt="" src="images/img2.jpg" style="width: 100%; display: block;"/></a>
+              
+              
+               <div class="slides-icon-ad slides-ad-point" style="position: absolute;right:60px;">
+				<a href="javascript:void(0);" class="icon-css-on ie6png">&nbsp;</a>
+				<a href="javascript:void(0);" class="icon-css ie6png">&nbsp;</a>	 
+			  </div>
+              
+		</div>
+        
+        
+        
+        
+        
+        
+        
+         
+	</div>
 </div>
 
-</div>
 
-    	
+
+<!--头部代码结束-->
+
+
+
+
 </body>
 </html>

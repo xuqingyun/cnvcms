@@ -12,7 +12,7 @@ import com.cnv.cms.model.UserRole;
  * @author Administrator
  *
  */
-public interface RoleService {
+public interface RoleService extends BaseService<Role>{
 	/**
 	 * 添加Group
 	 * @param Group
@@ -27,7 +27,7 @@ public interface RoleService {
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
 	 */
-	public void deleteRole(int id);
+	public void delete(int id);
 	/**
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
@@ -53,7 +53,7 @@ public interface RoleService {
 	 * 获取Group信息
 	 * @param id
 	 */
-	public Role selectRole(int id);
+	public Role selectById(int id);
 
 
 }

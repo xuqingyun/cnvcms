@@ -10,7 +10,20 @@ create table user(
 );
 
 ########################################################################
-#test table
+create table t_article(
+	id int not null auto_increment primary key,
+	title varchar(200) not null,
+	summary text,
+	content text,
+	keywords varchar(150),
+	userId int,
+	channelId int,
+	status int,
+	createDate date,
+	recommend int,
+	chiefPic int
+);
+
 create table t_user(
 	id int not null auto_increment primary key,
 	username varchar(50) not null unique,
@@ -61,9 +74,12 @@ create table t_channel(
 #################################################################
 
 #测试数据
-insert into user values(null,'nametest1');
-insert into user values(null,'nametest2');
-insert into user values(null,'nametest3');
+
+insert into t_article values(null,'标题1','摘要1','内容1','关键字1|关键字2',104,2,1,'2017-1-11',1,1);
+insert into t_article values(null,'标题2','摘要2','内容2','关键字1|关键字2',104,2,1,'2017-1-11',1,1);
+insert into t_article values(null,'标题3','摘要3','内容3','关键字1|关键字2',104,2,1,'2017-1-11',1,1);
+insert into t_article values(null,'标题4','摘要4','内容4','关键字1|关键字2',104,3,1,'2017-1-11',1,1);
+
 
 insert into t_user values(null,'nametest1','f123','abc','abg@t.cn','1355434543',1,'2016-9-11');
 insert into t_user values(null,'nametest2','aa345','abdc','abg@t.cn','123123',1,'2016-9-11');

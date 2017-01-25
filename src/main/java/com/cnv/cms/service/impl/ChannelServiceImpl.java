@@ -15,6 +15,10 @@ public class ChannelServiceImpl implements ChannelService {
 	@Autowired
 	private ChannelMapper channelMapper;
 	
+	/**
+	 * 添加Channel，注意id和orders需要先查询最大值，然后赋值
+	 * @param Channel
+	 */
 	public void add(Channel channel) {
 		
 		Channel c = channelMapper.selectByName(channel.getName());
@@ -50,7 +54,11 @@ public class ChannelServiceImpl implements ChannelService {
 		}
 	}
 
-	public void deleteById(int id) {
+	/**
+	 * 删除栏目，注意需要把栏目内的文章删除
+	 * @param id
+	 */
+	public void delete(int id) {
 		// TODO 查询栏目内是否存在文章，否则不能删除
 		
 		if(channelMapper.selectByParentId(id).size() > 0){
@@ -78,6 +86,10 @@ public class ChannelServiceImpl implements ChannelService {
 		}
 	}
 
+	/**
+	 * Channel更新
+	 * @param channel
+	 */
 	public void update(Channel channel) {
 		try{
 			channelMapper.update(channel);
@@ -99,6 +111,10 @@ public class ChannelServiceImpl implements ChannelService {
 		return channelMapper.selectByParentId(parentId);
 	}
 
+	/**
+	 * 获取Channel信息
+	 * @param id
+	 */
 	public Channel selectById(int id) {
 		return channelMapper.selectById(id);
 	}

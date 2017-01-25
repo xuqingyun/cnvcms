@@ -1,0 +1,65 @@
+/* 列表头部样式 */
+.list-header {
+	padding-bottom: 15px;
+}
+.list-header  a {
+    padding: 6px 10px 8px;   
+	margin: 5px 5px;
+}
+.list-header  a.header {
+	font-size: 22px;
+}
+/* 列表头部标签 */
+.list-header .head-tag{
+	margin: 10px 0px;
+	padding: 10px 10px;
+	border: 1px solid #E8E8E8;
+}
+.list-header  a.tags {
+	color: #333;
+	background: #fff;
+	border: 1px #E6E6E6 solid;
+	background: #FFF;
+	display:inline-block;
+}
+/* 列表项 */
+.list-item {
+	padding-left: 5;
+	padding-right: 10;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #E8E8E8;
+	display: inline-block;
+	width:100%;
+}
+.list-item .item-pic a{display:block;}
+.list-item .item-pic a img{height:auto;max-width: 100%;}
+.list-item .item-body, .list-item  .item-head{
+	/* padding: 0px 3px; */
+	width: 100%;
+	display: inline-block;
+}
+
+.list-item .item-head  .head>a{
+	color: #333;
+	font-weight: bold;
+}
+.list-item .item-head  .head>a:hover{color: #CC3300;}
+.list-item .item-head  i.info{
+    font-weight: bold;
+    color: #979797;
+	margin: 0 5px;
+    font-style: normal;	
+}
+.list-item .item-head  i.info a:hover{color: #2a6496;}
+.list-item .item-head .pull-right span{color: #666;}
+
+.list-item .item-body {
+	padding-top: 10px;
+}
+
+.page-number{
+	width: 240px;
+	margin:0 auto;
+}

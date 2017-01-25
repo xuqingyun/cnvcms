@@ -14,7 +14,7 @@ import com.cnv.cms.model.User;
  * @author Administrator
  *
  */
-public interface UserService {
+public interface UserService extends BaseService<User>{
 	/**
 	 * 添加用户，需要判断用户名是否存在，如果存在抛出异常
 	 * @param user 用户对象
@@ -66,7 +66,7 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	public User load(int id);
+	public User selectById(int id);
 	public User load(String username);
 	/**
 	 * 获取用户的所有角色信息

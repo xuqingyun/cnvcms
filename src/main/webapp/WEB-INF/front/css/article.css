@@ -1,0 +1,36 @@
+.article-header{
+	border-bottom: 1px solid #E8E8E8;
+}
+.article-content{
+	padding-top: 30px;
+	border-bottom: 1px solid #E8E8E8;
+}
+.article-content p{
+	text-indent: 28px;
+	margin-bottom: 25px;
+}
+/* 评论 */
+.article-commend h3{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.comment-item{
+	border-bottom: 1px dotted #E8E8E8;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.comment-item .c-bottomBar a{
+	/* font-size: 10px; */
+	color: #555;
+}
+.comment-item .c-bottomBar .commentTime{
+	font-size: 10px;
+	color: #777;
+}
+.comment-item  .c-username a{
+	font-size: 14px;
+	color: #666;
+}
+.comment-item .c-bottomBar .reply{
+	float: right;
+}

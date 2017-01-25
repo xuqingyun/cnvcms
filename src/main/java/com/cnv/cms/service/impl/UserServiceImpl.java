@@ -216,7 +216,7 @@ public class UserServiceImpl implements UserService {
 		List<User> users = userMapper.selectUsers("%");
 		return users;
 	}
-	public User load(int id) {
+	public User selectById(int id) {
 		return userMapper.selectUserByID(id);
 	}
 
@@ -279,6 +279,5 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
-	
 
 }

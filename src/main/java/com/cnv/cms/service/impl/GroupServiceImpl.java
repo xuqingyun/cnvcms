@@ -36,7 +36,7 @@ public class GroupServiceImpl implements GroupService {
 		userGroupMapper.add(ug);		
 	}
 
-	public void deleteGroup(int id) {
+	public void delete(int id) {
 		groupMapper.deleteGroup(id);
 		userGroupMapper.deleteByGID(id);		
 	}
@@ -62,7 +62,7 @@ public class GroupServiceImpl implements GroupService {
 		return groupMapper.selectAllGroups();
 	}
 
-	public Group selectGroup(int id) {
+	public Group selectById(int id) {
 		return groupMapper.selectGroup(id);
 	}
 

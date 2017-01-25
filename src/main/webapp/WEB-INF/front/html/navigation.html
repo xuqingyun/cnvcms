@@ -1,42 +1,64 @@
-	<div class="navbar-inner">
-	<div class="container">
-		<a id="nav-trigger" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<nav class="navbar  navbar-inverse navbar-fixed-top">
+ <div class="navbar-inner">
+	<div class="container"> 
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+			<span class="sr-only">切换导航</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
-		</a>
-		<div class="nav-collapse" id="my-navbar-collapse">
+		</button>
+		<a class="navbar-brand" href="index.html">CNV-CMS</a>
+	</div>
+	<div class="collapse navbar-collapse" id="example-navbar-collapse">
 		<ul class="nav navbar-nav" id="top-navbar">
-                 
-               <li class="active"><a href="index.html"><b>首页</b></a></li>
-              
-		</ul>
-		</div>	
-		<!-- <ul id="top-usercenter" class="nav navbar-right pull-right login-none nav-tips"> -->
-		<ul id="top-usercenter" class="nav navbar-right pull-right nav-tips">
-
-		</ul>
-<!-- 		<div class="popup-div tips-div" style="position: absolute;z-index: 10000001;display: none;">
-		</div> -->
-
-
-		<ul class="nav pull-right pl-20 myul navbar-right">
-		    <li class=""><a href="register.html">注册</a></li>
-		    <li class="l10"><a href="login.html">登录</a></li>
-<!-- 			<li class="dropdown">
-			   
-				<a href="#"><b>菜单</b></a>
-				<ul class="dropdown-menu  right-menu">
+			<li class="active"><a href="#">体育</a></li>
+			<li><a href="#">娱乐</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Java <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 					<li><a href="#">jmeter</a></li>
 					<li><a href="#">EJB</a></li>
-			
+					<li><a href="#">Jasper Report</a></li>
+					<li class="divider"></li>
+					<li><a href="#">分离的链接</a></li>
+					<li class="divider"></li>
+					<li><a href="#">另一个分离的链接</a></li>
 				</ul>
-			</li> -->
+			</li>
 		</ul>
-		
-    </div><!--/.container -->
-</div><!-- /.navbar-inner -->
-
-<!--  </div> -->
- 
-
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#">注册</a></li>
+			<li><a href="login.html">登录</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="glyphicon glyphicon-user"></i>
+					<i class="glyphicon glyphicon-menu-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-user" id="top-usercenter">
+					<li><a href="#"><i class="glyphicon glyphicon-user"></i>用户中心</a>
+					</li>
+					<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 设置</a>
+					</li>
+					<li class="divider"></li>
+					<li><a href="#"><i class="glyphicon glyphicon-log-out"></i>退出</a>
+					</li>
+				</ul>
+				<!-- /.dropdown-user -->
+			</li>
+	
+		</ul>		
+	</div>
+	</div>
+ </div>
+</nav>
+<!-- Page Header -->
+<header class="jumbotron">
+  <div class="container">
+    <h1>CNV</h1>
+    <p class="lead">欢迎来到 CMS Header</p>
+  </div>
+</header>

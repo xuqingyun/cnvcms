@@ -27,7 +27,7 @@ public class RoleServiceImpl implements RoleService {
 		userRoleMapper.add(userRole);
 	}
 
-	public void deleteRole(int id) {
+	public void delete(int id) {
 		roleMapper.deleteRole(id);
 		userRoleMapper.deleteByUID(id);
 	}
@@ -48,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
 		return roleMapper.selectAllRoles();
 	}
 
-	public Role selectRole(int id) {
+	public Role selectById(int id) {
 		return roleMapper.selectRole(id);
 	}
 

@@ -170,7 +170,7 @@ public class ChannelController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", "failure");	
 		try{
-			channelService.deleteById(id);
+			channelService.delete(id);
 			map.put("flag", "success");	
 		}
 		catch(CmsException ce){

@@ -45,7 +45,7 @@ public class GroupController {
 		System.out.println("----group query by id---");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Group group = groupService.selectGroup(id);
+		Group group = groupService.selectById(id);
 		map.put("data", group);
 		return map;
 	}
@@ -76,7 +76,7 @@ public class GroupController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", "failure");	
-		groupService.deleteGroup(id);
+		groupService.delete(id);
 		map.put("flag", "success");	
 		return map;
 	}
@@ -88,7 +88,7 @@ public class GroupController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", "failure");	
 		for(int id : ids){
-			groupService.deleteGroup(id);
+			groupService.delete(id);
 		}	
 		map.put("flag", "success");	
 		

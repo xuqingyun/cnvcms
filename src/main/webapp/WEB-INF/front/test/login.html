@@ -10,7 +10,7 @@
 	<!-- <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css"> -->
 	<!-- 自定义css -->
 	<link rel="stylesheet" href="css/basic.css">
-	<link rel="stylesheet" href="css/list.css">
+	<link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
@@ -86,48 +86,53 @@
 		<!-- </div> -->
 		<!-- /.col-lg-12 -->
 	  <!-- 页面左侧内容区 -->
-	  <div class="page-div col-md-6">
+	  <div class="div-login col-md-6">
+		<!-- <div class="div-login"> -->
+                    <div class="well">
+                        <h4>Normal Well</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                    </div>
+	
+			<div style="clear:both"></div>
 
-
-		<div class="list-item">	
-		
-			<!-- 左侧图片 -->
-			<div class="col-sm-4 col-lg-3">
-				<a href="javascript:;" title="标题"><img alt="标题标题" src="images/list_item.jpg"></a>					
-			</div>
-			<div class="col-sm-4 col-lg-3">
-				<a href="javascript:;" title="标题"><img alt="标题标题" src="images/list_item.jpg"></a>					
-			</div>			
-			<div class="col-sm-4 col-lg-3">
-				<a href="javascript:;" title="标题"><img alt="标题标题" src="images/list_item.jpg"></a>					
-			</div>
-			<div class="col-sm-4 col-lg-3">
-				<a href="javascript:;" title="标题"><img alt="标题标题" src="images/list_item.jpg"></a>					
-			</div>
-		</div>		
-
-
-
+		<!-- </div> -->
 	  </div> <!-- /.col-md-9 -->	
 	  
-		<!-- 页面右侧导航区 -->	
-		<div class="page-div col-md-3">
-			<div class="panel panel-default page-panel">
-				<div class="panel-heading">
-					右侧导航
+		<!-- 页面右侧登录-->	
+		<div class="div-login col-md-6">
+		<!-- <div class="div-login"> -->
+			<form role="form" class="form-horizontal">
+				<div class="form-group" >
+					<label class="col-sm-3 control-label">用户名：</label>
+					<div class="col-sm-7">
+						<input id="input_username" class="form-control" value="test1" placeholder="test1">
+						<p class="help-block">用户名长度大于6位</p>
+					</div>
 				</div>
-			
-				<div class="panel-body">
-					<ul class="">
-						<li>CNV-CMS系统</li>
-						<li><a href="#" >文章标题 1</a></li>
-						<li><a href="#" >文章标题 2</a></li>
-						<li><a href="#" >文章标题 3</a></li>
-					</ul>					
+				
+				
+				<div class="form-group" >
+					<label class="col-sm-3 control-label">密&nbsp;&nbsp;&nbsp;码：</label>
+					<div class="col-sm-7">
+						<input type="password" id="input_password" class="form-control" value="psdtest1" placeholder="psdtest1">
+						<p class="help-block">密码长度大于6位</p>
+					</div>
 				</div>
+																																																																								
+				<div class="col-sm-10" align="right">
 
-			</div>
-		
+					<button id="form_submit" type="submit" class="btn btn-primary">&nbsp;&nbsp;登录&nbsp;&nbsp;</button>
+					<span>&nbsp;&nbsp;&nbsp;</span>
+					<label class="checkbox-inline">
+						<input type="checkbox" id="login_checkbox">下次自动登录
+					</label>
+
+				</div>
+			</form>
+	
+			<div style="clear:both"></div>
+
+		<!-- </div> -->
 		</div>		
 		<!-- /.col-md-3 -->			
 	</div>

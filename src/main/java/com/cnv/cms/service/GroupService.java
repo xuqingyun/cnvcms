@@ -13,7 +13,7 @@ import com.cnv.cms.model.UserGroup;
  * @author Administrator
  *
  */
-public interface GroupService {
+public interface GroupService extends BaseService<Group>{
 	/**
 	 * 添加Group
 	 * @param Group
@@ -28,7 +28,7 @@ public interface GroupService {
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
 	 */
-	public void deleteGroup(int id);
+	public void delete(int id);
 	/**
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
@@ -59,7 +59,7 @@ public interface GroupService {
 	 * 获取Group信息
 	 * @param id
 	 */
-	public Group selectGroup(int id);
+	public Group selectById(int id);
 	
 	/**
 	 * 获取Group成员信息

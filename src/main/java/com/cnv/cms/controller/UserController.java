@@ -60,7 +60,7 @@ public class UserController {
 		System.out.println("----users query---");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		User user = userService.load(id);
+		User user = userService.selectById(id);
 		List<Integer> gids = userService.listUserGroupIds(id);
 		List<Integer> rids = userService.listUserRoleIds(id);
 		map.put("user", user);

@@ -41,7 +41,7 @@ public class RoleController {
 		System.out.println("----Role query by id---");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Role role = roleService.selectRole(id);
+		Role role = roleService.selectById(id);
 		map.put("role", role);
 		return map;
 	}
@@ -53,7 +53,7 @@ public class RoleController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", "failure");	
-		roleService.deleteRole(id);
+		roleService.delete(id);
 		map.put("flag", "success");	
 		return map;
 	}

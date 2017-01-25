@@ -35,7 +35,7 @@ function loadNavigation(){
 		 var head = $("#navigation-div");
 		 head.empty();
 		 head.html(data);
-		 showUserCenter();
+		 //showUserCenter();
 	}); 	
 }
 
@@ -57,7 +57,7 @@ function loadChannel(){
 	        });
 	        substr = "";
 	        if(subChannels != null && subChannels.length>0){
-	        	substr += '<ul class="dropdown-menu">';
+	        	substr += '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">';
 	        	for(j in subChannels){
 	        		var sc = subChannels[j];
 		        	substr += '<li><a columnid="'+sc.id+'" \
@@ -66,9 +66,15 @@ function loadChannel(){
 	        	substr += '</ul>';
 	        }
 	        
-			str += '<li class="dropdown topcol" ><a columnid="'+pchannel.id+'" \
-				href="'+getContextPath()+'/article_list.html?cid='+pchannel.id+'">\
-				<b>'+pchannel.name+'</b></a>'+substr+'</li>';
+			str += '<li class="dropdown topcol" >\
+				<a columnid="'+pchannel.id+'" \
+				href="'+getContextPath()+'/article_list.html?cid='+pchannel.id+'" \
+					class="dropdown-toggle" data-toggle="dropdown">\
+				<b>'+pchannel.name+'</b>';
+				if(substr != ""){
+					str += '<b class="caret"></b>';
+				}
+			str += '</a>'+substr+'</li>';
 		}
 		 var navmenu = $("#top-navbar");
 		 navmenu.empty();
@@ -91,21 +97,13 @@ function loadChannel(){
 
 function showUserCenter(){
 	var str = '\
-		  <li class="ie6png divider-vertical" \
-		style="_width: 30px;_height: 40px;_background: url('+getContextPath()+'/template/images/icons.png) no-repeat 10px -106px;">\
-		  <a class="dropdown-toggle clearfix" href="'+getContextPath()+'/user/home.html" style="padding: 7px 5px;">\
-		    <img class="logo-before pull-left" src="'+getContextPath()+'/template/images/avatar-icon.png" />\
-		  </a>\
-	      <ul class="dropdown-menu right-menu">\
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户中心</a>\
-             	</li>\
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>\
-                </li>\
-                <li class="divider"></li>\
-                <li><a href="'+getContextPath()+'/api/admin/login.out"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>\
-                </li>\
-            </ul>\
-		 </li>';
+		<li><a  href="'+getContextPath()+'/user/home.html"><i class="glyphicon glyphicon-user"></i>用户中心</a>\
+		</li>\
+		<li><a href="'+getContextPath()+'/user/setting.html"><i class="glyphicon glyphicon-cog"></i> 设置</a>\
+		</li>\
+		<li class="divider"></li>\
+		<li><a  href="'+getContextPath()+'/api/admin/login.out"><i class="glyphicon glyphicon-log-out"></i>退出</a>\
+		</li>';
 	obj = $("#top-usercenter");
 	obj.html(str);
 }
