@@ -6,28 +6,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 <mapper namespace="com.cnv.cms.mapper.ArticleMapper">
    
-	<!--  基本增删改查  -->
+	<!--  BaseMapper  -->
 	<!--  添加  -->
-    <insert id="add" parameterType="Article" 
-        useGeneratedKeys="true" keyProperty="id"> 
+    <insert id="add" parameterType="Article"
+    useGeneratedKeys="true" keyProperty="id"> 
         insert into t_article
         values(#{id},#{title},#{summary},#{content},#{keywords},
         	#{userId},#{channelId},#{status},#{createDate},#{recommend},
         	#{chiefPic},#{readTimes},#{fellows});  
-    </insert> 
+    </insert>   
  	<!--删除操作  -->
 	<select id="delete" parameterType="int">
 		delete from t_article where id= #{id}
 	</select>   
-         
-    <!-- 返回用户 list -->
-    <select id="selectUsers" parameterType="string" resultType="User">
-        select * from t_user where username like #{username}
+	<!--更新操作  -->
+     <select id="update" parameterType="Article"> 
+        update  t_article set 
+        title=#{title},summary=#{summary},content=#{content},keywords=#{keywords},
+        	userId=#{userId},channelId=#{channelId},status=#{status},recommend=#{recommend},
+        	chiefPic=#{chiefPic},readTimes=#{readTimes},fellows=#{fellows}
+        	where id=#{id};  
+    </select> 
+    <!-- 根据id查询-->
+     <select id="selectById" parameterType="int" resultType="Article">
+        select * from t_article where id=#{id};
+	</select>    
+	<select id="maxId"  resultType="int">
+        select max(id) from t_article
+    </select>    
+             
+    <!-- 删除栏目下全部文章 -->
+    <select id="deleteByChannel" parameterType="int">
+         delete from t_article where channelId=#{id}
     </select>
-    <!-- 根据id查询用户-->
-     <select id="selectUserByID" parameterType="int" resultType="User">
-        select * from t_user where id=#{id}
-	</select>
+
+	<!--改变文章状态 -->
+     <select id="updateStatus"> 
+        update  t_article set status=#{1} where id=#{0};  
+    </select> 
+	<!--设置文章查看次数-->
+     <select id="updateReadTimes"> 
+        update  t_article set readTimes=#{1} where id=#{0};  
+    </select>     
+  	<!--设置文章关注人数-->
+     <select id="updateFellows"> 
+        update  t_article set fellows=#{1} where id=#{0};  
+    </select>    
+    
+    
+    
+    
+
+
+
+
     <!-- 根据用户名查询用户-->
      <select id="selectUserByName" parameterType="string" resultType="User">
         select * from t_user where username=#{username};

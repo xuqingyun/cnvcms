@@ -12,9 +12,15 @@ public interface ArticleMapper extends BaseMapper<Article> {
 	/*
 	 * 改变文章状态
 	 */
-	void updateStatus(int s);
-	void updateReadTimes(int n);
-	void updateFellows(int n);
+	void updateStatus(int id, int s);
+	/*
+	 * 设置文章查看次数
+	 */
+	void updateReadTimes(int id, int n);
+	/*
+	 * 设置文章关注人数
+	 */
+	void updateFellows(int id, int n);
 	/*
 	 * 检索offset+1开始往后n个记录
 	 */
