@@ -2,7 +2,7 @@
 # cms系统
 # 采用 springMVC +spring + mybatis +maven
 
-version 0.0.8.2
+version 0.0.8.4
 	增加文章类、Mapper、Service：
 	Service:
 		ArticleService
@@ -11,7 +11,7 @@ version 0.0.8.2
 		ArticlelMapper
 	model:
 		Article	
-version 0.0.8.1
+version 0.0.8.3
 	重写前端模板			
 version 0.0.8
 

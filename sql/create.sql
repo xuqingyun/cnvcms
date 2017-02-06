@@ -10,6 +10,15 @@ create table user(
 );
 
 ########################################################################
+create table t_attachment(
+	id int not null auto_increment primary key, 
+	oldName varchar(256) not null,
+	newName varchar(256) not null,
+	path varchar(256) not null,
+	suffix varchar(256),
+	isPic int not null,
+	createDate date
+);
 create table t_article(
 	id int not null auto_increment primary key,
 	title varchar(200) not null,
