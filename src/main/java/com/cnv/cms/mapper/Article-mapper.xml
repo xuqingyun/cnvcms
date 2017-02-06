@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 <mapper namespace="com.cnv.cms.mapper.ArticleMapper">
    
-	<!--  BaseMapper  -->
+<!--  BaseMapper  -->
 	<!--  添加  -->
     <insert id="add" parameterType="Article"
     useGeneratedKeys="true" keyProperty="id"> 
@@ -41,40 +41,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 	<!--改变文章状态 -->
-     <select id="updateStatus"> 
-        update  t_article set status=#{1} where id=#{0};  
+     <select id="changeStatus" parameterType="int"> 
+        update t_article set status=1-status where id=#{id}; 
     </select> 
 	<!--设置文章查看次数-->
-     <select id="updateReadTimes"> 
-        update  t_article set readTimes=#{1} where id=#{0};  
+     <select id="addReadTimes"> 
+        update  t_article set readTimes=readTimes+#{1} where id=#{0};  
     </select>     
   	<!--设置文章关注人数-->
-     <select id="updateFellows"> 
-        update  t_article set fellows=#{1} where id=#{0};  
+     <select id="addFellows"> 
+        update  t_article set fellows=fellows+#{1} where id=#{0};  
     </select>    
-    
-    
-    
-    
-
-
-
-
-    <!-- 根据用户名查询用户-->
-     <select id="selectUserByName" parameterType="string" resultType="User">
-        select * from t_user where username=#{username};
+ 
+ 
+ <!--检索功能  -->   
+    <!-- 分页查询-->
+     <select id="selectFromTo"  resultType="Article">
+        select * from t_article order by id  limit #{0},#{1};
 	</select>
-	<!--更新操作  -->
-	<select id="updateUser" parameterType="User">
-		update t_user set username=#{username},password=#{password}, 
-		nickname=#{nickname},email=#{email},phone=#{phone},status=#{status} where id= #{id}
-	</select>
-	<!--删除操作  -->
-	<select id="deleteUser" parameterType="int">
-		delete from t_user where id= #{id}
-	</select>
-	<!--删除操作大于id的记录  -->
-	<select id="deleteUserLargerByID" parameterType="int">
-		delete from t_user where id > #{id}
-	</select>
+	
+    <!-- 通过标题检索 -->
+    <select id="selectByTitle" parameterType="string" resultType="Article">
+        select * from t_article where title like #{title};
+    </select>	
+	
+    <!-- 通过栏目id检索 -->
+    <select id="selectByChannel" parameterType="int" resultType="Article">
+        select * from t_article where channelId=#{id};
+    </select>	
+    <!-- 通过关键字检索 -->
+    <select id="selectByKeywords" parameterType="string" resultType="Article">
+        select * from t_article where keywords like #{keywords};
+    </select>	
+     <!-- 检索推荐文章 -->
+    <select id="selectRecommends" resultType="Article">
+        select * from t_article where recommend=1;
+    </select>	   
+    <select id="selectRecommends" parameterType="int" resultType="Article">
+        select * from t_article where recommend=1 and channelId=channelId;
+    </select>	    
+
+     <!-- 检索查看次数最多的文章 -->
+    <select id="selectTopRead" parameterType="int" resultType="Article">
+        select * from t_article order by readTimes desc limit #{n};
+    </select>	   
+    <select id="selectTopRead" resultType="Article">
+        select * from t_article where  channelId=#{1} order by readTimes desc limit #{0};
+    </select>	
+    
+    <!-- 检索关注次数最多的文章 -->
+    <select id="selectTopFellow" parameterType="int" resultType="Article">
+        select * from t_article order by fellows desc limit #{n};
+    </select>	
 </mapper>
