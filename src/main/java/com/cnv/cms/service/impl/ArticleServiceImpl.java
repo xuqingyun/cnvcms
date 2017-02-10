@@ -100,7 +100,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	public List<Article> selectRecommends(int channelId) {
 		// TODO Auto-generated method stub
-		return articleMapper.selectRecommends(channelId);
+		return articleMapper.selectRecommendsInChannel(channelId);
 	}
 
 	public List<Article> selectTopRead(int n) {
@@ -110,7 +110,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	public List<Article> selectTopRead(int n, int channelId) {
 		// TODO Auto-generated method stub
-		return articleMapper.selectTopRead(n, channelId);
+		return articleMapper.selectTopReadInChannel(n, channelId);
 	}
 
 	public List<Article> selectTopFellow(int n) {

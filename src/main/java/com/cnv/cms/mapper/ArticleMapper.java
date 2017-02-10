@@ -41,12 +41,12 @@ public interface ArticleMapper extends BaseMapper<Article> {
 	 * 检索推荐文章
 	 */	
 	List<Article> selectRecommends();	
-	List<Article> selectRecommends(int channelId);
+	List<Article> selectRecommendsInChannel(int channelId);
 	/*
 	 * 检索查看次数最多的文章
 	 */	
 	List<Article> selectTopRead(int n);	
-	List<Article> selectTopRead(int n, int channelId);
+	List<Article> selectTopReadInChannel(int n, int channelId);
 	/*
 	 * 检索关注次数最多的文章
 	 */	

@@ -77,15 +77,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectRecommends" resultType="Article">
         select * from t_article where recommend=1;
     </select>	   
-    <select id="selectRecommends" parameterType="int" resultType="Article">
-        select * from t_article where recommend=1 and channelId=channelId;
+    <select id="selectRecommendsInChannel" parameterType="int" resultType="Article">
+        select * from t_article where recommend=1 and channelId=#{channelId};
     </select>	    
 
      <!-- 检索查看次数最多的文章 -->
     <select id="selectTopRead" parameterType="int" resultType="Article">
         select * from t_article order by readTimes desc limit #{n};
     </select>	   
-    <select id="selectTopRead" resultType="Article">
+    <select id="selectTopReadInChannel" resultType="Article">
         select * from t_article where  channelId=#{1} order by readTimes desc limit #{0};
     </select>	
     

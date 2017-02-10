@@ -44,5 +44,15 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
   		<property name="basePackage" value="com.cnv.cms.mapper" />
 	</bean>
-
+	
+	
+	<!-- CMS配置 -->
+	<bean id="cmsConfig" class="com.cnv.cms.config.CmsConfig">
+		<property name="Debug" value="true" />
+  		<property name="ftpServer" value="127.0.0.1" />
+  		<property name="filePath" value="files" />
+  		<property name="ftpUser" value="ftptest" />
+  		<property name="ftpPassword" value="ftptest" />
+  		<property name="test" value="testt1" />
+	</bean>
 </beans> 

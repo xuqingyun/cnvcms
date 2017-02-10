@@ -12,6 +12,7 @@ create table user(
 ########################################################################
 create table t_attachment(
 	id int not null auto_increment primary key, 
+	aid int not null,
 	oldName varchar(256) not null,
 	newName varchar(256) not null,
 	path varchar(256) not null,

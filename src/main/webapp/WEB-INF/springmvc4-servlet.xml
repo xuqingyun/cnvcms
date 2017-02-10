@@ -20,8 +20,8 @@
  	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/WEB-INF/front/html/"/>
-		<property name="suffix" value=".html"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
 	</bean>
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
@@ -50,6 +50,9 @@
 	</bean>
 	
 	<!-- 配置静态资源拦截 -->
+	    <!-- FTP服务器路径  -->
+ 	<mvc:resources mapping="/attachfiles/**" location="G:/web-ftp-server/"/>	
+	
 	    <!--管理员路径  -->
  	<mvc:resources mapping="/admin/**" location="/WEB-INF/front/admin/"/>
  		<!--自定义js -->

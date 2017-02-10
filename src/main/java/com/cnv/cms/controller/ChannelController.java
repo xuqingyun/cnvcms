@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -92,7 +94,7 @@ public class ChannelController {
 	
 	@AuthMethod(role="customer")
 	@RequestMapping(value="/channels",method=RequestMethod.GET)
-	public  @ResponseBody Map<String, Object>  channels(){
+	public  @ResponseBody Map<String, Object>  channels(HttpServletRequest req){
 		if(CmsConfig.isDebug){
 			System.out.println("----channels query---");
 		}
@@ -102,6 +104,12 @@ public class ChannelController {
 		List<Channel> channels = channelService.selectAll();
 		map.put("data", channels);
 	
+		
+		
+		//String path = this.getClass().getClassLoader().getResource("upload").getPath();
+		String path2 = req.getSession().getServletContext().getRealPath("/");
+		//System.out.println(path);
+		System.out.println(path2);
 		
 		return map;
 	}
