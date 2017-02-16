@@ -8,8 +8,8 @@
 // 登录验证  
 function userLogin(){  
     // 做表单输入校验  
-    var userId = $("#username");  
-    var password = $("#password");  
+    var userId = $("#input_username");  
+    var password = $("#input_password");  
     /* var code = $("#code");   */
     var msg = "";  
     if ($.trim(userId.val()) == ""){  

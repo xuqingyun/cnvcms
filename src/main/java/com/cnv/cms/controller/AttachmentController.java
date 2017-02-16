@@ -1,6 +1,7 @@
 package com.cnv.cms.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,8 @@ public class AttachmentController {
 	private AttachmentService attachService;
 	
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  post(@RequestBody MultipartFile file, HttpServletRequest request){
-		
+	public  @ResponseBody Map<String, String>  post(@RequestBody MultipartFile file, HttpServletRequest request){
+		Map<String, String> map = new HashMap<String, String>();
         System.out.println("开始");  
         String path = request.getSession().getServletContext().getRealPath("upload"); 
         String fileName = file.getOriginalFilename();  
@@ -37,14 +38,16 @@ public class AttachmentController {
         if(!targetFile.exists()){  
             targetFile.mkdirs();  
         }  
-  
+        map.put("flag", "false");
         //保存  
         try {  
             file.transferTo(targetFile);  
         } catch (Exception e) {  
             e.printStackTrace();  
-        }  		
-		return null;
+            map.put("flag", e.getMessage());
+        }  	
+        map.put("flag", "success");
+		return map;
 		
 	}
 }

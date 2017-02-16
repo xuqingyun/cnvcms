@@ -57,7 +57,8 @@ function userAdd(){
 function fileUpload(){
 	var formData = new FormData();
 	var name = $("#user_pic").val();
-	formData.append("file",$("#uploadForm")[0].files[0]);
+	var ufile=document.getElementById("user_pic");
+	formData.append("file",ufile.files[0]);
 	formData.append("name",name);
 	$.ajax({ 
 		url : '../api/files/upload', 
