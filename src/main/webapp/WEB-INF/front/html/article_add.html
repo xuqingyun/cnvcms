@@ -7,12 +7,15 @@
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/xheditor/xheditor.min.js"></script>
+	<script src="vendor/xheditor/xheditor_lang/zh-cn.js"></script>
 	<!-- 自定义模板css -->
 	<link rel="stylesheet" href="css/basic.css">
 	<!-- <link rel="stylesheet" href="css/list.css"> -->
 	
 	<!-- 自定义js -->
 	<script src="js/common.js"></script>
+	<script src="js/article_add.js"></script>
 </head>
 
 
@@ -83,12 +86,21 @@
                                       <th style='text-align:right'>发布时间：</th>
                                       <td><input id="input_name" placeholder="2017-01-01" class="form-control"></td>
                                   </tr>
+                                   <tr>
+                                  <th style='text-align:right'>附件：</th>
+                                      <td>
+                                      	<input type="file" id="user_pic" style="display:inline;">
+                                      	<button id="pic_btn" class="btn btn-primary">上传(测试)</button>
+                                      </td>
+                                  </tr>                                  
                                   <tr>
                                    <th colspan="2">文章内容</th>
                                   	
                                   </tr>
                                   <tr>
-                                   <td colspan="2"><textarea class="form-control" rows="25"></textarea></td>
+                                   <td colspan="2">
+                                   <textarea id="article-text"  class="xheditor" rows="16" cols="80" style="width: 100%"></textarea>
+                                   </td>
                                   	
                                   </tr>
                                 </tbody>

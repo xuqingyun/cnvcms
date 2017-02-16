@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.User;
 
@@ -23,8 +24,9 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		
 		String url = request.getRequestURI();
-		System.out.println("Admin Interceptor: "+url);
-
+		if(CmsConfig.isDebug()){
+			System.out.println("Admin Interceptor: "+url);
+		}
 		
 		
 		/*

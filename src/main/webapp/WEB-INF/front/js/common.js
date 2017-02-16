@@ -132,6 +132,8 @@ function getContextPath(){
 }
 var contextPath = null;
 var navshow = false;
+
+
 $(document).ready(function () {
 	loadNavigation();
 	loadChannel();

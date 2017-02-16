@@ -23,6 +23,8 @@ public class Attachment {
 	private String suffix;
 	//是否为图片文件
 	private int isPic;
+	//是否为首页图片
+	private int isIndex;
 	//创建日期
 	private Date createDate;
 }
