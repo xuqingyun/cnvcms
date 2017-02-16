@@ -54,6 +54,49 @@ function userAdd(){
 	  });
  
 };
+function fileUpload(){
+	var formData = new FormData();
+	var name = $("#user_pic").val();
+	formData.append("file",$("#uploadForm")[0].files[0]);
+	formData.append("name",name);
+	$.ajax({ 
+		url : '../api/files/upload', 
+		type : 'POST', 
+		data : formData, 
+		// 告诉jQuery不要去处理发送的数据
+		processData : false, 
+		// 告诉jQuery不要去设置Content-Type请求头
+		contentType : false,
+		beforeSend:function(){
+			console.log("正在进行，请稍候");
+		},
+		success:function(data,status){ 
+			if(status == "success" && data.flag == "success"){
+				alert("上传成功！");
+				 //window.location.href='user_panel.html';
+			 
+			}else{
+				alert("上传失败!\n"+data.flag);
+			}
+	
+	     }, 
+		error : function(msg) { 
+			console.log("error");
+		} 
+	});	
+	
+
+/*        $("#uploadForm").ajaxSubmit({
+            success: function (data) {
+                alert("成功");
+            },
+            error: function (error) { alert(error); },
+            url: '/Default1/UploadFilesPost', 设置post提交到的页面
+            type: "post", 设置表单以post方法提交
+            dataType: "json" 设置返回值类型为文本
+        });*/
+  
+};
 
 $(document).ready(function() {
 	
@@ -66,6 +109,14 @@ $(document).ready(function() {
 		
 		userAdd();
 		//ftest();
+	});
+	
+	//test
+	$("#pic_btn").on("click", function(event){
+		//取消事件行为，非常重要！否则add中的post请求会被取消
+		event.preventDefault();		
+		fileUpload();
+
 	});
 	
 });
