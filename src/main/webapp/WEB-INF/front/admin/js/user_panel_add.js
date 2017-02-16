@@ -68,9 +68,9 @@ function fileUpload(){
 		processData : false, 
 		// 告诉jQuery不要去设置Content-Type请求头
 		contentType : false,
-		beforeSend:function(){
+		/*beforeSend:function(){
 			console.log("正在进行，请稍候");
-		},
+		},*/
 		success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
 				alert("上传成功！");

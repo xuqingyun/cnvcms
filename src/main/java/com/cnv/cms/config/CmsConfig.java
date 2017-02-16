@@ -11,6 +11,9 @@ public class CmsConfig {
 	public static boolean getDebug() {
 		return isDebug;
 	}
+	public static boolean isDebug() {
+		return isDebug;
+	}
 	public static void setDebug(boolean isDebug) {
 		CmsConfig.isDebug = isDebug;
 	}
