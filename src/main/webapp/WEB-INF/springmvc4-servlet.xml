@@ -51,7 +51,7 @@
 	
 	<!-- 配置静态资源拦截 -->
 	    <!-- FTP服务器路径  -->
- 	<mvc:resources mapping="/attachfiles/**" location="G:/web-ftp-server/"/>	
+ 	<mvc:resources mapping="/files/**" location="G:/web-ftp-server/files/"/>	
 	
 	    <!--管理员路径  -->
  	<mvc:resources mapping="/admin/**" location="/WEB-INF/front/admin/"/>

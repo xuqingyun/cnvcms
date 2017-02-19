@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,9 +37,10 @@ public class AttachmentController {
 	private FTPUtil ftpUtil; 
 	
 	@AuthMethod(role="customer")
-	@RequestMapping(value="/upload",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, String>  ftpupload(@RequestBody MultipartFile file, HttpServletRequest request){
-		Map<String, String> map = new HashMap<String, String>();
+	@RequestMapping(value="/uploadImg/{clientid}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  ftpupload(@RequestParam("filedata") MultipartFile file,
+			HttpServletRequest request,@PathVariable(value="clientid") String clientid){
+		Map<String, Object> map = new HashMap<String, Object>();
         //原文件名
         String fileName = file.getOriginalFilename();  
         //文件后缀名
@@ -57,15 +60,26 @@ public class AttachmentController {
         	
         }
         
-        map.put("flag", "false");
+        //map.put("flag", "false");
+        Integer fileid = null;
         //保存  
         try {  
-            ftpUtil.saveFile(file, newName, ymdPath);
+            fileid = ftpUtil.saveFile(file, newName, ymdPath);
         } catch (Exception e) {  
             e.printStackTrace();  
-            map.put("flag", e.getMessage());
-        }  	
-        map.put("flag", "success");
+            map.put("err", e.getMessage());
+            //map.put("flag", e.getMessage());
+            return map;
+        } 
+        String httpUrl = "http://"+CmsConfig.getFtpServer()+"/"+CmsConfig.getFilePath()
+        				+"/"+ymdPath+"/"+newName;
+        Map<String, String> msg = new HashMap<String, String>();
+        map.put("err", "");
+        msg.put("url", httpUrl);
+        msg.put("localfile", fileName);
+        msg.put("id", fileid.toString());
+        map.put("msg", msg);
+        //map.put("flag", "success");
 		return map;
 		
 	}	

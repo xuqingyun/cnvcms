@@ -6,6 +6,8 @@ public class CmsConfig {
 	static String filePath	="files";
 	static String ftpUser;
 	static String ftpPassword;
+	
+	//static String filePath;
 	static String test="test";
 	
 	public static boolean getDebug() {

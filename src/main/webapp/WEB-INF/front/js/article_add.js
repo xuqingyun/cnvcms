@@ -34,25 +34,44 @@ function fileUpload(){
 };
 
 function editorInit(){
-	$('#article-text').xheditor({
+	
+	editor =$('#article-text').xheditor({
 		tools:'full',
 		skin:'default',
-		showBlocktag:true,
-		//internalScript:false,
-		//internalStyle:false,
-		//width:300,height:200,
-		//loadCSS:'http://xheditor.com/test.css',
-		//fullscreen:true,
-		//sourceMode:true,
-		//forcePtag:true,
-		upImgUrl:"upload.php",
-		upImgExt:"jpg,jpeg,gif,png",
-		onUpload: function(){}
+		showBlocktag:true,//显示段落标签
+		//关闭html5上传，HTML5浏览器上传时文件不是multipart/form-data而是application/octet-stream
+		html5Upload:false,
+		//图片上传
+		upImgUrl: getContextPath()+'/api/files/uploadImg/'+clientId,
+		upImgExt: "jpg,jpeg,gif,png",
+		//动画上传
+		//upFlashUrl:"upload.php",
+		//upFlashExt:"swf",
+		//多媒体上传
+		//upMediaUrl:"upload.php",
+		//upMediaExt:"avi",
+		//附件上传
+		//upLinkUrl:"upload.php",
+		//upLinkExt:"zip,rar,txt",
+		//文件上传成功回调函数
+		onUpload: function(d){
+			return;
+		}
 	});
 
 };
-
+function getClientId(){
+	var r = Math.floor(Math.random()*1000+1);
+	var date = new Date();
+	clientId = clientId + date.getHours() + date.getMinutes() + date.getSeconds()+date.getMilliseconds()+r;
+};
+var clientId = "";
+var editor = null;
 $(document).ready(function() {
+	
+	//每次打开页面 生成一个客户端id
+	getClientId();
+	editorInit();
 		
 	//test
 	$("#pic_btn").on("click", function(event){
