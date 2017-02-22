@@ -5,6 +5,8 @@ import java.util.List;
 import com.cnv.cms.model.Article;
 
 public interface ArticleService extends BaseService<Article> {
+	
+	public boolean add(Article t, String client);
 	/*
 	 * 删除栏目下全部文章
 	 */

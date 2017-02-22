@@ -18,8 +18,9 @@ public class ChannelServiceImpl implements ChannelService {
 	/**
 	 * 添加Channel，注意id和orders需要先查询最大值，然后赋值
 	 * @param Channel
+	 * @return 
 	 */
-	public void add(Channel channel) {
+	public boolean add (Channel channel) throws CmsException {
 		
 		Channel c = channelMapper.selectByName(channel.getName());
 		if(c != null){
@@ -52,13 +53,15 @@ public class ChannelServiceImpl implements ChannelService {
 			e.printStackTrace();
 			throw new CmsException("栏目添加失败：\n"+e.toString());
 		}
+		return true;
 	}
 
 	/**
 	 * 删除栏目，注意需要把栏目内的文章删除
 	 * @param id
+	 * @return 
 	 */
-	public void delete(int id) {
+	public boolean delete(int id) throws CmsException{
 		// TODO 查询栏目内是否存在文章，否则不能删除
 		
 		if(channelMapper.selectByParentId(id).size() > 0){
@@ -72,6 +75,7 @@ public class ChannelServiceImpl implements ChannelService {
 				throw new CmsException("栏目删除失败：\n"+e.toString());
 			}
 		}
+		return true;
 	}
 
 	public void deleteByParentId(int id) {
@@ -89,14 +93,16 @@ public class ChannelServiceImpl implements ChannelService {
 	/**
 	 * Channel更新
 	 * @param channel
+	 * @return 
 	 */
-	public void update(Channel channel) {
+	public boolean update(Channel channel) {
 		try{
 			channelMapper.update(channel);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new CmsException("栏目更新失败：\n"+e.toString());
 		}
+		return false;
 	}
 
 	public List<Channel> selectAll() {

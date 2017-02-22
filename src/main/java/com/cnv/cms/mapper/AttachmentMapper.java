@@ -1,11 +1,11 @@
-package com.cnv.cms.service;
+package com.cnv.cms.mapper;
 
 import java.util.Date;
 import java.util.List;
 
 import com.cnv.cms.model.Attachment;
 
-public interface AttachmentService extends BaseService<Attachment> {
+public interface AttachmentMapper extends BaseMapper<Attachment> {
 	/*
 	 * 删除文章附件
 	 */
@@ -49,20 +49,7 @@ public interface AttachmentService extends BaseService<Attachment> {
 	List<Attachment> selectUnused();
 	/*
 	 * 删除未被使用附件
-	 */	
+	 */
 	void deletetUnused();
 	
-	/**************临时附件相关方法****************/
-	/*
-	 * 以clientid位主键，添加的对应的临时附件列表
-	 */	
-	public void addTempAttachs(String clientid, int id);
-	/*
-	 * 获得clientid对应的临时附件列表
-	 */
-	public List<Integer> getTempAttachs(String client);
-	/*
-	 * 删除clientid对应的临时附件列表
-	 */
-	public void removeTempAttachs(String client);
 }

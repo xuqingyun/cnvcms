@@ -85,6 +85,12 @@ create table t_channel(
 
 #测试数据
 
+insert into t_attachment values(null,3,'old1.jpg','new1.jpg','20170220','jpg',1,0,'2017-2-11');
+insert into t_attachment values(null,3,'old1.jpg','new2.jpg','20170220','jpg',1,1,'2017-2-11');
+insert into t_attachment values(null,4,'old1.jpg','new3.jpg','20170220','jpg',1,0,'2017-2-11');
+insert into t_attachment values(null,4,'old1.jpg','new4.jpg','20170220','jpg',1,0,'2017-2-11');
+insert into t_attachment values(null,4,'old1.jpg','new5.jpg','20170220','jpg',1,0,'2017-2-11');
+
 insert into t_article values(null,'标题1','摘要1','内容1','关键字1|关键字2',104,2,1,'2017-1-11',1,1);
 insert into t_article values(null,'标题2','摘要2','内容2','关键字1|关键字2',104,2,1,'2017-1-11',1,1);
 insert into t_article values(null,'标题3','摘要3','内容3','关键字1|关键字2',104,2,1,'2017-1-11',1,1);

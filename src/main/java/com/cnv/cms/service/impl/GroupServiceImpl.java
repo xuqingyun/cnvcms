@@ -21,7 +21,7 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	private UserGroupMapper userGroupMapper;
 	
-	public void add(Group g) {
+	public boolean add(Group g) {
 		if(g.getName() == null | g.getName() == ""){
 			throw new CmsException("用户名不能为空!");
 		}		
@@ -30,27 +30,30 @@ public class GroupServiceImpl implements GroupService {
 			throw new CmsException("该组名已经存在");
 		}
 		groupMapper.addGroup(g);
+		return true;
 	}
 	
 	public void add(UserGroup ug) {
 		userGroupMapper.add(ug);		
 	}
 
-	public void delete(int id) {
+	public boolean delete(int id) {
 		groupMapper.deleteGroup(id);
-		userGroupMapper.deleteByGID(id);		
+		userGroupMapper.deleteByGID(id);	
+		return true;
 	}
 	
 	public void deleteUserGroup(int id) {
 		userGroupMapper.delete(id);		
 	}
 	
-	public void update(Group g) {
+	public boolean update(Group g) {
 		Group group = groupMapper.selectGroup(g.getId());
 		if(group == null){
 			throw new CmsException("Group不存在！");
 		}
 		groupMapper.updateGroup(g);
+		return true;
 	}
 	
 	public void update(UserGroup ug) {

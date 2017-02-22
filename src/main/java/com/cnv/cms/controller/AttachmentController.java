@@ -4,9 +4,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cnv.cms.authority.AuthClass;
 import com.cnv.cms.authority.AuthMethod;
 import com.cnv.cms.config.CmsConfig;
+import com.cnv.cms.model.Attachment;
 import com.cnv.cms.service.AttachmentService;
 import com.cnv.cms.util.FTPUtil;
 
@@ -37,11 +40,58 @@ public class AttachmentController {
 	private FTPUtil ftpUtil; 
 	
 	@AuthMethod(role="customer")
-	@RequestMapping(value="/uploadImg/{clientid}",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, Object>  ftpupload(@RequestParam("filedata") MultipartFile file,
-			HttpServletRequest request,@PathVariable(value="clientid") String clientid){
+	@RequestMapping(value="/delete/{clientid}/{id}",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  delete(@PathVariable int id,
+			@PathVariable(value="clientid") String clientid, HttpSession httpSession){
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-        //原文件名
+		List<Integer> tempAts = attachService.getTempAttachs(clientid);
+		if(tempAts.contains(id)){
+			attachService.delete(id);
+		}
+		map.put("flag", "success");
+		return map;
+	}
+	
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/uploadImg/{clientid}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  uploadImg(@RequestParam("filedata") MultipartFile file,
+			HttpServletRequest request,@PathVariable(value="clientid") String clientid){
+		
+		Map<String, Object> map = upload(file,request,clientid,"Img");
+
+		return map;
+	}
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/uploadMedia/{clientid}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  uploadMedia(@RequestParam("filedata") MultipartFile file,
+			HttpServletRequest request,@PathVariable(value="clientid") String clientid){
+		
+		Map<String, Object> map = upload(file,request,clientid,"Media");
+
+		return map;
+	}
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/uploadFlash/{clientid}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  uploadFlash(@RequestParam("filedata") MultipartFile file,
+			HttpServletRequest request,@PathVariable(value="clientid") String clientid){
+		
+		Map<String, Object> map = upload(file,request,clientid,"Flash");
+
+		return map;
+	}
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/uploadFile/{clientid}",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object>  uploadFile(@RequestParam("filedata") MultipartFile file,
+			HttpServletRequest request,@PathVariable(value="clientid") String clientid){
+		
+		Map<String, Object> map = upload(file,request,clientid,"File");
+
+		return map;
+	}
+	private Map<String, Object> upload(MultipartFile file, HttpServletRequest request, String clientid, String fileType) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		//原文件名
         String fileName = file.getOriginalFilename();  
         //文件后缀名
         String suffix = fileName.substring(fileName.lastIndexOf("."), fileName.length());
@@ -53,24 +103,46 @@ public class AttachmentController {
         String ymdPath = newName.substring(0, newName.indexOf("_"));
         
         if(CmsConfig.isDebug()){
-        	System.out.println("file upload");  
+        	System.out.println("-------file upload---------");  
         	System.out.println("received filename:"+fileName);
         	System.out.println("suffix:"+suffix);
         	System.out.println("new filename:"+newName);
         	
         }
-        
-        //map.put("flag", "false");
-        Integer fileid = null;
-        //保存  
+
+        //文件保存到服务器  
         try {  
-            fileid = ftpUtil.saveFile(file, newName, ymdPath);
+            ftpUtil.saveFile(file, newName, ymdPath);
         } catch (Exception e) {  
             e.printStackTrace();  
             map.put("err", e.getMessage());
             //map.put("flag", e.getMessage());
             return map;
         } 
+        
+        
+        //把Attachment存储到数据库中
+        int isPic=0;
+        if(fileType.equals("Img")) {
+        	isPic = 1;
+        }
+        Attachment a = new Attachment(fileName,newName,ymdPath,fileType,isPic);
+        if(!attachService.add(a)){
+        	ftpUtil.deleteFile(fileName, ymdPath);
+        }
+			
+		
+        Integer fileid = a.getId();
+        
+        try {
+			//添加到临时文件列表
+			attachService.addTempAttachs(clientid, fileid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			attachService.delete(a.getId());
+		}
+        
+        
         String httpUrl = "http://"+CmsConfig.getFtpServer()+"/"+CmsConfig.getFilePath()
         				+"/"+ymdPath+"/"+newName;
         Map<String, String> msg = new HashMap<String, String>();
@@ -81,8 +153,8 @@ public class AttachmentController {
         map.put("msg", msg);
         //map.put("flag", "success");
 		return map;
-		
-	}	
+	}
+	
 	@RequestMapping(value="/upload2",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, String>  upload2(@RequestBody MultipartFile file, HttpServletRequest request){
 		Map<String, String> map = new HashMap<String, String>();
@@ -105,6 +177,7 @@ public class AttachmentController {
             map.put("flag", e.getMessage());
         }  	
         map.put("flag", "success");
+        
 		return map;
 		
 	}

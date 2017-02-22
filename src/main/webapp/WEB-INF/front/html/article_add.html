@@ -5,7 +5,7 @@
 	<title>CNV CMS系统</title>
 	<!-- 添加Boostrap 和 JQuery -->
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/jquery/jquery-1.9.1.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="vendor/xheditor/xheditor.min.js"></script>
 	<script src="vendor/xheditor/xheditor_lang/zh-cn.js"></script>
@@ -41,22 +41,25 @@
 				<!-- <div class="label-main"> -->
 					<!-- <div class="clearfix label-public pt-25"> -->
   					  <div class="panel panel-primary"  >
-                        <div class="panel-heading">添加文章 </div>
+                        <div class="panel-heading">添加文章 
+                        
+                        </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
                             <table class="table table-bordered">
-                               <!--  <thead>
-                                    <th colspan="2"> 用户信息 </th>
-                                </thead> -->
+                                
+                                
                                 <tbody>
                                   <tr>
                                       <th width="15%" style='text-align:right'>文章标题：</th>
-                                      <td><input id="input_name" placeholder="测试组1" class="form-control"></td>
+                                      <td><input id="input_name" placeholder="测试标题" class="form-control">
+                                     
+                                      </td>
                                   </tr>
                                   <tr>
                                       <th style='text-align:right'>文章栏目：</th>
-                                      <td><input id="input_name" placeholder="测试组1" class="form-control"></td>
+                                      <td><input id="input_name" placeholder="测试栏目" class="form-control"></td>
                                   </tr>
                                   <tr>
                                       <th style='text-align:right'>文章状态：</th>
@@ -84,8 +87,12 @@
                                   </tr>
                                    <tr>
                                       <th style='text-align:right'>发布时间：</th>
-                                      <td><input id="input_name" placeholder="2017-01-01" class="form-control"></td>
+                                      <td><input id="input_name" placeholder="2017-01-01" class="form-control"  readonly="readonly"></td>
                                   </tr>
+                                  <tr>
+                                      <th style='text-align:right'>关键字：</th>
+                                      <td><input id="input_name" placeholder="请用'|'分割开，如： 关键字1|关键字2" class="form-control"></td>
+                                  </tr>                                  
                                    <tr>
                                   <th style='text-align:right'>附件：</th>
                                       <td>
@@ -94,15 +101,23 @@
                                       </td>
                                   </tr>                                  
                                   <tr>
-                                   <th colspan="2">文章内容</th>
+                                   	<th colspan="2">文章内容</th>
                                   	
                                   </tr>
                                   <tr>
-                                   <td colspan="2">
-                                   <textarea id="article-text"   rows="16" cols="80" style="width: 100%"></textarea>
-                                   </td>
-                                  	
+                                   	<td colspan="2">
+                                   		<textarea id="article-text"   rows="16" cols="80" style="width: 100%"></textarea>
+                                   	</td>
                                   </tr>
+                                  <tr>
+                                   	<td colspan="2">
+                                   	<div class="col-sm-10" align="right">
+										<button id="article-submit" class="btn btn-primary">发表文章</button>
+	                              	</div>
+                                   		
+                                   	</td>
+                                  </tr>
+                                  
                                 </tbody>
                              </table>
                             

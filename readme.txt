@@ -2,6 +2,17 @@
 # cms系统
 # 采用 springMVC +spring + mybatis +maven
 
+version 0.0.8.5
+	Service:
+		ArticleServiceImpl
+		AttachmentService
+		AttachmentServiceImpl
+	Mapper:
+		AttachmentMapper
+	Controller:
+		AttachmentController(文件上传)
+		ArticleController(部分：基本增删改查)
+	
 version 0.0.8.4
 	增加文章类、Mapper、Service：
 	Service:

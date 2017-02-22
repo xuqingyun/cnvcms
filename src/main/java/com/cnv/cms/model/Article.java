@@ -50,7 +50,7 @@ public class Article {
 	/*
 	 * 创建时间
 	 */
-	private Date createDate;
+	private Date createDate=new Date();
 	/*
 	 * 是否推荐文章
 	 */

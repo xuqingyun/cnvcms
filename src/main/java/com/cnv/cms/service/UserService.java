@@ -22,13 +22,14 @@ public interface UserService extends BaseService<User>{
 	 * @param gids 用户的所有组信息
 	 */
 	public void add(User user,List<Integer> rids, List<Integer> gids);
-	public void add(User user);
+	public boolean add(User user);
 	/**
 	 * 删除用户，注意需要把用户和角色和组的对应关系删除
 	 * 如果用户存在相应的文章不能删除
 	 * @param id
+	 * @return 
 	 */
-	public void delete(int id);
+	public boolean delete(int id);
 	/**
 	 * 用户的更新，如果rids中的角色在用户中已经存在，就不做操作
 	 * 如果rids中的角色在用户中不存在就要添加，如果用户中的角色不存在于rids中需要进行删除
@@ -40,7 +41,7 @@ public interface UserService extends BaseService<User>{
 	public void update(User user,List<Integer> listRids,List<Integer> listGids);
 	public void update(int id,List<Integer> rids,List<Integer> gids);
 	
-	public void update(User user);
+	public boolean update(User user);
 	/**
 	 * 更新密码方法
 	 * @param uid

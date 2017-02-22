@@ -25,7 +25,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		
 		String url = request.getRequestURI();
 		if(CmsConfig.isDebug()){
-			System.out.println("Admin Interceptor: "+url);
+			System.out.println("------Admin Interceptor: "+url);
 		}
 		
 		

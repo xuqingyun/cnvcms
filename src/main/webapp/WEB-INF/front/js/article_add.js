@@ -45,17 +45,17 @@ function editorInit(){
 		upImgUrl: getContextPath()+'/api/files/uploadImg/'+clientId,
 		upImgExt: "jpg,jpeg,gif,png",
 		//动画上传
-		//upFlashUrl:"upload.php",
-		//upFlashExt:"swf",
+		upFlashUrl:getContextPath()+'/api/files/uploadFlash/'+clientId,
+		upFlashExt:"swf",
 		//多媒体上传
-		//upMediaUrl:"upload.php",
-		//upMediaExt:"avi",
+		upMediaUrl:getContextPath()+'/api/files/uploadMedia/'+clientId,
+		upMediaExt:"avi",
 		//附件上传
-		//upLinkUrl:"upload.php",
-		//upLinkExt:"zip,rar,txt",
+		upLinkUrl:getContextPath()+'/api/files/uploadFile/'+clientId,
+		upLinkExt:"zip,rar,txt",
 		//文件上传成功回调函数
 		onUpload: function(d){
-			return;
+			return true;
 		}
 	});
 
@@ -71,14 +71,20 @@ $(document).ready(function() {
 	
 	//每次打开页面 生成一个客户端id
 	getClientId();
-	editorInit();
-		
+	//editorInit();
+
+	//test
+	$("#article-submit").on("click", function(event){
+		//取消事件行为，非常重要！否则add中的post请求会被取消
+		event.preventDefault();		
+		//fileUpload();
+	});
+	
 	//test
 	$("#pic_btn").on("click", function(event){
 		//取消事件行为，非常重要！否则add中的post请求会被取消
 		event.preventDefault();		
 		fileUpload();
-
 	});
 	
 	

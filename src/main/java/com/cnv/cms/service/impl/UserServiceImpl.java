@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 		
 		
 	}
-	public void add(User user) {
+	public boolean add(User user) throws CmsException{
 		
 		//检查用户是否存在
 		User utemp = userMapper.selectUserByName(user.getUsername());
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 			throw new CmsException("用户添加失败");
 		}
 
-		
+		return true;
 	}
 	private void addRole(User user, int rid){
 		Role role = roleMapper.selectRole(rid);
@@ -93,11 +93,17 @@ public class UserServiceImpl implements UserService {
 		if(group==null) throw new CmsException("添加的组别不存在");
 		userGroupMapper.add(new UserGroup(user.getId(),gid));	
 	}
-	public void delete(int id) {
-		//是否有文章
-		userMapper.deleteUser(id);
-		userRoleMapper.deleteByUID(id);
-		userGroupMapper.deleteByUID(id);
+	public boolean delete(int id) {
+		// TODO　是否有文章
+		try {
+			userMapper.deleteUser(id);
+			userRoleMapper.deleteByUID(id);
+			userGroupMapper.deleteByUID(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public void update(User user, List<Integer> listRids, List<Integer> listGids) {
@@ -174,13 +180,14 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	public void update(User user) {
+	public boolean update(User user) {
 		User u = userMapper.selectUserByID(user.getId());
 		if(u==null){
 			//此处抛出异常
 			throw new CmsException("用户不存在");
 		}
 		userMapper.updateUser(user);
+		return true;
 	}
 
 	public void updatePwd(int uid, String oldPwd, String newPwd) {

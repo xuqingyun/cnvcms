@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.cnv.cms.mapper.AttachmentMapper">
+   
+<!--  BaseMapper  -->
+	<!--  添加  -->
+    <insert id="add" parameterType="Attachment"
+    useGeneratedKeys="true" keyProperty="id"> 
+        insert into t_attachment
+        values(#{id},#{aid},#{oldName},#{newName},#{path},
+        	#{suffix},#{isPic},#{isIndex},#{createDate});  
+    </insert>   
+ 	<!--删除操作  -->
+	<select id="delete" parameterType="int">
+		delete from t_attachment where id= #{id}
+	</select>   
+	<!--更新操作  -->
+     <select id="update" parameterType="Attachment"> 
+        update  t_attachment set 
+        aid=#{aid},oldName=#{oldName},newName=#{newName},path=#{path},
+        	suffix=#{suffix},isPic=#{isPic},isIndex=#{isIndex},createDate=#{createDate}
+        	where id=#{id};  
+    </select> 
+    <!-- 根据id查询-->
+     <select id="selectById" parameterType="int" resultType="Attachment">
+        select * from t_attachment where id=#{id};
+	</select>  
+	<!-- 获取最大Id-->  
+	<select id="maxId"  resultType="int">
+        select max(id) from t_attachment
+    </select>    
+             
+    <!-- 删除文章附件 -->
+    <select id="deleteByArticleId" parameterType="int">
+         delete from t_attachment where aid=#{aid}
+    </select>
+    <!-- 删除栏目下全部文章 -->
+    <select id="deleteByChannelId" parameterType="int">
+         delete tat from t_attachment tat, t_article tar where tar.channelId=#{cid} and tat.aid=tar.id
+    </select>
+    
+	<!--改变所属文章id -->
+     <select id="setArticleId"> 
+        update t_attachment set aid=#{1} where id=#{0}; 
+    </select> 
+	<!--设置首页标志 -->
+     <select id="setIndex"> 
+        update t_attachment set isIndex=#{1} where id=#{0}; 
+    </select> 
+
+    <!-- 查询文章附件-->
+     <select id="selectByArticleId" parameterType="int" resultType="Attachment">
+        select * from t_attachment where aid=#{aid};
+	</select>  
+	<!-- 查询文章附件ID 列表-->
+     <select id="selectIdsByArticleId" parameterType="int" resultType="Integer">
+        select id from t_attachment where aid=#{aid};
+	</select>  	
+    <!-- 查询文章图片-->
+     <select id="selectPicByArticleId" parameterType="int" resultType="Attachment">
+        select * from t_attachment where aid=#{aid} and isPic=1;
+	</select>  
+			
+    <!-- 查询首页图片-->
+    <select id="selectIndexPic" resultType="Attachment">
+        select * from t_attachment where isIndex=1 and isPic=1;
+    </select>	
+    <!-- 查询首页图片-->
+    <select id="selectBeforeDate" parameterType="Date" resultType="Attachment">
+        <![CDATA[select * from t_attachment where createDate  < #{date};]]>
+    </select>	    
+    <!-- 查询文章附件-->
+     <select id="selectByChannelId" parameterType="int" resultType="Attachment">
+        select ath.* from t_attachment ath,  t_article art where art.channelId=#{cid} and ath.aid=art.id;
+	</select>
+	<!-- 查询未使用附件-->
+    <select id="selectUnused" resultType="Attachment">
+        select * from t_attachment where aid=-1;
+    </select>	
+	<!-- 删除未使用附件-->
+    <select id="deleteUnused" resultType="Attachment">
+        delete  from t_attachment where aid=-1;
+    </select>	
+          	
+</mapper>

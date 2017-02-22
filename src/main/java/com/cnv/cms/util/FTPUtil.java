@@ -2,6 +2,7 @@ package com.cnv.cms.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketException;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -15,21 +16,37 @@ import com.cnv.cms.exception.CmsException;
 
 
 @Component("ftpUtil")  
-public class FTPUtil {  
-	public int saveFile( MultipartFile uploadFile, String fileName, String path){
+public class FTPUtil {
+	public boolean deleteFile(String fileName, String path){
+		FTPClient ftp = new FTPClient();
+		if(!this.connect(ftp)){
+			throw new CmsException("无法连接FTP服务器");
+		}
+		ftp.enterLocalPassiveMode();
+		//改变当前目录 
+		String fliePath = CmsConfig.getFilePath()+"/"+path;
+		try {
+			if(!ftp.changeWorkingDirectory(fliePath)){
+				return false;
+			}
+			if(!ftp.deleteFile(fileName)){
+				return false;
+			}
+		} catch (IOException e) {
+			return false;
+		} 
+		return true;
+	}
+	
+	public boolean saveFile( MultipartFile uploadFile, String fileName, String path){
 		FTPClient ftp = new FTPClient();
 		InputStream input = null;
 		try { 
-			//建立连接
-			ftp.connect(CmsConfig.getFtpServer(),21); 
-			//登录
-			ftp.login(CmsConfig.getFtpUser(), CmsConfig.getFtpPassword()); 
-			//返回码
-	        int reply = ftp.getReplyCode();  
-	        if (!FTPReply.isPositiveCompletion(reply)) {  
-	            ftp.disconnect();  
-	            throw new CmsException("无法连接FTP服务器");
-	        }
+			
+			if(!this.connect(ftp)){
+				throw new CmsException("无法连接FTP服务器");
+			}
+			
 	        //ftp client告诉ftp server开通一个端口来传输数据
 			ftp.enterLocalPassiveMode();
 			//文件格式为二进制格式
@@ -72,7 +89,28 @@ public class FTPUtil {
 	            }  
 	        }
 		}
-		return 1;
-	}      
+		return true;
+	}
+	
+	private boolean connect(FTPClient ftp){
+		try {
+			//建立连接
+			ftp.connect(CmsConfig.getFtpServer(),21); 
+			//登录
+			ftp.login(CmsConfig.getFtpUser(), CmsConfig.getFtpPassword()); 
+			//返回码
+			int reply = ftp.getReplyCode();  
+			if (!FTPReply.isPositiveCompletion(reply)) {  
+			    ftp.disconnect();  
+			    return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			 return false;
+			
+		}
+		return true;
+		
+	}
  
 }  

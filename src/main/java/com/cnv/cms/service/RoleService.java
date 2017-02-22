@@ -16,8 +16,9 @@ public interface RoleService extends BaseService<Role>{
 	/**
 	 * 添加Group
 	 * @param Group
+	 * @return 
 	 */
-	public void add(Role role);
+	public boolean add(Role role);
 	/**
 	 * 添加UserGroup
 	 * @param UserGroup
@@ -26,8 +27,9 @@ public interface RoleService extends BaseService<Role>{
 	/**
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
+	 * @return 
 	 */
-	public void delete(int id);
+	public boolean delete(int id);
 	/**
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
@@ -36,8 +38,9 @@ public interface RoleService extends BaseService<Role>{
 	/**
 	 * Group更新
 	 * @param group
+	 * @return 
 	 */
-	public void update(Role role);
+	public boolean update(Role role);
 	/**
 	 * UserGroup更新
 	 * @param userGroup

@@ -17,8 +17,9 @@ public interface GroupService extends BaseService<Group>{
 	/**
 	 * 添加Group
 	 * @param Group
+	 * @return 
 	 */
-	public void add(Group g);
+	public boolean add(Group g);
 	/**
 	 * 添加UserGroup
 	 * @param UserGroup
@@ -27,8 +28,9 @@ public interface GroupService extends BaseService<Group>{
 	/**
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
+	 * @return 
 	 */
-	public void delete(int id);
+	public boolean delete(int id);
 	/**
 	 * 删除组，注意需要把用户和角色和组的对应关系删除
 	 * @param id
@@ -42,8 +44,9 @@ public interface GroupService extends BaseService<Group>{
 	/**
 	 * Group更新
 	 * @param group
+	 * @return 
 	 */
-	public void update(Group g);
+	public boolean update(Group g);
 	/**
 	 * UserGroup更新
 	 * @param userGroup

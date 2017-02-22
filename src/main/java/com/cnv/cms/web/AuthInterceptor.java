@@ -22,7 +22,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		String url = request.getRequestURI();
 		if(CmsConfig.isDebug){
-			System.out.println("Api Interceptor: "+url);
+			System.out.println("-------Api Interceptor: "+url);
 		}
 		
 		//获取包含包名和类名的方法名全称

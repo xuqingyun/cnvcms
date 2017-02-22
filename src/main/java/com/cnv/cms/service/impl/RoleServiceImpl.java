@@ -19,25 +19,43 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RoleMapper roleMapper;
 	
-	public void add(Role role) {
-		roleMapper.addRole(role);
+	public boolean add(Role role) {
+		try {
+			roleMapper.addRole(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public void add(UserRole userRole) {
 		userRoleMapper.add(userRole);
 	}
 
-	public void delete(int id) {
-		roleMapper.deleteRole(id);
-		userRoleMapper.deleteByUID(id);
+	public boolean delete(int id) {
+		try {
+			roleMapper.deleteRole(id);
+			userRoleMapper.deleteByUID(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public void deleteUserRole(int id) {
 		userRoleMapper.delete(id);
 	}
 
-	public void update(Role role) {
-		roleMapper.updateRole(role);
+	public boolean update(Role role) {
+		try {
+			roleMapper.updateRole(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public void update(UserRole userRole) {

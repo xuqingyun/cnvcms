@@ -1,8 +1,10 @@
 package com.cnv.cms.service;
 
+import com.cnv.cms.exception.CmsException;
+
 public interface BaseService<T> {
-	void add(T t);
-	void delete(int id);
-	void update(T t);
+	boolean add(T t);
+	boolean delete(int id);
+	boolean update(T t);
 	T selectById(int id);	
 }
