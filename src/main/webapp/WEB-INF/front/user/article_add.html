@@ -3,31 +3,34 @@
 <head>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 	<title>CNV CMS系统</title>
-	<!-- 添加Boostrap 和 JQuery -->
-	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<!--  JQuery -->
 	<script src="../vendor/jquery/jquery-1.9.1.min.js"></script>
+	<!-- Boostrap  -->
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">	
 	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../vendor/xheditor/xheditor.min.js"></script>
-	<script src="../vendor/xheditor/xheditor_lang/zh-cn.js"></script>
 	
-	
-	   <!-- MetisMenu CSS -->
+	 <!-- MetisMenu CSS -->
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Custom CSS -->
+    <!-- su-admin -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <script src="../dist/js/sb-admin-2.js"></script>
 
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
-	
+	<!-- Xheditor  -->
+	<script src="../vendor/xheditor/xheditor.min.js"></script>
+	<script src="../vendor/xheditor/xheditor_lang/zh-cn.js"></script>	
 	
 	<!-- 自定义模板css -->
 	<link rel="stylesheet" href="../css/basic.css">
-	<link rel="stylesheet" href="../css/list.css">
+	<link rel="stylesheet" href="../css/user-center.css">
 	
 	<!-- 自定义js -->
 	<script src="../js/common.js"></script>
+	<script src="../js/user_home.js"></script>
 	<script src="../js/article_add.js"></script>
 
 
@@ -84,55 +87,12 @@ document.write('<script src="'+getContextPath()+'/js/article_add.js" type="text/
 	<!-- Example row of columns -->
 	<div class="row">
 	
+
+		<!-- 侧边栏-->
+  <div id="sidebar-div"> 
+    </div>  
 	
-<!-- <div class="navbar-default  " role="navigation"> -->
-         <div class="col-md-2 sidebar-nav side-div">
-				<ul class="nav" id="side-menu">
-				<li>
-                     <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主面板</a>
-                 </li>
-				</ul>
-              <ul class="nav" id="side-menu">
-             
-             
-                 <li>
-                     <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> 主面板</a>
-                 </li>
-           
-                 <li>
-                     <a href="#"><i class="fa fa-user fa-fw"></i>用户管理<span class="fa arrow"></span></a>
-                     <ul class="nav nav-second-level">
-	                     <li>
-	                     
-	                         <a href="user_panel.html">用户列表</a>
-	                     
-	                     </li>
-	                     <li>
-	                         <a href="group_panel.html">组别管理</a>
-	                     </li>
-	                      <li>
-	                         <a href="role_panel.html">角色管理</a>
-	                     </li>
-                     </ul>
-                   
-                 </li>
-    
-  
-                 
-                 <li>
-                     <a href="#"><i class="fa fa-columns fa-fw"></i> 帮助<span class="fa arrow"></span></a>
-                     <ul class="nav nav-second-level">
-                         <li>
-                             <a href="../pages/user_panel.html">帮助</a>
-                         </li>
-                                                 
-                     </ul>
-                 </li>
-      
-             </ul>
-         </div>
-         <!-- /.sidebar-collapse -->
-	<!-- </div> -->
+	
 	
 	
 	
@@ -147,7 +107,7 @@ document.write('<script src="'+getContextPath()+'/js/article_add.js" type="text/
 			<!-- <div class="label-div t-15 border-all" style="padding: 0;"> -->
 				<!-- <div class="label-main"> -->
 					<!-- <div class="clearfix label-public pt-25"> -->
-  					  <div class="panel panel-primary"  >
+  					  <div class="panel panel-default"  >
                         <div class="panel-heading">添加文章 
                         
                         </div>
@@ -160,13 +120,30 @@ document.write('<script src="'+getContextPath()+'/js/article_add.js" type="text/
                                 <tbody>
                                   <tr>
                                       <th width="15%" style='text-align:right'>文章标题：</th>
-                                      <td><input id="input_name" placeholder="测试标题" class="form-control">
+                                      <td><input id="input_title" placeholder="测试标题" class="form-control" value="标题1">
                                      
                                       </td>
                                   </tr>
                                   <tr>
                                       <th style='text-align:right'>文章栏目：</th>
-                                      <td><input id="input_name" placeholder="测试栏目" class="form-control"></td>
+                                      <td>
+                                      <div class="col-sm-6">
+                                     
+                                         <select class="form-control" id="input_pchannel">
+							         		<option value="0">栏目0</option>
+							            	<option value="1">栏目1</option>
+
+	                                      </select>
+	                                    
+                                      </div>
+                                      <div class="col-sm-6">
+                                         <select class="form-control" id="input_channel">
+							         		<option value="0">zi栏目0</option>
+							            	<option value="1">zi栏目1</option>
+
+	                                      </select>
+                                      </div>
+                                      </td>
                                   </tr>
                                   <tr>
                                       <th style='text-align:right'>文章状态：</th>
@@ -194,11 +171,11 @@ document.write('<script src="'+getContextPath()+'/js/article_add.js" type="text/
                                   </tr>
                                    <tr>
                                       <th style='text-align:right'>发布时间：</th>
-                                      <td><input id="input_name" placeholder="2017-01-01" class="form-control"  readonly="readonly"></td>
+                                      <td><input id="input_time" placeholder="2017-01-01" class="form-control"  readonly="readonly"></td>
                                   </tr>
                                   <tr>
                                       <th style='text-align:right'>关键字：</th>
-                                      <td><input id="input_name" placeholder="请用'|'分割开，如： 关键字1|关键字2" class="form-control"></td>
+                                      <td><input id="input_keywords" placeholder="请用'|'分割开，如： 关键字1|关键字2" class="form-control" value="关键字1|关键字2"></td>
                                   </tr>                                  
                                    <tr>
                                   <th style='text-align:right'>附件：</th>
@@ -213,12 +190,14 @@ document.write('<script src="'+getContextPath()+'/js/article_add.js" type="text/
                                   </tr>
                                   <tr>
                                    	<td colspan="2">
-                                   		<textarea id="article-text"   rows="16" cols="80" style="width: 100%"></textarea>
+                                   		<textarea id="article-text"   rows="16" cols="80" style="width: 100%">
+                                   		<img src="http://121.248.54.247/files/20170222/20170222_185229860.jpg" alt="" />
+                                   		</textarea>
                                    	</td>
                                   </tr>
                                   <tr>
                                    	<td colspan="2">
-                                   	<div class="col-sm-10" align="right">
+                                   	<div class="col-sm-11" align="right">
 										<button id="article-submit" class="btn btn-primary">发表文章</button>
 	                              	</div>
                                    		

@@ -5,7 +5,7 @@ function fileUpload(){
 	formData.append("file",ufile.files[0]);
 	formData.append("name",name);
 	$.ajax({ 
-		url : getContextPath()+'/api/files/upload', 
+		url : getContextPath()+'/api/files/uploadFile', 
 		type : 'POST', 
 		data : formData, 
 		// 告诉jQuery不要去处理发送的数据
@@ -55,29 +55,99 @@ function editorInit(){
 		upLinkExt:"zip,rar,txt",
 		//文件上传成功回调函数
 		onUpload: function(d){
-			return true;
+			var m = d[0].url;
+			fileIds[d[0].url] = d[0].id;
+			setCookie("fileIds",fileIds);
 		}
 	});
 
 };
+function articleSubmit(){
+	var d = new Date();
+	var date = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+
+	var content = editor.getSource();
+	var attchids = new Array();
+	var picUrl = getUrl(/<img.*?src=\".*?\"/gi,content);
+	var t = getCookie("fileIds");
+	for(i in picUrl){
+		pu = fileIds[picUrl[i]];
+		if(pu != null)
+			attchids[attchids.length] = pu;
+	}
+	
+	
+	//attchids=[7,8];
+	var article = {
+		"title":$("#input_title").val(),
+		"summary":content,
+		"content":$("#article-text").val(),
+		"keywords":$("#input_keywords").val(),
+		"userId":26,
+		"channelId":14,
+		"status":$("#input_status").val(),
+		"recommend":$("#input_recommend").val(),
+		"chiefPic":1,
+		"attachs":attchids
+	}
+	 $.ajax({ 
+	     type:"POST", 
+	     url:"../api/article/add/"+clientId, 
+	     dataType:"json",      
+	     contentType:"application/json",               
+	     data:JSON.stringify(article), 
+	     success:function(data,status){ 
+			if(status == "success" && data.flag == "success"){
+				//alert("用户添加成功！");
+				 window.location.href='home.html';
+			 
+			}else{
+				alert("添加失败!\n"+data.flag);
+			}
+	
+	     },
+	     error:function(msg){
+	    	 alert("添加失败！\nstatus:"+msg.status);
+	     }
+	  });
+}
+function getUrl(reg,str){
+	var x = new Array();
+	while(t = reg.exec(str)){
+		t = t[0].replace(/<img src=\"/,"");
+		t = t.replace(/\"/,"");
+		x[x.length] = t;
+	}
+	return x;
+}
 function getClientId(){
-	var r = Math.floor(Math.random()*1000+1);
-	var date = new Date();
-	clientId = clientId + date.getHours() + date.getMinutes() + date.getSeconds()+date.getMilliseconds()+r;
+	clientId = getCookie("clientId");
+	if(clientId == null | clientId == ""){
+		var r = Math.floor(Math.random()*1000+1);
+		var date = new Date();
+		clientId = "" + date.getHours() + date.getMinutes() + date.getSeconds()+date.getMilliseconds()+r;
+		setCookie("clientId",clientId);
+	}
 };
 var clientId = "";
 var editor = null;
+var fileIds =new Object();
 $(document).ready(function() {
 	
 	//每次打开页面 生成一个客户端id
 	getClientId();
-	//editorInit();
+	editorInit();
 
 	//test
 	$("#article-submit").on("click", function(event){
 		//取消事件行为，非常重要！否则add中的post请求会被取消
 		event.preventDefault();		
-		//fileUpload();
+		articleSubmit();
+
+		
+		//var reg = /<img src=\".*?\">/gi;
+		//var reg = /<img.*src=\".*?\"/gi;
+
 	});
 	
 	//test

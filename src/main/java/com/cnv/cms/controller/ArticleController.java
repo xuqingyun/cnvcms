@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cnv.cms.authority.AuthClass;
 import com.cnv.cms.authority.AuthMethod;
+import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.Article;
 import com.cnv.cms.model.User;
@@ -37,7 +38,15 @@ public class ArticleController {
 		
 		User loginUser = (User) httpSession.getAttribute("loginUser"); 
 		article.setUserId(loginUser.getId());
-		if(!articleService.add(article, "clientid")){
+		
+        if(CmsConfig.isDebug()){
+        	System.out.println("-------article add---------");  
+        	System.out.println("received article:"+article);
+        	System.out.println("client id:"+clientid);
+
+        }
+		
+		if(!articleService.add(article, clientid)){
 			map.put("flag", "添加文章失败！");
 		}
 		map.put("flag", "success");

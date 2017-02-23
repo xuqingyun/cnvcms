@@ -17,7 +17,32 @@ backToTop = function(className){
 	$(window).bind("scroll", $backToTopFun);
 	$(function() { $backToTopFun(); });
 };
-
+//写cookies
+function setCookie(name,value)
+{
+	var minute = 30;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + minute*60*1000);
+	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+//读cookies
+function getCookie(name)
+{
+	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+	if(arr=document.cookie.match(reg))
+		return unescape(arr[2]);
+	else
+		return null;
+}
+//删除cookies
+function delCookie(name)
+{
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval=getCookie(name);
+	if(cval!=null)
+		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+}
 //获取url中的参数
 function getUrlParam(name) {
    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -35,7 +60,8 @@ function loadNavigation(){
 		 var head = $("#navigation-div");
 		 head.empty();
 		 head.html(data);
-		 //showUserCenter();
+		 loadChannel();
+		 showUserCenter();
 	}); 	
 }
 
@@ -96,16 +122,33 @@ function loadChannel(){
  */
 
 function showUserCenter(){
-	var str = '\
-		<li><a  href="'+getContextPath()+'/user/home.html"><i class="glyphicon glyphicon-user"></i>用户中心</a>\
-		</li>\
-		<li><a href="'+getContextPath()+'/user/setting.html"><i class="glyphicon glyphicon-cog"></i> 设置</a>\
-		</li>\
-		<li class="divider"></li>\
-		<li><a  href="'+getContextPath()+'/api/admin/login.out"><i class="glyphicon glyphicon-log-out"></i>退出</a>\
-		</li>';
-	obj = $("#top-usercenter");
-	obj.html(str);
+
+	$.get(getContextPath()+"/api/admin/login.check",function(data,status){
+		if(status == "success" && data.login == "success"){
+			$("#login-link").html('<a>您好, &nbsp</a>');
+			var str = '\
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">'+data.loginUser+'\
+				&nbsp&nbsp&nbsp&nbsp<i class="glyphicon glyphicon-user"></i>\
+					<i class="glyphicon glyphicon-menu-down"></i>\
+				</a>\
+				<ul class="dropdown-menu dropdown-user">\
+				<li><a  href="'+getContextPath()+'/user/home.html"><i class="glyphicon glyphicon-user"></i>用户中心</a>\
+				</li>\
+				<li><a href="'+getContextPath()+'/user/user_profile.html"><i class="glyphicon glyphicon-cog"></i> 设置</a>\
+				</li>\
+				<li class="divider"></li>\
+				<li><a  href="'+getContextPath()+'/api/admin/login.out"><i class="glyphicon glyphicon-log-out"></i>退出</a>\
+				</li>\
+				</ul>';
+			obj = $("#top-usercenter");
+			obj.html(str);
+		}else{
+			$("#login-link").html('<a href="'+getContextPath()+'/login.html">登录</a>');
+			$("#register-link").html('<a href="'+getContextPath()+'/register.html">注册</a>');
+		}
+     });
+	
+	
 }
 function changeNav(){
 	if(navshow==false){
@@ -132,11 +175,11 @@ function getContextPath(){
 }
 var contextPath = null;
 var navshow = false;
-
+var loginUser = "";
 
 $(document).ready(function () {
 	loadNavigation();
-	loadChannel();
+	
 /*	$("#nav-trigger").on("click", function(event){
 		//取消事件行为，非常重要！否则add中的post请求会被取消
 		event.preventDefault();

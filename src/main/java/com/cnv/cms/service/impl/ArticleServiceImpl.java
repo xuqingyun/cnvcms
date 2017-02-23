@@ -54,20 +54,29 @@ public class ArticleServiceImpl implements ArticleService {
 			articleMapper.delete(t.getChannelId());
 			//删除临时附件
 			List<Integer> attachTempIDs = attachService.getTempAttachs(client);
-			for(int at : attachTempIDs){
-					attachMapper.delete(at);
+			if (attachTempIDs != null) {
+				for (int at : attachTempIDs) {
+					attachService.delete(at);
+				} 
 			}
 			attachService.removeTempAttachs(client);
 			return false;
 		}
 		
-		List<Integer> attachIDs = t.getAttachs();
-		List<Integer> attachTempIDs = attachService.getTempAttachs(client);
-		//如果临时附件不在提交的附件id列表中，则删除
-		for(int at : attachTempIDs){
-			if(!attachIDs.contains(at)){
-				attachMapper.delete(at);
+		try {
+			List<Integer> attachIDs = t.getAttachs();
+			List<Integer> attachTempIDs = attachService.getTempAttachs(client);
+			if (attachTempIDs != null) {
+				//如果临时附件不在提交的附件id列表中，则删除
+				for (int at : attachTempIDs) {
+					if (!attachIDs.contains(at)) {
+						attachService.delete(at);
+					}
+				} 
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		attachService.removeTempAttachs(client);
 		return true;

@@ -54,11 +54,14 @@ function userLogin(){
             data:JSON.stringify(logindata), 
             success:function(data,status){ 
             	if(status == "success" && data.login == "success"){
-            		if(data.url == null){
+            		/*if(data.url == null){
 	            		window.location.href="index.html"; 
 	            	}else{
 	            		window.location.href= data.url; 
-	            	}
+	            	}*/
+            		window.location.href= getContextPath()+"/user/home.html";
+            		loginUser = data.loginUser;
+            		setCookie("loginUser",data.loginUser);
             		return true;
             		//window.location.replace("index.html"); 
             	}else{

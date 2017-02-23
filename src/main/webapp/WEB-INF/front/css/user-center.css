@@ -1,0 +1,29 @@
+/* 用户中心ccs样式 */
+.side-div{
+	/* border: 1px solid #E8E8E8; */
+	padding-right: 1px;
+	padding-left: 1px;
+}
+.side-div .sidebar-nav{
+	 border: 1px solid #E8E8E8;
+}
+.side-div ul li{
+	border-bottom: 1px solid #E8E8E8;
+}
+.sidehead-div{
+	padding: 10px 10px;
+	text-align:center;
+}
+.sidehead-div img.head{
+	border: 1px solid #E8E8E8;
+	width:100%;
+}
+.sidehead-div img.btn{
+	width:50%;
+}
+.sidehead-div .user-action{
+	margin-top:10px;
+}
+.sidehead-div .user-action a{
+	margin-bottom:10px;
+}

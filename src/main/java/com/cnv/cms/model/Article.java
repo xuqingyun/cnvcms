@@ -158,5 +158,12 @@ public class Article {
 	public void setReadTimes(int readTimes) {
 		this.readTimes = readTimes;
 	}
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", title=" + title + ", summary=" + summary + ", content=" + content
+				+ ", keywords=" + keywords + ", userId=" + userId + ", author=" + author + ", channelId=" + channelId
+				+ ", status=" + status + ", createDate=" + createDate + ", recommend=" + recommend + ", chiefPic="
+				+ chiefPic + ", attachs=" + attachs + ", readTimes=" + readTimes + ", fellows=" + fellows + "]";
+	}
 	
 }

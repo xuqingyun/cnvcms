@@ -71,6 +71,7 @@ public class AdminController {
 				}
 			}
 			httpSession.setAttribute("allActions", allActions);
+			map.put("loginUser", user.getUsername());
 			map.put("login", "success");
 			if(isAdmin){
 				map.put("url", req.getContextPath()+"/admin/index.html");
@@ -91,7 +92,7 @@ public class AdminController {
 		return map;
 	}
 	
-	@AuthMethod()
+	@AuthMethod(role="customer")
 	@RequestMapping(value="/login.check",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  loginCheck(HttpSession httpSession){
 		System.out.println("login get");
@@ -104,11 +105,33 @@ public class AdminController {
 			map.put("login", "failure");
 		}else{
 			map.put("login", "success");
+			map.put("loginUser", loginUser.getUsername());
 		}	
 		
 		return map;
 	}
+	@AuthMethod(role="base")
+	@RequestMapping(value="/selfinfo",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  selfInfo(HttpSession httpSession){
+		
 	
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		User loginUser = (User) httpSession.getAttribute("loginUser");
+		
+		if(CmsConfig.isDebug){
+			System.out.println("---------self info  query---------");
+			System.out.println("user :" + loginUser.getId());
+		}
+		if(loginUser == null){
+			map.put("data", "no login");
+		}else{
+			map.put("data", loginUser);
+			map.put("flag", "success");
+		}	
+		
+		return map;
+	}	
 	
 	@AuthMethod()
 	@RequestMapping(value="/login.out",method=RequestMethod.GET)

@@ -2,6 +2,11 @@
 # cms系统
 # 采用 springMVC +spring + mybatis +maven
 
+version 0.0.8.6
+	前台：
+		文章添加页面
+		用户中心页面
+
 version 0.0.8.5
 	Service:
 		ArticleServiceImpl

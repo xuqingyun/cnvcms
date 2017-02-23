@@ -104,6 +104,7 @@ public class AttachmentController {
         
         if(CmsConfig.isDebug()){
         	System.out.println("-------file upload---------");  
+        	System.out.println("client id:"+clientid);
         	System.out.println("received filename:"+fileName);
         	System.out.println("suffix:"+suffix);
         	System.out.println("new filename:"+newName);
