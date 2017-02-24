@@ -87,5 +87,10 @@
 			<mvc:mapping path="/admin/**"/>
 			<bean class="com.cnv.cms.web.AdminInterceptor"/>
 		</mvc:interceptor>
+		<!-- 用户中心拦截-->
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**"/>
+			<bean class="com.cnv.cms.web.UserInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

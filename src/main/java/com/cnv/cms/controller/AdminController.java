@@ -37,21 +37,20 @@ public class AdminController {
 	
 	@AuthMethod(role="customer")
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public  @ResponseBody Map<String, String>  loginIn(@RequestBody User  userForm,
+	public  @ResponseBody Map<String, Object>  loginIn(@RequestBody User  userForm,
 			HttpSession httpSession, HttpServletRequest req){
 		if(CmsConfig.isDebug){
 			System.out.println("received userform:");
 			System.out.println(userForm);
 		}
 		
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try{
 			User user = userService.login(userForm.getUsername(), userForm.getPassword());
 			httpSession.setAttribute("loginUser", user); 
-			List<Role> roles =  userService.listUserRoles(user.getId());
 			//是否是管理员
-			boolean isAdmin = isRole(roles,RoleType.ROLE_ADMIN);
+			boolean isAdmin = this.isAdmin(user.getId());
 			httpSession.setAttribute("isAdmin", isAdmin);
 			//该用户所有可以访问的方法
 			Set<String> allActions = new HashSet<String>();
@@ -61,6 +60,7 @@ public class AdminController {
 			allActions.addAll(customAuths);
 			Set<String> baseAuths = auths.get("base");
 			allActions.addAll(baseAuths);
+			
 			//查询每个角色对应的权限
 			for(int rid : user.getRoleIDs()){
 				//数据库中role id 从1开始
@@ -70,8 +70,14 @@ public class AdminController {
 					allActions.addAll(roleAuths);	
 				}
 			}
+			//把该用户能访问的权限放到session中
 			httpSession.setAttribute("allActions", allActions);
+			
+			//返回的数据
 			map.put("loginUser", user.getUsername());
+			map.put("isAdmin", isAdmin);
+			map.put("loginId", user.getId());
+			
 			map.put("login", "success");
 			if(isAdmin){
 				map.put("url", req.getContextPath()+"/admin/index.html");
@@ -100,12 +106,23 @@ public class AdminController {
 		
 		//httpSession.setAttribute("loginUser", user.getUsername()); 
 		User loginUser = (User) httpSession.getAttribute("loginUser");
-		System.out.println("login user: "+loginUser);
+		if(CmsConfig.isDebug){
+			System.out.println("login user: "+loginUser);
+		}
 		if(loginUser == null){
 			map.put("login", "failure");
 		}else{
+			//重新获取用户身份，并写入session
+			boolean isAdmin = this.isAdmin(loginUser.getId());
+			httpSession.setAttribute("isAdmin", isAdmin);
+			//重新读取，而不是直接用session里是数据，防止数据库被修改
+			loginUser = userService.selectById(loginUser.getId());
+			//返回的数据
 			map.put("login", "success");
 			map.put("loginUser", loginUser.getUsername());
+			map.put("loginId", loginUser.getId());
+			map.put("isAdmin", isAdmin);
+			//map.put("loginUserId", loginUser.getId());
 		}	
 		
 		return map;
@@ -126,6 +143,8 @@ public class AdminController {
 		if(loginUser == null){
 			map.put("data", "no login");
 		}else{
+			//重新读取，防止数据库被修改
+			loginUser = userService.selectById(loginUser.getId());
 			map.put("data", loginUser);
 			map.put("flag", "success");
 		}	
@@ -152,5 +171,11 @@ public class AdminController {
 			if(r.getRoleType()==rt) return true;
 		}
 		return false;
+	}
+	private boolean isAdmin(int id) {
+		List<Role> roles =  userService.listUserRoles(id);
+		//是否是管理员
+		boolean isAdmin = isRole(roles,RoleType.ROLE_ADMIN);
+		return isAdmin;
 	}
 }

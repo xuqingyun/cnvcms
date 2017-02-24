@@ -87,12 +87,13 @@ public class ArticleController {
 	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
 	public  @ResponseBody Map<String, Object>  detail(@PathVariable int id){
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		Article a=null;
 		try {
-			articleService.selectById(id);
+			a = articleService.selectById(id);
 		} catch (CmsException ce) {
 			map.put("flag", ce.getMessage());
 		}
+		map.put("data", a);
 		map.put("flag", "success");
 		return map;
 	}

@@ -1,12 +1,12 @@
-function showRoleOrGroupBox(str,boxid,rids){
- 	$.get(getContextPath()+"/api/"+str+"/"+str+"s",function(data,status){
+function showRoleOrGroupBox(strbox,boxid,rids){
+ 	$.get(getContextPath()+"/api/"+strbox+"/"+strbox+"s",function(data,status){
 		 	
 			if(status == "success"){
 				var roles = data.data;
 				var str="";
 				for(i in roles){
 					var role = roles[i];
-					str += '<label class="checkbox-inline"><input id="'+str+'_checkbox" itemid="'+role.id
+					str += '<label class="checkbox-inline"><input id="'+strbox+'_checkbox" itemid="'+role.id
 					+'" type="checkbox">'+role.name+'</input></label>';
 				}
 
@@ -14,7 +14,8 @@ function showRoleOrGroupBox(str,boxid,rids){
 				$(boxid).append(str);
 				
 				for(i in rids){
-					$('#'+str+'_checkbox[itemid="'+rids[i]+'"]').attr("checked",'true');
+					var id = '#'+strbox+'_checkbox[itemid="'+rids[i]+'"]';
+					$(id).attr("checked",'true');
 				}
 				
 			}
@@ -22,16 +23,14 @@ function showRoleOrGroupBox(str,boxid,rids){
 }
 function showUserEdit(){
 
-	if(itemid == null | itemid == ""){
-		window.location.href = "user_panel.html"
-	}
+	
  	$.get(getContextPath()+"/api/admin/selfinfo",function(data,status){
 	 	
 		if(status == "success"){
 				
-			var user = data.user;
+			var user = data.data;
 			//ID放在username标签的itemid属性里
-			$("#input_username").attr("itemid",itemid);
+			$("#input_username").attr("itemid",user.id);
 			$("#input_username").attr("value",user.username);
 			$("#input_nickname").attr("value",user.nickname);
 			$("#input_email").attr("value",user.email);
@@ -40,8 +39,8 @@ function showUserEdit(){
 				
 			$("#input_createDate").attr("value",user.createDate);
 			
-			showRoleOeGroupBox('group','#div_groups_checkbox',data.groupids);
-			showRoleOeGroupBox('role','#div_roles_checkbox',data.roleids);
+			showRoleOrGroupBox('group','#div_groups_checkbox',user.groupIDs);
+			showRoleOrGroupBox('role','#div_roles_checkbox',user.roleIDs);
 			///showRoleBox('#div_roles_checkbox',data.roleids);
 			
 		}
@@ -55,11 +54,11 @@ function userEditSubmit(){
 	
 	 var gids=new Array();
 	 $("#group_checkbox:checked").each(function (index, domEle){
-		 gids[index] = $(domEle).attr("groupid");
+		 gids[index] = $(domEle).attr("itemid");
 	 });
 	  var rids=new Array();
 	  $("#role_checkbox:checked").each(function (index, domEle){
-		  rids[index] = $(domEle).attr("roleid");
+		  rids[index] = $(domEle).attr("itemid");
 	 });
 	 
 	 var s = $("#input_status").val();
@@ -85,7 +84,7 @@ function userEditSubmit(){
 	     success:function(data,status){ 
 			if(status == "success" && data.flag == "success"){
 				 //table.ajax.reload( null, false );
-				 window.location.href='user_panel.html';
+				 window.location.href=getContextPath()+'/user/home.html';
 			}else{
 				alert("更新失败!\n"+data.flag);
 			}
@@ -100,7 +99,7 @@ function userEditSubmit(){
 $(document).ready(function () {
 
 
-    showUserEdit(getUrlParam("id"));
+    showUserEdit();
     
 	$("#form_submit").on("click", function(event){
 		//取消事件行为

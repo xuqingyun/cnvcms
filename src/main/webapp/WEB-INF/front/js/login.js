@@ -60,8 +60,11 @@ function userLogin(){
 	            		window.location.href= data.url; 
 	            	}*/
             		window.location.href= getContextPath()+"/user/home.html";
-            		loginUser = data.loginUser;
+            
+       
             		setCookie("loginUser",data.loginUser);
+            		setCookie("loginId",data.loginId);
+            		setCookie("isAdmin",data.isAdmin);
             		return true;
             		//window.location.replace("index.html"); 
             	}else{

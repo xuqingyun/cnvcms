@@ -224,7 +224,13 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 	public User selectById(int id) {
-		return userMapper.selectUserByID(id);
+		User user = userMapper.selectUserByID(id);
+		if(user==null){
+			throw new CmsException("用户不存在");
+		}
+		user.setRoleIDs(this.listUserRoleIds(user.getId()));
+		user.setGroupIDs(this.listUserGroupIds(user.getId()));
+		return user;
 	}
 
 	public List<Role> listUserRoles(int id) {
@@ -274,6 +280,7 @@ public class UserServiceImpl implements UserService {
 			throw new CmsException("密码不正确");
 		}
 		user.setRoleIDs(this.listUserRoleIds(user.getId()));
+		user.setGroupIDs(this.listUserGroupIds(user.getId()));
 		return user;
 	}
 	public List<User> listUsersByGroupID(int id) {

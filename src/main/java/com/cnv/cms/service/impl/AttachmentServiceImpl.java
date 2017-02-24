@@ -111,7 +111,6 @@ public class AttachmentServiceImpl implements AttachmentService {
 		}
 	}
 
-	@Override
 	public void deleteByChannelId(int cid) {
 		try {
 			List<Attachment> attachs = attachMapper.selectByChannelId(cid);
@@ -130,53 +129,43 @@ public class AttachmentServiceImpl implements AttachmentService {
 		}
 	}
 
-	@Override
 	public void setArticleId(int id, int aid) {
 		attachMapper.setArticleId(id, aid);
 	}
 
-	@Override
 	public void setIndex(int id, int isIndex) {
 		attachMapper.setIndex(id, isIndex);
 	}
 
-	@Override
 	public  List<Attachment> selectByArticleId(int aid) {
 		return attachMapper.selectByArticleId(aid);
 	}
 
-	@Override
 	public List<Attachment> selectPicByArticleId(int id) {
 		return attachMapper.selectPicByArticleId(id);
 	}
 
-	@Override
 	public List<Attachment> selectIndexPic() {
 		return attachMapper.selectIndexPic();
 	}
 
-	@Override
 	public List<Attachment> selectBeforeDate(Date date) {
 		return attachMapper.selectBeforeDate(date);
 	}
 
-	@Override
 	public List<Attachment> selectByChannelId(int cid) {
 		return attachMapper.selectByChannelId(cid);
 	}
 
-	@Override
 	public List<Attachment> selectUnused() {
 		return attachMapper.selectUnused();
 	}
 
-	@Override
 	public void deletetUnused() {
 		attachMapper.deletetUnused();
 	}
 
 
-	@Override
 	public List<Integer> selectIdsByArticleId(int aid) {
 		return attachMapper.selectIdsByArticleId(aid);
 	}

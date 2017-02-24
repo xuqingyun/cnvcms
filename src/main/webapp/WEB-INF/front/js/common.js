@@ -1,22 +1,4 @@
-/**
- * 返回顶部
- * Author:peggy
- */
-backToTop = function(className){
-	var $backToTopTxt = "返回顶部", $backToTopEle = $('<a class="backToTop" href="javascript:void(0);" class="ie6png"></a>').appendTo($(className))
-    .text('').attr("title", $backToTopTxt).click(function() {
-        $("html, body").animate({ scrollTop: 0 }, 600);
-	}), $backToTopFun = function() {
-	    var st = $(document).scrollTop(), winh = $(window).height();
-	    (st > 0)? $backToTopEle.show(): $backToTopEle.hide();
-	    //IE6下的定位
-	    if (!window.XMLHttpRequest) {
-	        $backToTopEle.css("top", st + winh - 166);
-	    }
-	};
-	$(window).bind("scroll", $backToTopFun);
-	$(function() { $backToTopFun(); });
-};
+
 //写cookies
 function setCookie(name,value)
 {
@@ -125,6 +107,10 @@ function showUserCenter(){
 
 	$.get(getContextPath()+"/api/admin/login.check",function(data,status){
 		if(status == "success" && data.login == "success"){
+	//if(loginUser != null){
+			//登录信息重新写入cookie
+			setLoginInfo(data);
+
 			$("#login-link").html('<a>您好, &nbsp</a>');
 			var str = '\
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">'+data.loginUser+'\
@@ -143,12 +129,24 @@ function showUserCenter(){
 			obj = $("#top-usercenter");
 			obj.html(str);
 		}else{
+			//没登录则清除cookie中的登录信息
+			clearLoginInfo();
+			
 			$("#login-link").html('<a href="'+getContextPath()+'/login.html">登录</a>');
 			$("#register-link").html('<a href="'+getContextPath()+'/register.html">注册</a>');
 		}
      });
 	
 	
+}
+function loginCheck(){
+	$.get(getContextPath()+"/api/admin/login.check",function(data,status){
+		if(status == "success" && data.login == "success"){
+			loginUser = data.loginUser;
+			return true;
+		}
+		return false;
+     });
 }
 function changeNav(){
 	if(navshow==false){
@@ -173,16 +171,33 @@ function getContextPath(){
 	return contextPath;
 	
 }
+function clearLoginInfo(){
+	delCookie("loginUser");
+	delCookie("loginId");
+	delCookie("isAdmin");
+}
+function setLoginInfo(data){
+	setCookie("loginUser",data.loginUser);
+	setCookie("loginId",data.loginId);
+	setCookie("isAdmin",data.isAdmin);
+}
+function getLoginInfo(){
+	loginId = getCookie("loginId");
+	loginUser = getCookie("loginUser");
+	isAdmin = getCookie("isAdmin");
+}
+//当前网站根路径
 var contextPath = null;
 var navshow = false;
-var loginUser = "";
+//登录信息
+var loginUser = null;
+var loginId = null;
+var isAdmin = false;
 
 $(document).ready(function () {
+	
+	loginCheck();
 	loadNavigation();
 	
-/*	$("#nav-trigger").on("click", function(event){
-		//取消事件行为，非常重要！否则add中的post请求会被取消
-		event.preventDefault();
-		changeNav();
-	});	*/
+
 });	

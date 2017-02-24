@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.ArticleMapper;
 import com.cnv.cms.mapper.AttachmentMapper;
+import com.cnv.cms.mapper.UserMapper;
 import com.cnv.cms.model.Article;
 import com.cnv.cms.service.ArticleService;
 import com.cnv.cms.service.AttachmentService;
@@ -19,6 +20,8 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleMapper articleMapper;
 	@Autowired
 	private AttachmentMapper attachMapper;
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Autowired
 	@Qualifier("attachServiceImpl")
@@ -129,7 +132,7 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		//  查询附件
 		at.setAttachs(attachMapper.selectIdsByArticleId(id));
-		
+		at.setAuthor(userMapper.selectUserByID(at.getUserId()).getUsername());
 		return at;
 	}
 
