@@ -14,7 +14,7 @@ import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.User;
 
 /*
- *Adminl目录静态资源拦截
+ *user目录静态资源拦截
  */
 public class UserInterceptor extends HandlerInterceptorAdapter {
 	@SuppressWarnings("unchecked")

@@ -53,6 +53,6 @@
   		<property name="filePath" value="files" />
   		<property name="ftpUser" value="ftptest" />
   		<property name="ftpPassword" value="ftptest" />
-  		<property name="test" value="testt1" />
+  		
 	</bean>
 </beans> 

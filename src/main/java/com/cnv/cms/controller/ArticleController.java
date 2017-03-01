@@ -1,6 +1,7 @@
 package com.cnv.cms.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -90,11 +91,54 @@ public class ArticleController {
 		Article a=null;
 		try {
 			a = articleService.selectById(id);
+			map.put("data", a);
 		} catch (CmsException ce) {
 			map.put("flag", ce.getMessage());
 		}
-		map.put("data", a);
+		
 		map.put("flag", "success");
 		return map;
+	}
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/channel/{id}",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  articlesInColumn(@PathVariable int id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			List<Article> articles = articleService.selectByChannel(id);
+			map.put("data", articles);
+		} catch (CmsException ce) {
+			map.put("flag", ce.getMessage());
+		}
+		
+		map.put("flag", "success");
+		return map;
+	}
+	
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/topread/{n}/{id}",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  topRead(@PathVariable int n,@PathVariable int id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			List<Article> articles = null;
+			if(id<0){
+				articles = articleService.selectTopRead(n);
+			}else{
+				articles = articleService.selectTopRead(n,id);
+			}
+			map.put("data", articles);
+		} catch (CmsException ce) {
+			map.put("flag", ce.getMessage());
+		}
+		
+		map.put("flag", "success");
+		return map;
+	}
+	@AuthMethod(role="customer")
+	@RequestMapping(value="/topread/{n}",method=RequestMethod.GET)
+	public  @ResponseBody Map<String, Object>  topRead(@PathVariable int n){
+		return this.topRead(n,-1);
+		
 	}
 }

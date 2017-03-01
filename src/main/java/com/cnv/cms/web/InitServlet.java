@@ -12,11 +12,20 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cnv.cms.authority.AuthUtil;
 
+/**
+ * @author Administrator
+ *
+ * @description 系统启动时初始化权限列表
+ *
+ */
 public class InitServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static WebApplicationContext wc;
 	
+	/* 
+	 * 读取控制器方法上的注解信息
+	 */
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);

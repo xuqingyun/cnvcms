@@ -47,7 +47,7 @@ public interface ArticleService extends BaseService<Article> {
 	List<Article> selectRecommends();	
 	List<Article> selectRecommends(int channelId);
 	/*
-	 * 检索查看次数最多的文章
+	 * 检索查看次数最多的N个条目
 	 */	
 	List<Article> selectTopRead(int n);	
 	List<Article> selectTopRead(int n, int channelId);

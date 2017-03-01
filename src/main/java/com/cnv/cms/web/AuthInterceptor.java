@@ -13,7 +13,16 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.model.User;
 
+/**
+ * @author Administrator
+ *
+ * @description 拦截api/**,需要在springMVC配置文件中配置拦截器
+ *
+ */
 public class AuthInterceptor extends HandlerInterceptorAdapter {
+	/*
+	 * 在方法执行前执行拦截器
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -37,8 +46,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			User user = (User)session.getAttribute("loginUser");
 			
 			if(user==null) {
-				//System.out.println("Redirect:"+request.getContextPath()+"/admin/login.html");
-				//response.sendRedirect(request.getContextPath()+"/admin/login.html");
 				response.sendError(403, "无权访问");
 				return false;
 			} else {
@@ -47,10 +54,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 					//不是超级管理人员，就需要判断是否有权限访问某些功能
 					Set<String> actions = (Set<String>)session.getAttribute("allActions");
 					
-					//TODO
 					if(!actions.contains(aname)){
-						System.out.println("没有权限访问该功能");
-						//throw new CmsException("没有权限访问该功能");
+						if(CmsConfig.isDebug()){
+							System.out.println("没有权限访问该功能");
+						}
+						response.sendError(403, "无权访问");
+						return false;
 					}
 				}
 			}

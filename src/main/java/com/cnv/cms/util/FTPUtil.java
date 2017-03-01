@@ -15,6 +15,12 @@ import com.cnv.cms.exception.CmsException;
 
 
 
+/**
+ * @author Administrator
+ *
+ * @description 用于往ftp服务器存储和删除文件
+ *
+ */
 @Component("ftpUtil")  
 public class FTPUtil {
 	public boolean deleteFile(String fileName, String path){
@@ -26,9 +32,11 @@ public class FTPUtil {
 		//改变当前目录 
 		String fliePath = CmsConfig.getFilePath()+"/"+path;
 		try {
+			//改变当前目录，如果失败则返回
 			if(!ftp.changeWorkingDirectory(fliePath)){
 				return false;
 			}
+			//删除文件，如果失败则返回
 			if(!ftp.deleteFile(fileName)){
 				return false;
 			}

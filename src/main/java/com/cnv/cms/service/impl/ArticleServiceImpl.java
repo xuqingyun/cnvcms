@@ -27,6 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Qualifier("attachServiceImpl")
 	private AttachmentService attachService;
 	
+	
 	public boolean add(Article t) {
 		Integer id = articleMapper.maxId();
 		if(id==null) id=0;
