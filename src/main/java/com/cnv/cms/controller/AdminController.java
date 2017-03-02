@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +40,12 @@ public class AdminController {
 	@AuthMethod(role="customer")
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public  @ResponseBody Map<String, Object>  loginIn(@RequestBody User  userForm,
-			HttpSession httpSession, HttpServletRequest req){
+			HttpServletRequest request,HttpServletResponse response){
 		if(CmsConfig.isDebug){
 			System.out.println("received userform:");
 			System.out.println(userForm);
 		}
+		HttpSession httpSession = request.getSession();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -73,17 +76,20 @@ public class AdminController {
 			//把该用户能访问的权限放到session中
 			httpSession.setAttribute("allActions", allActions);
 			
-			//返回的数据
-			map.put("loginUser", user.getUsername());
-			map.put("isAdmin", isAdmin);
-			map.put("loginId", user.getId());
-			
-			map.put("login", "success");
-			if(isAdmin){
-				map.put("url", req.getContextPath()+"/admin/index.html");
-			}else{
-				map.put("url", req.getContextPath()+"/user/home.html");
+			//设置cookie记录登录信息
+			Cookie[] cookies = new Cookie[3];
+			cookies[0] = new Cookie("loginUser", user.getUsername());
+			cookies[1] = new Cookie("loginId", Integer.toString(user.getId()));
+			cookies[2] = new Cookie("isAdmin", Boolean.toString(isAdmin));
+			for(Cookie ck : cookies){
+				ck.setPath("/");
+				ck.setMaxAge(60);
+				response.addCookie(ck);
 			}
+			
+			//返回的数据
+			map.put("login", "success");
+			
 			
 			if(CmsConfig.isDebug){
 				System.out.println(user.getUsername()+" 's authority:");
@@ -141,7 +147,7 @@ public class AdminController {
 			System.out.println("user :" + loginUser.getId());
 		}
 		if(loginUser == null){
-			map.put("data", "no login");
+			map.put("data", "not login");
 		}else{
 			//重新读取，防止数据库被修改
 			loginUser = userService.selectById(loginUser.getId());
@@ -154,15 +160,31 @@ public class AdminController {
 	
 	@AuthMethod()
 	@RequestMapping(value="/login.out",method=RequestMethod.GET)
-	public  String  loginOut(HttpSession httpSession){
+	public   @ResponseBody Map<String, Object>   loginOut(HttpServletRequest request,HttpServletResponse response){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", "false");
+		HttpSession httpSession = request.getSession();
 		httpSession.removeAttribute("loginUser");
 		httpSession.removeAttribute("isAdmin");
 		httpSession.removeAttribute("allActions");
+		
+		//删除cookie
+		Cookie[] cookies = request.getCookies();
+		for(Cookie ck : cookies){
+			if(ck.getName().equals("loginUser")||ck.getName().equals("loginId")
+					|| ck.getName().equals("isAdmin")){
+				ck.setValue(null);
+				ck.setPath("/");
+				ck.setMaxAge(0);
+				response.addCookie(ck);
+			}
+		}
+		
 		if(CmsConfig.isDebug){
 			System.out.println("login out");
 		}
-		
-		return "redirect:/login.html";
+		map.put("flag", "success");
+		return map;
 	}
 	
 	

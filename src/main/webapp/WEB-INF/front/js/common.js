@@ -98,56 +98,54 @@ function loadChannel(){
 		 }
 	}); 	
 }
+function loginOut(){
+	$.get(getContextPath()+'/api/admin/login.out',function(data,status){
+		if(status == "success" && data.flag == "success"){
+			var loginUser = getCookie("loginUser");
+		}
+	});
+	return false;
+}
 
 /*
  * 导航栏右端用户中心
  */
 
 function showUserCenter(){
-
-	$.get(getContextPath()+"/api/admin/login.check",function(data,status){
-		if(status == "success" && data.login == "success"){
-	//if(loginUser != null){
-			//登录信息重新写入cookie
-			setLoginInfo(data);
-
-			$("#login-link").html('<a>您好, &nbsp</a>');
-			var str = '\
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">'+data.loginUser+'\
-				&nbsp&nbsp&nbsp&nbsp<i class="glyphicon glyphicon-user"></i>\
-					<i class="glyphicon glyphicon-menu-down"></i>\
-				</a>\
-				<ul class="dropdown-menu dropdown-user">\
-				<li><a  href="'+getContextPath()+'/user/home.html"><i class="glyphicon glyphicon-user"></i>用户中心</a>\
-				</li>\
-				<li><a href="'+getContextPath()+'/user/user_profile.html"><i class="glyphicon glyphicon-cog"></i> 设置</a>\
-				</li>\
-				<li class="divider"></li>\
-				<li><a  href="'+getContextPath()+'/api/admin/login.out"><i class="glyphicon glyphicon-log-out"></i>退出</a>\
-				</li>\
-				</ul>';
-			obj = $("#top-usercenter");
-			obj.html(str);
-		}else{
-			//没登录则清除cookie中的登录信息
-			clearLoginInfo();
-			
-			$("#login-link").html('<a href="'+getContextPath()+'/login.html">登录</a>');
-			$("#register-link").html('<a href="'+getContextPath()+'/register.html">注册</a>');
-		}
-     });
+	var loginUser = getCookie("loginUser");
+	
+	if(loginUser != null){
+	
+		$("#login-link").html('<a>您好, &nbsp</a>');
+		var str = '\
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">'+loginUser+'\
+			&nbsp&nbsp&nbsp&nbsp<i class="glyphicon glyphicon-user"></i>\
+				<i class="glyphicon glyphicon-menu-down"></i>\
+			</a>\
+			<ul class="dropdown-menu dropdown-user">\
+			<li><a  href="'+getContextPath()+'/user/home.html"><i class="glyphicon glyphicon-user"></i>用户中心</a>\
+			</li>\
+			<li><a href="'+getContextPath()+'/user/user_profile.html"><i class="glyphicon glyphicon-cog"></i> 设置</a>\
+			</li>\
+			<li class="divider"></li>\
+			<li><a  href=""javascript:void(0)" onclick="loginOut()"><i class="glyphicon glyphicon-log-out"></i>退出</a>\
+			</li>\
+			</ul>';
+		obj = $("#top-usercenter");
+		obj.html(str);
+		
+		//$("#login-link").html('<a href="'+getContextPath()+'/login.html">登录</a>');
+		//$("#register-link").html('<a href="'+getContextPath()+'/register.html">注册</a>');
+	}else{
+		
+		$("#login-link").html('<a href="'+getContextPath()+'/login.html">登录</a>');
+		$("#register-link").html('<a href="'+getContextPath()+'/register.html">注册</a>');
+	}
+   
 	
 	
 }
-function loginCheck(){
-	$.get(getContextPath()+"/api/admin/login.check",function(data,status){
-		if(status == "success" && data.login == "success"){
-			loginUser = data.loginUser;
-			return true;
-		}
-		return false;
-     });
-}
+
 function changeNav(){
 	if(navshow==false){
 		$("#my-navbar-collapse").attr("style","height:auto;")
@@ -171,33 +169,14 @@ function getContextPath(){
 	return contextPath;
 	
 }
-function clearLoginInfo(){
-	delCookie("loginUser");
-	delCookie("loginId");
-	delCookie("isAdmin");
-}
-function setLoginInfo(data){
-	setCookie("loginUser",data.loginUser);
-	setCookie("loginId",data.loginId);
-	setCookie("isAdmin",data.isAdmin);
-}
-function getLoginInfo(){
-	loginId = getCookie("loginId");
-	loginUser = getCookie("loginUser");
-	isAdmin = getCookie("isAdmin");
-}
+
 //当前网站根路径
 var contextPath = null;
 var navshow = false;
-//登录信息
-var loginUser = null;
-var loginId = null;
-var isAdmin = false;
+
 
 $(document).ready(function () {
 	
-	loginCheck();
-	loadNavigation();
-	
+	loadNavigation();	
 
 });	

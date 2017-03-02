@@ -12,7 +12,6 @@ function loadSidebar(){
 					 getContextPath()+'/admin/index.html" class="btn btn-default">管理员入口</a>');
 		 }
 		 
-		 //showUserCenter();
 	}); 	
 }
 

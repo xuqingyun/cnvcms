@@ -22,14 +22,20 @@ import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.model.Article;
 import com.cnv.cms.model.User;
 import com.cnv.cms.service.ArticleService;
+import com.cnv.cms.service.AttachmentService;
 
 @AuthClass
 @Controller
 @RequestMapping("/api/article")
 public class ArticleController {
+	
 	@Autowired
 	 @Qualifier("articleServiceImpl")
 	private ArticleService articleService;
+	
+	@Autowired
+	@Qualifier("attachServiceImpl")
+	private AttachmentService attachService;
 	
 	@AuthMethod(role="base")
 	@RequestMapping(value="/add/{clientid}",method=RequestMethod.POST)
@@ -91,7 +97,10 @@ public class ArticleController {
 		Article a=null;
 		try {
 			a = articleService.selectById(id);
+			articleService.addReadTimes(id, 1);
+			Map<String, String> mapUrl = attachService.selectPicUrlByArticleId(id);
 			map.put("data", a);
+			map.put("imgUrl", mapUrl);
 		} catch (CmsException ce) {
 			map.put("flag", ce.getMessage());
 		}

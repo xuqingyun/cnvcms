@@ -59,6 +59,8 @@ public class Article {
 	 * 图片栏目时，所要显示的图片的id
 	 */
 	private int chiefPic;
+	private String picPath;
+
 	/*
 	 * 文章附件列表
 	 */
@@ -71,6 +73,7 @@ public class Article {
 	 * 关注人数
 	 */
 	private int fellows;
+	
 	
 	//getters and setters
 	public int getId() {
@@ -157,6 +160,18 @@ public class Article {
 	}
 	public void setReadTimes(int readTimes) {
 		this.readTimes = readTimes;
+	}
+	public int getFellows() {
+		return fellows;
+	}
+	public void setFellows(int fellows) {
+		this.fellows = fellows;
+	}
+	public String getPicPath() {
+		return picPath;
+	}
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
 	}
 	@Override
 	public String toString() {

@@ -13,6 +13,7 @@
 	
 	<!-- 自定义js -->
 	<script src="js/common.js"></script>
+	<script src="js/article_list.js"></script>
 </head>
 <body>
 <div id="navigation-div"> 
@@ -30,7 +31,7 @@
 	  <div class="page-div col-md-9">
 		<div class="list-header">
 		  <div>
-			<a class="header" href="#"><strong>栏目标题</strong></a>			
+			<a class="header" href="#"><strong id="channel-title">栏目标题</strong></a>			
 			<!-- 右侧搜索输入框 -->
 			<div class="col-sm-4 pull-right">
 				<div class="input-group custom-search-form">
@@ -51,7 +52,7 @@
 		
 		
 		</div>	
-
+		<div id="article-list-div">
 		<div class="list-item">	
 		
 			<!-- 左侧图片 -->
@@ -147,7 +148,8 @@
 					描述描述描述描述描述描述描述描述描述描述描述描述描述</p>
 				</div>
 			</div>
-		</div>		
+		</div>	
+		</div>	
 		<div class="page-number">
 			<ul class="pagination">
 				<li><a href="#">&laquo;</a></li>

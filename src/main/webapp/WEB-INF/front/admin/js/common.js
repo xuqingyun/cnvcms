@@ -74,6 +74,14 @@ function showRoleBox(boxid,gids){
 			}
 	 	});
 }
+function loginOut(){
+	$.get('../api/admin/login.out',function(data,status){
+		if(status == "success" && data.flag == "success"){
+			window.location.href= "../login.html";
+		}
+	});
+	return false;
+}
 
 $(document).ready(function () {
 	loadNavigation();

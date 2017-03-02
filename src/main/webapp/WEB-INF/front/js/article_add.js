@@ -57,7 +57,8 @@ function editorInit(){
 		onUpload: function(d){
 			var m = d[0].url;
 			fileIds[d[0].url] = d[0].id;
-			setCookie("fileIds",fileIds);
+			//var temp= JSON.stringify(fileIds);
+			//setCookie("fileIds",fileIds);
 		}
 	});
 
@@ -68,20 +69,38 @@ function articleSubmit(){
 
 	var content = editor.getSource();
 	var attchids = new Array();
-	var picUrl = getUrl(/<img.*?src=\".*?\"/gi,content);
-	var t = getCookie("fileIds");
+	
+	
+	$("#temp-text").html(content);
+	var imgs = $("#temp-text").find("img");
+	for(var i=0 ;i<imgs.length;i++){
+		var imgid = imgs[i];
+		var src = $(imgid).attr("src");
+		var picid = fileIds[src];
+		//如果是上传的图片
+		if(picid!=null){
+			//将id加入到附件列表
+			attchids[attchids.length] = picid;
+			//设置img标签的id属性
+			$(imgid).attr("imgid",picid);
+		}
+	}
+	content = $("#temp-text").html();
+	
+	
+/*	var picUrl = getUrl(/<img.*?src=\".*?\"/gi,content);
 	for(i in picUrl){
 		pu = fileIds[picUrl[i]];
 		if(pu != null)
 			attchids[attchids.length] = pu;
-	}
+	}*/
 	
 	
 	//attchids=[7,8];
 	var article = {
 		"title":$("#input_title").val(),
-		"summary":content,
-		"content":$("#article-text").val(),
+		"summary":$("#article-summary").val(),
+		"content":content,
 		"keywords":$("#input_keywords").val(),
 		"userId":26,
 		"channelId":14,

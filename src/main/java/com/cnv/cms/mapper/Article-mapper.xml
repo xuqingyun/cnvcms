@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select> 
     <!-- 根据id查询-->
      <select id="selectById" parameterType="int" resultType="Article">
-        select * from t_article where id=#{id};
+        select ta.*, tu.username as author from t_article ta, t_user tu where ta.id=#{id} and ta.userId=tu.id;
 	</select>    
 	<select id="maxId"  resultType="int">
         select max(id) from t_article
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
     <!-- 通过栏目id检索 -->
     <select id="selectByChannel" parameterType="int" resultType="Article">
-        select * from t_article where channelId=#{id};
+        select tu.username as author,ta.* from t_article ta, t_user tu where ta.channelId=#{id} and ta.userId=tu.id;
     </select>	
     <!-- 通过关键字检索 -->
     <select id="selectByKeywords" parameterType="string" resultType="Article">

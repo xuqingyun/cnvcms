@@ -54,19 +54,16 @@ function userLogin(){
             data:JSON.stringify(logindata), 
             success:function(data,status){ 
             	if(status == "success" && data.login == "success"){
-            		/*if(data.url == null){
-	            		window.location.href="index.html"; 
-	            	}else{
-	            		window.location.href= data.url; 
-	            	}*/
+            		
+            		var loginUser = getCookie("loginUser");
+            		
             		window.location.href= getContextPath()+"/user/home.html";
             
-       
-            		setCookie("loginUser",data.loginUser);
+            		//cookie在服务器添加
+            		/*setCookie("loginUser",data.loginUser);
             		setCookie("loginId",data.loginId);
-            		setCookie("isAdmin",data.isAdmin);
+            		setCookie("isAdmin",data.isAdmin);*/
             		return true;
-            		//window.location.replace("index.html"); 
             	}else{
             		alert("登录错误！\nstatus:"+data.error);
             		return true;

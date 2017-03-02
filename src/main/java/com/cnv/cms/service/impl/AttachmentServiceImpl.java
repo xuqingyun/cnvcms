@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.AttachmentMapper;
 import com.cnv.cms.model.Attachment;
@@ -143,6 +144,17 @@ public class AttachmentServiceImpl implements AttachmentService {
 
 	public List<Attachment> selectPicByArticleId(int id) {
 		return attachMapper.selectPicByArticleId(id);
+	}
+	public Map<String, String> selectPicUrlByArticleId(int id){
+		List<Attachment> attachs = this.selectPicByArticleId(id);
+		Map<String, String> map = new HashMap<String, String>();
+		for(Attachment att: attachs){
+			String url = "http://"+CmsConfig.getFtpServer()+"/"+CmsConfig.getFilePath()
+			+"/"+att.getPath()+"/"+att.getNewName();
+			map.put(Integer.toString(att.getId()), url);
+		}
+		return map;
+		
 	}
 
 	public List<Attachment> selectIndexPic() {

@@ -178,20 +178,21 @@ document.write('<script src="'+getContextPath()+'/js/article_add.js" type="text/
                                       <td><input id="input_keywords" placeholder="请用'|'分割开，如： 关键字1|关键字2" class="form-control" value="关键字1|关键字2"></td>
                                   </tr>                                  
                                    <tr>
-                                  <th style='text-align:right'>附件：</th>
+                                  <th style='text-align:right'>摘要：</th>
                                       <td>
+                                      <textarea id="article-summary"   rows="3" style="width: 100%">
+                                   		</textarea>
                                       	<!-- <input type="file" id="user_pic" style="display:inline;">
                                       	<button id="pic_btn" class="btn btn-primary">上传(测试)</button> -->
                                       </td>
                                   </tr>                                  
                                   <tr>
                                    	<th colspan="2">文章内容</th>
-                                  	
+                                  	<td id="temp-text" style="display:none;">内容</td>
                                   </tr>
                                   <tr>
                                    	<td colspan="2">
                                    		<textarea id="article-text"   rows="16" cols="80" style="width: 100%">
-                                   		<img src="http://121.248.54.247/files/20170222/20170222_185229860.jpg" alt="" />
                                    		</textarea>
                                    	</td>
                                   </tr>

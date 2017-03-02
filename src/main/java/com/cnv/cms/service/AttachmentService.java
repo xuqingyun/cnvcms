@@ -2,6 +2,7 @@ package com.cnv.cms.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.cnv.cms.model.Attachment;
 
@@ -25,28 +26,29 @@ public interface AttachmentService extends BaseService<Attachment> {
 	/*
 	 * 查询文章附件
 	 */
-	List<Attachment> selectByArticleId(int aid);
-	List<Integer> selectIdsByArticleId(int aid);
+	public List<Attachment> selectByArticleId(int aid);
+	public List<Integer> selectIdsByArticleId(int aid);
+	public Map<String, String> selectPicUrlByArticleId(int id);
 	/*
 	 * 查询文章图片
 	 */
-	List<Attachment> selectPicByArticleId(int id);
+	public List<Attachment> selectPicByArticleId(int id);
 	/*
 	 * 查询首页图片
 	 */
-	List<Attachment> selectIndexPic();
+	public List<Attachment> selectIndexPic();
 	/*
 	 * 查找指定日期前的附件
 	 */
-	List<Attachment> selectBeforeDate(Date date);
+	public List<Attachment> selectBeforeDate(Date date);
 	/*
 	 * 根据栏目查询附件
 	 */	
-	List<Attachment> selectByChannelId(int cid);
+	public List<Attachment> selectByChannelId(int cid);
 	/*
 	 * 查询未被文章引用的图片
 	 */	
-	List<Attachment> selectUnused();
+	public List<Attachment> selectUnused();
 	/*
 	 * 删除未被使用附件
 	 */	
