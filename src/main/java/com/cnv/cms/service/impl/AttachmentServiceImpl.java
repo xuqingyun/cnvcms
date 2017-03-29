@@ -1,6 +1,5 @@
 package com.cnv.cms.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,12 +7,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnv.cms.config.CmsConfig;
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.AttachmentMapper;
 import com.cnv.cms.model.Attachment;
 import com.cnv.cms.service.AttachmentService;
+import com.cnv.cms.util.AttachUtil;
 import com.cnv.cms.util.FTPUtil;
 
 @Service("attachServiceImpl")
@@ -24,21 +25,19 @@ public class AttachmentServiceImpl implements AttachmentService {
 	@Autowired
 	private FTPUtil ftpUtil;
 	
-	private static Map<String,List<Integer>> tempAttachs = new HashMap<String,List<Integer>>();
+	@Autowired
+	private AttachUtil attachUtil;
+	
 	
 	public void addTempAttachs(String clientid, int id){
-		List<Integer> tempAtsList = tempAttachs.get(clientid);
-		if(tempAtsList==null){
-			tempAtsList = new ArrayList<Integer>();
-			tempAttachs.put(clientid, tempAtsList);
-		}
-		tempAttachs.get(clientid).add(id);
+		this.attachUtil.addTempAttachs(clientid, id);
+		
 	}
 	public List<Integer> getTempAttachs(String client){
-		return tempAttachs.get(client);
+		return this.attachUtil.getTempAttachs(client);
 	}
 	public void removeTempAttachs(String client){
-		tempAttachs.remove(client);
+		this.attachUtil.removeTempAttachs(client);
 	}
 	
 	//删除ftp服务器图片，内部使用
@@ -48,7 +47,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 		}
 	}
 
-	
+	@Transactional
 	public boolean add(Attachment t) {
 		try {
 			Integer id = attachMapper.maxId();
@@ -60,12 +59,17 @@ public class AttachmentServiceImpl implements AttachmentService {
 		}
 		return true;
 	}
-
+	
 	public boolean delete(int id) {
 		
+		Attachment a = attachMapper.selectById(id);
+		return this.delete(a);
+	}
+	@Transactional
+	public boolean delete(Attachment a) {
+		if(a==null) return false;
 		try {
-			Attachment a = attachMapper.selectById(id);
-			attachMapper.delete(id);
+			attachMapper.delete(a.getId());
 			//删除ftp文件
 			this.delelteFile(a);
 		}catch(CmsException ce){
@@ -76,7 +80,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 		}
 		return true;
 	}
-
+	@Transactional
 	public boolean update(Attachment t) {
 	
 		try {
@@ -94,7 +98,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 		return a;
 	}
 
-
+	@Transactional
 	public void deleteByArticleId(int aid) {
 		try {
 			List<Attachment> attachs = attachMapper.selectByArticleId(aid);
@@ -111,7 +115,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 			throw new CmsException("附件删除失败");
 		}
 	}
-
+	@Transactional
 	public void deleteByChannelId(int cid) {
 		try {
 			List<Attachment> attachs = attachMapper.selectByChannelId(cid);
@@ -170,11 +174,15 @@ public class AttachmentServiceImpl implements AttachmentService {
 	}
 
 	public List<Attachment> selectUnused() {
-		return attachMapper.selectUnused();
+		return attachMapper.selectUnused(new Date());
 	}
 
-	public void deletetUnused() {
-		attachMapper.deletetUnused();
+	public void deletetUnused(Date date) {
+		List<Attachment> attchs = attachMapper.selectUnused(date);
+		for(Attachment ath : attchs){
+			this.delete(ath);
+		}
+		//attachMapper.deletetUnusedBefore(date);
 	}
 
 

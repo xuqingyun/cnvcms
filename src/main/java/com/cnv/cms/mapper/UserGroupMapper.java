@@ -8,12 +8,12 @@ import com.cnv.cms.model.Group;
 import com.cnv.cms.model.User;
 import com.cnv.cms.model.UserGroup;
 
-public interface UserGroupMapper {
+public interface UserGroupMapper extends BaseMapper<UserGroup>{
 	void add(UserGroup userGroup);
 	void delete(int id);
 	void deleteByUID(int id);
 	void deleteByGID(int id);
-	void deleteUserGroup(@Param("uid") int uid,@Param("gid") int gid);
+	void deleteUserGroup(int uid,int gid);
 	void update(UserGroup userGroup);
 	UserGroup selectByID(int id);
 	List<UserGroup> selectByUID(int id);

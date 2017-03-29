@@ -46,10 +46,11 @@ public interface AttachmentMapper extends BaseMapper<Attachment> {
 	/*
 	 * 查询未被文章引用的图片
 	 */	
-	List<Attachment> selectUnused();
+	List<Attachment> selectUnused(Date date);
 	/*
 	 * 删除未被使用附件
 	 */
 	void deletetUnused();
+	void deletetUnusedBefore(Date date);
 	
 }

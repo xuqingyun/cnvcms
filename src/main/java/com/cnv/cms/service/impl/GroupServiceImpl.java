@@ -3,7 +3,9 @@ package com.cnv.cms.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.GroupMapper;
@@ -21,6 +23,9 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	private UserGroupMapper userGroupMapper;
 	
+	@Autowired
+	DataSourceTransactionManager txManager;
+	
 	public boolean add(Group g) {
 		if(g.getName() == null | g.getName() == ""){
 			throw new CmsException("用户名不能为空!");
@@ -34,6 +39,9 @@ public class GroupServiceImpl implements GroupService {
 	}
 	
 	public void add(UserGroup ug) {
+		Integer id = userGroupMapper.maxId();
+		if(id==null) id=0;
+		ug.setId(id+1);
 		userGroupMapper.add(ug);		
 	}
 
@@ -42,9 +50,8 @@ public class GroupServiceImpl implements GroupService {
 		userGroupMapper.deleteByGID(id);	
 		return true;
 	}
-	
 	public void deleteUserGroup(int id) {
-		userGroupMapper.delete(id);		
+		userGroupMapper.delete(id);	
 	}
 	
 	public boolean update(Group g) {

@@ -11,7 +11,7 @@
     <location>/error404.html</location>
   </error-page>
   	
-<context-param>
+<!-- <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:applicationContext.xml</param-value>
 </context-param>
@@ -30,7 +30,7 @@
 	    <servlet-name>springmvc4</servlet-name>  
 	    <url-pattern>/</url-pattern>  
 	</servlet-mapping> 
-	
+	 -->
 	<servlet>
 		<servlet-name>initServlet</servlet-name>
 		<servlet-class>com.cnv.cms.web.InitServlet</servlet-class>

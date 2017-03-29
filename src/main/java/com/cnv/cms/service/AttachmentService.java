@@ -4,17 +4,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.cnv.cms.model.Attachment;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cnv.cms.model.Attachment;
+@Transactional
 public interface AttachmentService extends BaseService<Attachment> {
 	/*
 	 * 删除文章附件
 	 */
+	@Transactional
 	void deleteByArticleId(int aid);
 	/*
 	 * 清空栏目附件
 	 */
-	void deleteByChannelId(int cid);	
+	@Transactional
+	void deleteByChannelId(int cid);
+
 	/*
 	 * 设置Article ID
 	 */
@@ -52,7 +57,8 @@ public interface AttachmentService extends BaseService<Attachment> {
 	/*
 	 * 删除未被使用附件
 	 */	
-	void deletetUnused();
+	@Transactional
+	void deletetUnused(Date date);
 	
 	/**************临时附件相关方法****************/
 	/*

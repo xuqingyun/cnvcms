@@ -87,7 +87,7 @@ public class Attachment {
 	public void setIsIndex(int isIndex) {
 		this.isIndex = isIndex;
 	}
-	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
 	public Date getCreateDate() {
 		return createDate;
 	}

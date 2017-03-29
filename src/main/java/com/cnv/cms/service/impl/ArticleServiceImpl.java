@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.ArticleMapper;
@@ -27,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Qualifier("attachServiceImpl")
 	private AttachmentService attachService;
 	
-	
+	@Transactional
 	public boolean add(Article t) {
 		Integer id = articleMapper.maxId();
 		if(id==null) id=0;
@@ -51,6 +52,7 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return true;
 	}
+	@Transactional
 	public boolean add(Article t, String client) {
 		
 		if(!add(t)){
@@ -85,20 +87,21 @@ public class ArticleServiceImpl implements ArticleService {
 		attachService.removeTempAttachs(client);
 		return true;
 	}
-
+	@Transactional
 	public boolean delete(int id) {
 		
 		try {
 			//删除Article
-			attachMapper.deleteByArticleId(id);
-			//删除附件
 			articleMapper.delete(id);
+			//删除附件
+			attachMapper.deleteByArticleId(id);
+			
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
-
+	@Transactional
 	public boolean update(Article t) throws CmsException{
 		// TODO 需要更新附件
 		Article aOld = articleMapper.selectById(t.getId());
@@ -126,7 +129,7 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return true;
 	}
-
+	
 	public Article selectById(int id) {
 		Article at = articleMapper.selectById(id);
 		if(at == null) throw new CmsException("文章不存在");
@@ -136,18 +139,35 @@ public class ArticleServiceImpl implements ArticleService {
 		at.setAuthor(userMapper.selectUserByID(at.getUserId()).getUsername());
 		return at;
 	}
-
+	@Transactional
 	public void deleteByChannel(int id) {
 		try {
+			//List<Article> articles = articleMapper.selectByChannel(id);
 			//删除Article
 			articleMapper.deleteByChannel(id);
 			//删除附件
-			attachMapper.deleteByChannelId(id);
+			attachService.deleteByChannelId(id);
+
 		} catch (Exception e) {
 			throw new CmsException("文章删除失败");
 		}
 	}
+	@Transactional
+	public void deleteByUser(int userId) {
+		// TODO Auto-generated method stub
+		try {
+			List<Article> articles = articleMapper.selectByUserId(userId);
+			//删除Article
+			articleMapper.deleteByUser(userId);
+			//删除附件
+			for(Article a: articles){
+				attachService.deleteByArticleId(a.getId());
+			}
 
+		} catch (Exception e) {
+			throw new CmsException("文章删除失败");
+		}
+	}
 	public void changeStatus(int id) {
 		articleMapper.changeStatus(id);
 	}
@@ -162,6 +182,11 @@ public class ArticleServiceImpl implements ArticleService {
 
 	public List<Article> selectPage(int page, int n) {
 		return articleMapper.selectFromTo(page*(n-1), n);
+	}
+	@Override
+	public List<Article> selectByUserId(int id) {
+		// TODO Auto-generated method stub
+		return articleMapper.selectByUserId(id);
 	}
 
 	public List<Article> selectByTitle(String title) {
@@ -204,6 +229,7 @@ public class ArticleServiceImpl implements ArticleService {
 		// TODO Auto-generated method stub
 		return articleMapper.selectTopFellow(n);
 	}
+
 
 
 }

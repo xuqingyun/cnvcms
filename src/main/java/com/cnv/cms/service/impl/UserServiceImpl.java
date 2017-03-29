@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnv.cms.exception.CmsException;
 import com.cnv.cms.mapper.GroupMapper;
@@ -19,10 +21,11 @@ import com.cnv.cms.model.Role;
 import com.cnv.cms.model.User;
 import com.cnv.cms.model.UserGroup;
 import com.cnv.cms.model.UserRole;
+import com.cnv.cms.service.ArticleService;
 import com.cnv.cms.service.UserService;
 
 //@Component
-@Service("userServiceImpl")  
+@Service  
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
@@ -34,20 +37,15 @@ public class UserServiceImpl implements UserService {
 	private RoleMapper roleMapper;
 	@Autowired
 	private GroupMapper groupMapper;
-
+	
+	@Autowired
+	//@Qualifier("articleServiceImpl")
+	private ArticleService articleService;
+	
+	
+	@Transactional
 	public void add(User user,List<Integer> rids, List<Integer> gids) {
 		add(user);
-/*		//检查用户是否存在
-		User utemp = userMapper.selectUserByName(user.getUsername());
-		if(utemp!=null){
-			//此处应该抛出异常
-			throw new CmsException("该用户已经存在");
-		}
-		try {
-			userMapper.addUser(user);
-		}catch(Exception e){
-			throw new CmsException("用户添加失败");
-		}*/
 		
 		//添加角色
 		if(rids.size()>0){
@@ -67,6 +65,7 @@ public class UserServiceImpl implements UserService {
 		
 		
 	}
+	@Transactional
 	public boolean add(User user) throws CmsException{
 		
 		//检查用户是否存在
@@ -76,7 +75,11 @@ public class UserServiceImpl implements UserService {
 			throw new CmsException("该用户已经存在");
 		}
 		try {
-			userMapper.addUser(user);
+			Integer id = userMapper.maxId();
+			if(id==null) id=0;
+			user.setId(id+1);
+			
+			userMapper.add(user);
 		}catch(Exception e){
 			throw new CmsException("用户添加失败");
 		}
@@ -93,19 +96,23 @@ public class UserServiceImpl implements UserService {
 		if(group==null) throw new CmsException("添加的组别不存在");
 		userGroupMapper.add(new UserGroup(user.getId(),gid));	
 	}
+	
+	@Transactional
 	public boolean delete(int id) {
-		// TODO　是否有文章
 		try {
 			userMapper.deleteUser(id);
 			userRoleMapper.deleteByUID(id);
-			userGroupMapper.deleteByUID(id);
+			userGroupMapper.deleteByUID(id);			
+			articleService.deleteByUser(id);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			//e.printStackTrace();
+			throw new CmsException("用户删除失败");
+			//return false;
 		}
-		return true;
+		throw new CmsException("test 事务");
+		//return true;
 	}
-
+	@Transactional
 	public void update(User user, List<Integer> listRids, List<Integer> listGids) {
 		User u = userMapper.selectUserByID(user.getId());
 		if(u==null){
@@ -142,7 +149,7 @@ public class UserServiceImpl implements UserService {
 			}
 		}		
 	}
-
+	@Transactional
 	public void update(int id, List<Integer> rids, List<Integer> gids) {
 		User user = userMapper.selectUserByID(id);
 		if(user==null){

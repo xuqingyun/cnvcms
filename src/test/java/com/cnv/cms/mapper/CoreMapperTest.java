@@ -17,6 +17,7 @@ import com.cnv.cms.model.Role;
 import com.cnv.cms.model.User;
 import com.cnv.cms.model.UserGroup;
 import com.cnv.cms.model.UserRole;
+import com.cnv.cms.service.GroupService;
 
 
 
@@ -33,25 +34,11 @@ public class CoreMapperTest {
 	}
 	
 //	@Test
-	public void testUserMapper(){
-		System.out.println("******************test user mapper**************");
-		UserMapper userMapper = context.getBean(UserMapper.class);	
-		//userMapper.deleteUser(1);
-		User u = new User(0, "a", "a", "aff", "a@eff", "12321", 1, new Date());
-		try {
-			userMapper.addUser(u);
-		}catch(Exception e){
-			
-		}
-		User u2 = userMapper.selectUserByName("a");
-		System.out.println(u2);		
-		List<User> users = userMapper.selectUsers("%");
+	public void testTransaction(){
+		System.out.println("******************testTransaction**************");
+		GroupService gs = context.getBean("groupServiceImpl",GroupService.class);	
+		gs.deleteUserGroup(111);
 
-		System.out.println("------test selectUsers-------");
-		for(User user : users){
-			System.out.println(user);
-		}	
-		userMapper.deleteUser(u.getId());
 	}
 	
 //	@Test

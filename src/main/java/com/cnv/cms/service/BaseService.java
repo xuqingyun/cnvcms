@@ -1,5 +1,6 @@
 package com.cnv.cms.service;
 
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Administrator
@@ -8,6 +9,7 @@ package com.cnv.cms.service;
  *
  * @param <T>
  */
+@Transactional
 public interface BaseService<T> {
 	
 	/**

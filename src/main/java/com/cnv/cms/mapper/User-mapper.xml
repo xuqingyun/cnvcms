@@ -19,6 +19,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result column="createDate" property="createDate" javaType="java.util.Date" jdbcType="DATE"/>
     </resultMap>
  -->
+ <!--  BaseMapper  -->
+	<!--  添加  -->
+    <insert id="add" parameterType="User" 
+        useGeneratedKeys="true" keyProperty="id"> 
+        insert into t_user
+        values(#{id},#{username},#{password},#{nickname},
+        	#{email},#{phone},#{status},#{createDate});  
+    </insert>     
+ 	<!--删除操作  -->
+	<select id="delete" parameterType="int">
+		delete from t_user where id= #{id}
+	</select>   
+	<!--更新操作  -->
+     <select id="update" parameterType="User"> 
+       update t_user set username=#{username},password=#{password}, 
+		nickname=#{nickname},email=#{email},phone=#{phone},status=#{status} where id= #{id}  
+    </select> 
+    <!-- 根据id查询-->
+     <select id="selectById" parameterType="int" resultType="User">
+     	select * from t_user where id=#{id}
+	</select>    
+	<select id="maxId"  resultType="int">
+        select max(id) from t_user
+    </select> 
+ 
 	<!--  增加用户 -->
     <insert id="addUser" parameterType="User" 
         useGeneratedKeys="true" keyProperty="id"> 

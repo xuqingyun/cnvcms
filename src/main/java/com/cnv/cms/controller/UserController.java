@@ -25,9 +25,9 @@ import com.cnv.cms.service.UserService;
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
-	
+
 	@Autowired
-	 @Qualifier("userServiceImpl")
+	 //@Qualifier("userServiceImpl")
 	private UserService userService;
 	
 	
@@ -38,7 +38,6 @@ public class UserController {
 		
 		List<User> users = userService.listUsers();
 		map.put("data", users);
-	
 		
 		return map;
 	}
@@ -72,13 +71,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
-	public  @ResponseBody Map<String, Object>  deleter(@PathVariable(value="id") Integer id){
+	public  @ResponseBody Map<String, Object>  delete(@PathVariable(value="id") Integer id){
 		System.out.println("----users delete---");
 		System.out.println("delete id:" + id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", "failure");	
-		userService.delete(id);
-		map.put("flag", "success");	
+		try{
+			userService.delete(id);
+			map.put("flag", "success");
+		}catch(CmsException ce){
+			map.put("flag", ce.getMessage());
+		}
 		
 		return map;
 	}

@@ -5,6 +5,8 @@ package com.cnv.cms.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cnv.cms.model.Role;
 import com.cnv.cms.model.UserRole;
 
@@ -12,6 +14,7 @@ import com.cnv.cms.model.UserRole;
  * @author Administrator
  *
  */
+@Transactional
 public interface RoleService extends BaseService<Role>{
 	/**
 	 * 添加Group

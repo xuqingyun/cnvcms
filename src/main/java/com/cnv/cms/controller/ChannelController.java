@@ -106,10 +106,8 @@ public class ChannelController {
 	
 		
 		
-		//String path = this.getClass().getClassLoader().getResource("upload").getPath();
-		String path2 = req.getSession().getServletContext().getRealPath("/");
-		//System.out.println(path);
-		System.out.println(path2);
+		//String path2 = req.getSession().getServletContext().getRealPath("/");
+		//System.out.println(path2);
 		
 		return map;
 	}

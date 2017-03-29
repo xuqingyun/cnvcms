@@ -79,11 +79,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 查询未使用附件-->
     <select id="selectUnused" resultType="Attachment">
-        select * from t_attachment where aid=-1;
+         <![CDATA[ select *  from t_attachment where aid=-1 and createDate  < #{0};]]>
     </select>	
 	<!-- 删除未使用附件-->
     <select id="deleteUnused" resultType="Attachment">
         delete  from t_attachment where aid=-1;
     </select>	
-          	
+    <select id="deletetUnusedBefore" resultType="Attachment">
+        <![CDATA[ delete  from t_attachment where aid=-1 and createDate  < #{0};]]>
+    </select>	      	
 </mapper>

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnv.cms.exception.CmsException;
+import com.cnv.cms.mapper.ArticleMapper;
 import com.cnv.cms.mapper.ChannelMapper;
 import com.cnv.cms.model.Channel;
 import com.cnv.cms.service.ChannelService;
@@ -14,6 +16,8 @@ import com.cnv.cms.service.ChannelService;
 public class ChannelServiceImpl implements ChannelService {
 	@Autowired
 	private ChannelMapper channelMapper;
+	@Autowired
+	private ArticleMapper articleMapper;
 	
 	/**
 	 * 添加Channel，注意id和orders需要先查询最大值，然后赋值
@@ -61,6 +65,7 @@ public class ChannelServiceImpl implements ChannelService {
 	 * @param id
 	 * @return 
 	 */
+	@Transactional
 	public boolean delete(int id) throws CmsException{
 		// TODO 查询栏目内是否存在文章，否则不能删除
 		
@@ -69,6 +74,7 @@ public class ChannelServiceImpl implements ChannelService {
 		}
 		try{
 			channelMapper.delete(id);
+			articleMapper.deleteByChannel(id);
 		}catch(Exception e){
 			e.printStackTrace();
 			if(channelMapper.selectById(id) != null){
@@ -77,11 +83,15 @@ public class ChannelServiceImpl implements ChannelService {
 		}
 		return true;
 	}
-
+	@Transactional
 	public void deleteByParentId(int id) {
 		// TODO 查询栏目内是否存在文章，否则不能删除
+		List<Channel> subChanels = this.selectSubChannels(id);
 		try{
-			channelMapper.deleteByParentId(id);
+			//channelMapper.deleteByParentId(id);
+			for(Channel c: subChanels){
+				this.delete(c.getId());
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			if(channelMapper.selectByParentId(id).size() == 0){

@@ -7,10 +7,12 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cnv.cms.authority.AuthUtil;
+import com.cnv.cms.util.AttachUtil;
 
 /**
  * @author Administrator
@@ -22,7 +24,7 @@ public class InitServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static WebApplicationContext wc;
-	
+		
 	/* 
 	 * 读取控制器方法上的注解信息
 	 */
@@ -41,5 +43,10 @@ public class InitServlet extends HttpServlet {
 	public static WebApplicationContext getWc() {
 		return wc;
 	}
-
+	@Override
+	public void destroy() {
+		AttachUtil.stop();
+		// TODO Auto-generated method stub
+		super.destroy();
+	}
 }

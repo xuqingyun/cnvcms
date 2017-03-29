@@ -2,15 +2,24 @@ package com.cnv.cms.service;
 
 import java.util.List;
 
-import com.cnv.cms.model.Article;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cnv.cms.model.Article;
+@Transactional
 public interface ArticleService extends BaseService<Article> {
-	
+	@Transactional
 	public boolean add(Article t, String client);
 	/*
 	 * 删除栏目下全部文章
 	 */
+	@Transactional
 	void deleteByChannel(int id);
+	/*
+	 * 删除用户全部文章
+	 */
+	@Transactional
+	void deleteByUser(int userId);
 	/*
 	 * 改变文章状态
 	 */
@@ -29,6 +38,10 @@ public interface ArticleService extends BaseService<Article> {
 	 * n：每页数量
 	 */
 	List<Article> selectPage(int page, int n);	
+	/*
+	 * 通过用户id检索
+	 */
+	List<Article> selectByUserId(int id);
 	/*
 	 * 通过标题检索
 	 */
