@@ -40,7 +40,6 @@ public class AttachUtil {
 	public AttachUtil(){
 		Thread t =new Thread(new Runnable(){
 
-			@Override
 			public void run() {
 				Calendar   c   =   Calendar.getInstance();  
 				//得到2小时前的时间
@@ -69,7 +68,6 @@ public class AttachUtil {
 		
 		//ApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
 		Thread task =new Thread(new Runnable(){
-			@Override
 			public void run() {
 				
 				//UserService gs = context.getBean(UserService.class);	

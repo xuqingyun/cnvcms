@@ -183,7 +183,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> selectPage(int page, int n) {
 		return articleMapper.selectFromTo(page*(n-1), n);
 	}
-	@Override
+	
 	public List<Article> selectByUserId(int id) {
 		// TODO Auto-generated method stub
 		return articleMapper.selectByUserId(id);
